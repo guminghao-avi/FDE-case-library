@@ -11,7 +11,7 @@
     "human": "AI负责检索与建议；资深员工提供经验、审核高风险建议。",
     "result": "公开材料强调新人培养与经验沉淀得到改善；未披露统一财务指标。",
     "maturity": "已落地/持续迭代",
-    "url": "https://fde100.datawhale.cn/cases/cases-009",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=7",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -48,14 +48,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从师徒带教到 AI 辅助培训：AI 破解制造业经验传承难题",
+      "title": "Datawhale FDE案例100｜NO.01 从师徒带教到AI辅助培训：FDE用AI破解制造业经验传承难题",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-009",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=7",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 1,
+      "printed_page": 6,
+      "pdf_page": 7
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -69,6 +73,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.01",
+        "url": "https://fde100.datawhale.cn/cases/cases-009"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://finance.sina.com.cn/roll/2026-09-06/doc-iniqxiqt0968091.shtml"
@@ -104,7 +112,7 @@
     "human": "采购人员确认关键物料与异常替代建议。",
     "result": "案例聚焦缩短定位时间与减少经验依赖；公开资料未披露统一ROI。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-024",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=77",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -141,14 +149,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从物料难找到精准定位：用 AI 减少工业企业采购浪费",
+      "title": "Datawhale FDE案例100｜NO.08 从物料难找到精准定位：FDE用AI减少工业企业采购浪费",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-024",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=77",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 8,
+      "printed_page": 76,
+      "pdf_page": 77
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -162,6 +174,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.08",
+        "url": "https://fde100.datawhale.cn/cases/cases-024"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -197,7 +213,7 @@
     "human": "销售与工程师负责最终技术边界、价格和承诺。",
     "result": "提升方案初稿产出效率；公开资料未披露精确数值。",
     "maturity": "POC/落地",
-    "url": "https://fde100.datawhale.cn/cases/cases-019",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=166",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -234,14 +250,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "用AI重构非标制造售前链路",
+      "title": "Datawhale FDE案例100｜NO.17 从老师傅报价到AI深度协同：FDE用AI重构非标制造售前链路",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-019",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=166",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 17,
+      "printed_page": 165,
+      "pdf_page": 166
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -255,6 +275,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.17",
+        "url": "https://fde100.datawhale.cn/cases/cases-019"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -290,7 +314,7 @@
     "human": "业务人员确认高价值订单和非标准方案。",
     "result": "重点是扩大长尾需求可承接范围；公开材料未给统一指标。",
     "maturity": "验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-006",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=226",
     "architecture": [
       "业务数据/文档/系统输入",
       "数据清洗与业务语义整理",
@@ -327,14 +351,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从老板报价到长尾承接：AI打通工程租赁获客与报价",
+      "title": "Datawhale FDE案例100｜NO.23 从老板报价到长尾承接：FDE用AI打通工程租赁获客与报价",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-006",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=226",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 23,
+      "printed_page": 225,
+      "pdf_page": 226
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -348,6 +376,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.23",
+        "url": "https://fde100.datawhale.cn/cases/cases-006"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -383,7 +415,7 @@
     "human": "人工处理低置信度、规则冲突和最终责任事项。",
     "result": "公开二次整理称单次审核从约15分钟降到3–5分钟。",
     "maturity": "已见成效",
-    "url": "https://fde100.datawhale.cn/cases/cases-007",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=15",
     "architecture": [
       "用户上传证件/申请材料",
       "OCR/多模态解析图片与文档",
@@ -420,14 +452,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从人工审材料到自动化办件：用 AI 提升车管所网办效率",
+      "title": "Datawhale FDE案例100｜NO.02 从人工审材料到自动化办件：FDE用AI提升车管所网办效率",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-007",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=15",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 2,
+      "printed_page": 14,
+      "pdf_page": 15
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -441,6 +477,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.02",
+        "url": "https://fde100.datawhale.cn/cases/cases-007"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -475,7 +515,7 @@
     "human": "规划专家负责判断、政策解释与正式结论。",
     "result": "缩短案头分析周期；具体指标未公开。",
     "maturity": "验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-008",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=34",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -512,14 +552,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从人工研判到智能调度：AI重构城市规划编制流程",
+      "title": "Datawhale FDE案例100｜NO.04 从人工研判到智能调度：FDE用AI重构城市规划研判流程",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-008",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=34",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 4,
+      "printed_page": 33,
+      "pdf_page": 34
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -533,6 +577,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.04",
+        "url": "https://fde100.datawhale.cn/cases/cases-008"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -568,7 +616,7 @@
     "human": "现场人员确认真实设备状态与异常。",
     "result": "减少手工录入与文书工作；指标未公开。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-011",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=129",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -605,14 +653,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "消防维保流程数字化提效",
+      "title": "Datawhale FDE案例100｜NO.13 从纸质流程到数据驱动：FDE用AI推动传统消防维保企业数字化转型",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-011",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=129",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 13,
+      "printed_page": 128,
+      "pdf_page": 129
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -626,6 +678,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.13",
+        "url": "https://fde100.datawhale.cn/cases/cases-011"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -661,7 +717,7 @@
     "human": "律师保留事实认定、法律判断和最终签发。",
     "result": "降低案头工作时间；公开材料未给统一量化效果。",
     "maturity": "落地/迭代",
-    "url": "https://fde100.datawhale.cn/cases/cases-001",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=25",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -698,14 +754,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "诉讼律师案件智能工作台",
+      "title": "Datawhale FDE案例100｜NO.03 从案头工作到智能协作：FDE用AI优化诉讼律师的案件处理能力",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-001",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=25",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 3,
+      "printed_page": 24,
+      "pdf_page": 25
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -719,6 +779,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.03",
+        "url": "https://fde100.datawhale.cn/cases/cases-001"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -754,7 +818,7 @@
     "human": "人工承担高风险、低置信度和最终审批责任。",
     "result": "形成“AI判断 + RPA执行 + 人终审”的可迁移架构；部分案例推动私有化算力投入。",
     "maturity": "已落地/规模化",
-    "url": "https://fde100.datawhale.cn/cases/cases-018",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=87",
     "architecture": [
       "业务材料/发票/单据/申请",
       "OCR/字段抽取 + 业务材料结构化",
@@ -793,14 +857,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "央国企财务流程AI化",
+      "title": "Datawhale FDE案例100｜NO.09 从“表哥表姐”到智能执行：FDE用AI重构央国企财务流程效率",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-018",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=87",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 9,
+      "printed_page": 86,
+      "pdf_page": 87
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -814,6 +882,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.09",
+        "url": "https://fde100.datawhale.cn/cases/cases-018"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -849,7 +921,7 @@
     "human": "财务人员只处理未匹配、异常和高风险交易。",
     "result": "目标是从逐笔核对转为异常处理；公开资料未披露统一ROI。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-015",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=96",
     "architecture": [
       "发票/单据/账单/业务材料",
       "OCR/字段抽取 + 业务分类",
@@ -886,14 +958,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "线下零售门店智能对账",
+      "title": "Datawhale FDE案例100｜NO.10 从人工核对到智能对账：FDE用AI让线下零售对账又快又准",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-015",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=96",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 10,
+      "printed_page": 95,
+      "pdf_page": 96
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -907,6 +983,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.10",
+        "url": "https://fde100.datawhale.cn/cases/cases-015"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -942,7 +1022,7 @@
     "human": "业务人员定义口径并验证异常解释。",
     "result": "建立可溯源的经营分析链路，而不是单纯做聊天式BI。",
     "maturity": "已落地/持续迭代",
-    "url": "https://fde100.datawhale.cn/cases/cases-016",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=234",
     "architecture": [
       "业务数据/文档/系统输入",
       "数据清洗与业务语义整理",
@@ -979,14 +1059,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "跨境快消海外市场数据流转",
+      "title": "Datawhale FDE案例100｜NO.24 从发货到动销：FDE用AI打通跨境快消的海外数据断层",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-016",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=234",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 24,
+      "printed_page": 233,
+      "pdf_page": 234
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1000,6 +1084,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.24",
+        "url": "https://fde100.datawhale.cn/cases/cases-016"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1035,7 +1123,7 @@
     "human": "调度人员处理异常货物、特殊约束与最终排载。",
     "result": "案例强调98方等装载阈值与利润直接相关；具体公司指标未公开。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-010",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=56",
     "architecture": [
       "ERP/WMS/订单/库存/供应商/约束数据",
       "统一实体与业务口径",
@@ -1073,14 +1161,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "跨境物流智能装车规划",
+      "title": "Datawhale FDE案例100｜NO.06 从经验装车到智能规划：FDE用AI优化跨境物流装载效率",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-010",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=56",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 6,
+      "printed_page": 55,
+      "pdf_page": 56
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1094,6 +1186,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.06",
+        "url": "https://fde100.datawhale.cn/cases/cases-010"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1129,7 +1225,7 @@
     "human": "运营人员审核促销、季节性和资金约束下的补货决策。",
     "result": "减少数据汇总与人工判断负担；具体指标未公开。",
     "maturity": "验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-012",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=216",
     "architecture": [
       "ERP/WMS/订单/库存/供应商/约束数据",
       "统一实体与业务口径",
@@ -1167,14 +1263,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "跨境电商库存补货与广告联动实践",
+      "title": "Datawhale FDE案例100｜NO.22 从库存割裂到业务联动：FDE用AI打通跨境电商的库存、补货与广告决策",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-012",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=216",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 22,
+      "printed_page": 215,
+      "pdf_page": 216
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1188,6 +1288,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.22",
+        "url": "https://fde100.datawhale.cn/cases/cases-012"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1223,7 +1327,7 @@
     "human": "运营人员决定重点达人、谈判与关系维护。",
     "result": "扩大单人可覆盖达人数量；公开资料未披露精确效果。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-013",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=47",
     "architecture": [
       "商品/门店/达人/品牌资料",
       "结构化素材与品牌规则",
@@ -1260,14 +1364,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "TikTok达人建联与履约协同实践",
+      "title": "Datawhale FDE案例100｜NO.05 从大海捞针到全链路提效：FDE用AI重构TikTok达人建联与履约",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-013",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=47",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 5,
+      "printed_page": 46,
+      "pdf_page": 47
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1281,6 +1389,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.05",
+        "url": "https://fde100.datawhale.cn/cases/cases-013"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1316,7 +1428,7 @@
     "human": "业务员负责商业判断、价格与最终发送。",
     "result": "减少重复文书劳动；具体指标未公开。",
     "maturity": "落地/迭代",
-    "url": "https://fde100.datawhale.cn/cases/cases-004",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=106",
     "architecture": [
       "商品/门店/达人/品牌资料",
       "结构化素材与品牌规则",
@@ -1353,14 +1465,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "跨境电商AI工作流矩阵",
+      "title": "Datawhale FDE案例100｜NO.11 从文件散乱到随取随用：FDE用AI帮外贸企业把资料变成可用资产",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-004",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=106",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 11,
+      "printed_page": 105,
+      "pdf_page": 106
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1374,6 +1490,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.11",
+        "url": "https://fde100.datawhale.cn/cases/cases-004"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1409,7 +1529,7 @@
     "human": "设计与运营负责品牌一致性和最终发布。",
     "result": "提升内容量产能力；具体ROI未公开。",
     "maturity": "已落地",
-    "url": "https://fde100.datawhale.cn/cases/cases-021",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=119",
     "architecture": [
       "商品/门店/达人/品牌资料",
       "结构化素材与品牌规则",
@@ -1446,14 +1566,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "AI重塑鞋服电商素材工作流",
+      "title": "Datawhale FDE案例100｜NO.12 从人工盯图到公司级生产：FDE用AI重塑鞋服电商素材工作流",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-021",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=119",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 12,
+      "printed_page": 118,
+      "pdf_page": 119
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1467,6 +1591,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.12",
+        "url": "https://fde100.datawhale.cn/cases/cases-021"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1502,7 +1630,7 @@
     "human": "运营人员挑选主题、审核品牌与违规风险。",
     "result": "重点是降低单条内容生产成本并扩大产量。",
     "maturity": "已落地/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-003",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=146",
     "architecture": [
       "商品/门店/达人/品牌资料",
       "结构化素材与品牌规则",
@@ -1539,14 +1667,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "本地生活短视频内容AI生产实践",
+      "title": "Datawhale FDE案例100｜NO.15 从经验写稿到稳定量产：FDE用AI重构本地生活短视频内容生产",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-003",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=146",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 15,
+      "printed_page": 145,
+      "pdf_page": 146
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1560,6 +1692,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.15",
+        "url": "https://fde100.datawhale.cn/cases/cases-003"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1595,7 +1731,7 @@
     "human": "建筑/工程专业人员保留设计责任与安全判断。",
     "result": "减少重复检查和资料整理时间；指标未公开。",
     "maturity": "POC/验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-002",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=207",
     "architecture": [
       "业务数据/文档/系统输入",
       "数据清洗与业务语义整理",
@@ -1632,14 +1768,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "建筑消防施工图智能生成",
+      "title": "Datawhale FDE案例100｜NO.21 从人工绘图到智能协作：FDE用AI重塑建筑图纸交付流程",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-002",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=207",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 21,
+      "printed_page": 206,
+      "pdf_page": 207
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1653,6 +1793,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.21",
+        "url": "https://fde100.datawhale.cn/cases/cases-002"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1688,7 +1832,7 @@
     "human": "网络专家确认根因和处置建议。",
     "result": "目标是分钟级获取洞察；公开材料未披露统一效果。",
     "maturity": "验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-005",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=158",
     "architecture": [
       "SOP / 历史案例 / 专家访谈",
       "文档解析、切分与元数据标注",
@@ -1725,14 +1869,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从人工分析到分钟级洞察：AI重构电信网络数据分析",
+      "title": "Datawhale FDE案例100｜NO.16 从人工分析到分钟级洞察：FDE用AI重构电信网络数据分析",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-005",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=158",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 16,
+      "printed_page": 157,
+      "pdf_page": 158
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1746,6 +1894,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.16",
+        "url": "https://fde100.datawhale.cn/cases/cases-005"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1781,7 +1933,7 @@
     "human": "业务人员维护关键事实并审核经营结论。",
     "result": "形成统一数据底座和问数入口；指标未公开。",
     "maturity": "验证中",
-    "url": "https://fde100.datawhale.cn/cases/cases-020",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=178",
     "architecture": [
       "业务数据/文档/系统输入",
       "数据清洗与业务语义整理",
@@ -1818,14 +1970,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从纸质台账到AI经营：一家生物科技上市公司的0帧起手数智化",
+      "title": "Datawhale FDE案例100｜NO.18 从纸质台账到AI经营：一家生物科技上市公司的0帧起手数智化",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-020",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=178",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 18,
+      "printed_page": 177,
+      "pdf_page": 178
     },
     "analysis_boundary": {
       "business_problem": "基于公开材料概括",
@@ -1839,6 +1995,10 @@
       "来源可直接定位到该案例；数值仍属于来源方披露，不代表独立审计。"
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.18",
+        "url": "https://fde100.datawhale.cn/cases/cases-020"
+      },
       {
         "title": "旧版使用的二次整理或汇总来源",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1877,7 +2037,7 @@
     "result": "Datawhale审核案例称，法务场景可节省1个法务编制，整体覆盖法务、财务、人事、业务、技术等约10人/年的用工成本。",
     "maturity": "已落地/扩展中",
     "maturity_stage": "已上线",
-    "url": "https://fde100.datawhale.cn/cases/cases-014",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=136",
     "architecture": [
       "OA / ERP / 数据中台与岗位知识",
       "知识萃取与隐性流程显性化",
@@ -1912,14 +2072,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "国企电商AI工作流落地",
+      "title": "Datawhale FDE案例100｜NO.14 从技术交付到业务自驱：FDE用AI推动国企工作流程真正落地",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-014",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=136",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 14,
+      "printed_page": 135,
+      "pdf_page": 136
     },
     "analysis_boundary": {
       "business_problem": "公开页面披露",
@@ -1932,7 +2096,12 @@
       "页面标记为 VERIFIED CASE / 审核通过。",
       "效果数字属于案例发布方披露，不代表独立审计。"
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.14",
+        "url": "https://fde100.datawhale.cn/cases/cases-014"
+      }
+    ],
     "detail_score": 12,
     "detail_level": "deep",
     "detail_label": "深度案例｜关键链路较完整",
@@ -1961,7 +2130,7 @@
     "result": "Datawhale审核案例称，写代码时间节省约三分之一，写文档时间节省50%以上。",
     "maturity": "已落地/持续迭代",
     "maturity_stage": "已上线",
-    "url": "https://fde100.datawhale.cn/cases/cases-017",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=68",
     "architecture": [
       "真实研发任务与现有协作流程",
       "团队能力与工具使用基线诊断",
@@ -1996,14 +2165,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "基金公司AI Coding研发转型",
+      "title": "Datawhale FDE案例100｜NO.07 从个人提效到组织能力：FDE用AI推动企业研发转型",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-017",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=68",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 7,
+      "printed_page": 67,
+      "pdf_page": 68
     },
     "analysis_boundary": {
       "business_problem": "公开页面披露",
@@ -2016,7 +2189,12 @@
       "页面标记为 VERIFIED CASE / 审核通过。",
       "效果数字属于案例发布方披露，不代表独立审计。"
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.07",
+        "url": "https://fde100.datawhale.cn/cases/cases-017"
+      }
+    ],
     "detail_score": 12,
     "detail_level": "deep",
     "detail_label": "深度案例｜关键链路较完整",
@@ -2046,7 +2224,7 @@
     "result": "形成订单全链路穿透、异常主动提醒和经营看板；Datawhale公开页面未披露统一量化收益。",
     "maturity": "已落地/演示中",
     "maturity_stage": "已上线",
-    "url": "https://fde100.datawhale.cn/cases/cases-022",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=197",
     "architecture": [
       "管家婆ERP中的订单/采购/库存/发货/回款数据",
       "只读同步到独立业务镜像库",
@@ -2081,14 +2259,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "制造企业经营流程透明化",
+      "title": "Datawhale FDE案例100｜NO.20 从看不清订单到看清经营：FDE用AI让制造企业的经营流程更透明",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-022",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=197",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 20,
+      "printed_page": 196,
+      "pdf_page": 197
     },
     "analysis_boundary": {
       "business_problem": "公开页面披露",
@@ -2101,7 +2283,12 @@
       "页面标记为 VERIFIED CASE / 审核通过。",
       "公开页面未给统一量化结果。"
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.20",
+        "url": "https://fde100.datawhale.cn/cases/cases-022"
+      }
+    ],
     "detail_score": 11,
     "detail_level": "deep",
     "detail_label": "深度案例｜关键链路较完整",
@@ -2133,7 +2320,7 @@
     "result": "形成包装预审、产品生命周期知识沉淀和业务Builder培养方案；Datawhale公开页面未披露统一量化收益。",
     "maturity": "落地/持续迭代",
     "maturity_stage": "已上线",
-    "url": "https://fde100.datawhale.cn/cases/cases-023",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=186",
     "architecture": [
       "产品需求、配方、设计稿、法规与渠道规则",
       "OCR/VLM解析包装内容",
@@ -2168,14 +2355,18 @@
     "evidence_level": "A",
     "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "从人工排队到审核前置：AI重构消费品研发协同与包装审核",
+      "title": "Datawhale FDE案例100｜NO.19 从人工排队到审核前置：FDE用AI重构消费品研发协同与包装审核",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-023",
-      "source_type": "经发布方审核的脱敏案例",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=186",
+      "source_type": "官方案例合集 PDF",
       "directness": "案例级直接来源",
       "claim_origin": "案例发布方披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE案例100",
+      "case_number": 19,
+      "printed_page": 185,
+      "pdf_page": 186
     },
     "analysis_boundary": {
       "business_problem": "公开页面披露",
@@ -2188,7 +2379,12 @@
       "页面标记为 VERIFIED CASE / 审核通过。",
       "公开页面未给统一量化结果。"
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 单案例网页｜NO.19",
+        "url": "https://fde100.datawhale.cn/cases/cases-023"
+      }
+    ],
     "detail_score": 11,
     "detail_level": "deep",
     "detail_label": "深度案例｜关键链路较完整",

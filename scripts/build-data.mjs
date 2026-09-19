@@ -23,6 +23,7 @@ const sourceRecordFields = [
 ];
 const boundaryFields = ['business_problem', 'solution', 'architecture', 'fde_actions', 'result'];
 const minimumTextLength = { problem: 10, solution: 20, human: 10, result: 10, case_summary: 30 };
+const datawhalePdfBase = 'https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=';
 
 for (const [index, item] of cases.entries()) {
   const label = `#${index + 1} ${item.id || '(无 id)'}`;
@@ -70,6 +71,19 @@ for (const [index, item] of cases.entries()) {
     if (!item.analysis_boundary?.[field]) errors.push(`${label}: analysis_boundary.${field} 缺失`);
   }
   if (item.source_record?.url !== item.url) warnings.push(`${label}: 主 URL 与 source_record.url 不一致`);
+  if (item.source === 'Datawhale') {
+    if (!item.url.startsWith(datawhalePdfBase)) {
+      errors.push(`${label}: Datawhale 主来源必须指向官方 FDE案例100 PDF 的具体页码`);
+    }
+    if (!Number.isInteger(item.source_record?.pdf_page) || !Number.isInteger(item.source_record?.printed_page)) {
+      errors.push(`${label}: Datawhale source_record 必须记录 pdf_page 与 printed_page`);
+    } else if (item.source_record.pdf_page !== item.source_record.printed_page + 1) {
+      errors.push(`${label}: Datawhale PDF 物理页码应比印刷页码大 1`);
+    }
+    if (!(item.additional_sources || []).some((source) => source.url.startsWith('https://fde100.datawhale.cn/cases/'))) {
+      errors.push(`${label}: Datawhale 案例必须在补充来源中保留原单案例网页`);
+    }
+  }
   if (typeof item.source_record?.independently_verified !== 'boolean') {
     errors.push(`${label}: independently_verified 必须是布尔值`);
   }

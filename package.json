@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "migrate:legacy": "node scripts/migrate-legacy.mjs",
+    "link:datawhale-pdf": "node scripts/link-datawhale-pdf.mjs",
     "classify:detail": "node scripts/recalculate-detail.mjs",
     "build:data": "node scripts/build-data.mjs && node scripts/refine-english-cases.mjs && node scripts/build-english-data.mjs && node scripts/build-english-page.mjs",
     "validate": "npm run build:data",

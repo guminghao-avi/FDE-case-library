@@ -11,7 +11,7 @@
     "human": "AI is responsible for retrieval and recommendation; senior staff provide experience and review high-risk recommendations.",
     "result": "The public material highlighted improvements in the development of newcomers and the sedimentation of experience; and the non-disclosure of harmonized financial indicators.",
     "maturity": "Deployed / continuing iteration",
-    "url": "https://fde100.datawhale.cn/cases/cases-009",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=7",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -48,14 +48,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From teacher to teacher to AI supplementary training: AI Breaking the legacy of manufacturing experience",
+      "title": "Datawhale FDE Case 100 | No. 1: From master-apprentice coaching to AI-assisted training",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-009",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=7",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 1,
+      "printed_page": 6,
+      "pdf_page": 7
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -69,6 +73,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 1",
+        "url": "https://fde100.datawhale.cn/cases/cases-009"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://finance.sina.com.cn/roll/2026-09-06/doc-iniqxiqt0968091.shtml"
@@ -104,7 +112,7 @@
     "human": "Procurement staff confirm critical material and unusual replacement proposals.",
     "result": "Case focus shortens positioning time and reduces empirical reliance; public information does not disclose harmonized ROI.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-024",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=77",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -141,14 +149,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Precision from material difficulties: use AI to reduce waste in industrial procurement",
+      "title": "Datawhale FDE Case 100 | No. 8: From hard-to-find materials to precise industrial procurement matching",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-024",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=77",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 8,
+      "printed_page": 76,
+      "pdf_page": 77
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -162,6 +174,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 8",
+        "url": "https://fde100.datawhale.cn/cases/cases-024"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -197,7 +213,7 @@
     "human": "Sales and engineers are responsible for the final technological boundaries, prices and commitments.",
     "result": "Increased efficiency of outputs from the first draft of the programme; accurate values not disclosed in public information.",
     "maturity": "POC / deployed",
-    "url": "https://fde100.datawhale.cn/cases/cases-019",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=166",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -234,14 +250,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "A. Reconstruct non-fixed pre-sale links with AI",
+      "title": "Datawhale FDE Case 100 | No. 17: AI collaboration for non-standard manufacturing presales and quotation",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-019",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=166",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 17,
+      "printed_page": 165,
+      "pdf_page": 166
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -255,6 +275,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 17",
+        "url": "https://fde100.datawhale.cn/cases/cases-019"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -290,7 +314,7 @@
     "human": "Operations confirm high-value orders and non-standard programmes.",
     "result": "The focus is on expanding the reach of long-tailed needs; public material is not available for harmonized indicators.",
     "maturity": "In validation",
-    "url": "https://fde100.datawhale.cn/cases/cases-006",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=226",
     "architecture": [
       "Business Data/Documents/System Inputs",
       "Data cleansing and business semantics",
@@ -327,14 +351,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From boss offer to Longtail acceptance: AI's offer and offer to lease the project.",
+      "title": "Datawhale FDE Case 100 | No. 23: Using AI to support long-tail lead intake and quotation in equipment rental",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-006",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=226",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 23,
+      "printed_page": 225,
+      "pdf_page": 226
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -348,6 +376,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 23",
+        "url": "https://fde100.datawhale.cn/cases/cases-006"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -383,7 +415,7 @@
     "human": "Manually handles low confidence, conflict of rules and final liability matters.",
     "result": "The public re-organization of the single review was reduced from about 15 minutes to 3-5 minutes.",
     "maturity": "Deployed",
-    "url": "https://fde100.datawhale.cn/cases/cases-007",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=15",
     "architecture": [
       "User uploads identification/application materials",
       "OCR/ Multimodular Resolution Pictures and Documents",
@@ -420,14 +452,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From manual review of materials to automation: use AI to improve the efficiency of the DMV network",
+      "title": "Datawhale FDE Case 100 | No. 2: From manual document review to automated vehicle-service processing",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-007",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=15",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 2,
+      "printed_page": 14,
+      "pdf_page": 15
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -441,6 +477,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 2",
+        "url": "https://fde100.datawhale.cn/cases/cases-007"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -475,7 +515,7 @@
     "human": "Planning specialists are responsible for judgement, policy interpretation and formal conclusions.",
     "result": "Reduction of desk analysis cycle; specific indicators not made public.",
     "maturity": "In validation",
-    "url": "https://fde100.datawhale.cn/cases/cases-008",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=34",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -512,14 +552,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From manual research to smart dispatch: AI re-engineering urban planning processes",
+      "title": "Datawhale FDE Case 100 | No. 4: From manual analysis to intelligent urban-planning coordination",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-008",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=34",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 4,
+      "printed_page": 33,
+      "pdf_page": 34
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -533,6 +577,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 4",
+        "url": "https://fde100.datawhale.cn/cases/cases-008"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -568,7 +616,7 @@
     "human": "The personnel at the site confirmed the state of the real equipment and the anomalies.",
     "result": "Reduction in manual entry and paperwork; indicators not made public.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-011",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=129",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -605,14 +653,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Digitalization of fire protection processes",
+      "title": "Datawhale FDE Case 100 | No. 13: From paper processes to data-driven fire-maintenance operations",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-011",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=129",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 13,
+      "printed_page": 128,
+      "pdf_page": 129
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -626,6 +678,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 13",
+        "url": "https://fde100.datawhale.cn/cases/cases-011"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -661,7 +717,7 @@
     "human": "Counsel retains findings of fact, legal judgement and final issuance.",
     "result": "Reduction of desk work time; disclosure of material does not have a uniform quantitative effect.",
     "maturity": "Deployed / iterating",
-    "url": "https://fde100.datawhale.cn/cases/cases-001",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=25",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -698,14 +754,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Wireless workstation for litigating lawyers",
+      "title": "Datawhale FDE Case 100 | No. 3: From desk work to intelligent collaboration for litigation teams",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-001",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=25",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 3,
+      "printed_page": 24,
+      "pdf_page": 25
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -719,6 +779,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 3",
+        "url": "https://fde100.datawhale.cn/cases/cases-001"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -754,7 +818,7 @@
     "human": "Man-made responsibility for high risk, low confidence and final approval.",
     "result": "The development of a transferable structure for “AI Sentencing + RPA Implementation + People Final Appeal”; some cases contribute to privatization numeracy inputs.",
     "maturity": "Deployed / scaled",
-    "url": "https://fde100.datawhale.cn/cases/cases-018",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=87",
     "architecture": [
       "Operational materials/invoices/documents/applications",
       "OCR/ field extraction + structured business materials",
@@ -793,14 +857,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Acid Financial Flows of the United States Enterprise",
+      "title": "Datawhale FDE Case 100 | No. 9: From spreadsheet-heavy work to intelligent public-enterprise finance execution",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-018",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=87",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 9,
+      "printed_page": 86,
+      "pdf_page": 87
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -814,6 +882,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 9",
+        "url": "https://fde100.datawhale.cn/cases/cases-018"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -849,7 +921,7 @@
     "human": "The finance staff only handle unmatched, unusual and high-risk transactions.",
     "result": "The objective was to move from a paper-by-written check to an anomaly; public information was not disclosed as a unified ROI.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-015",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=96",
     "architecture": [
       "Invoices/documentation/billing/operational materials",
       "OCR/ field extraction + business classification",
@@ -886,14 +958,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Underline retail store smart reconciliations",
+      "title": "Datawhale FDE Case 100 | No. 10: From manual checks to intelligent reconciliation for offline retail",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-015",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=96",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 10,
+      "printed_page": 95,
+      "pdf_page": 96
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -907,6 +983,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 10",
+        "url": "https://fde100.datawhale.cn/cases/cases-015"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -942,7 +1022,7 @@
     "human": "Operational personnel define calibres and validate unusual interpretations.",
     "result": "Establish an retrospective business analysis link, rather than simply a chat-type BI.",
     "maturity": "Deployed / continuing iteration",
-    "url": "https://fde100.datawhale.cn/cases/cases-016",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=234",
     "architecture": [
       "Business Data/Documents/System Inputs",
       "Data cleansing and business semantics",
@@ -979,14 +1059,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Cross-border elimination of overseas market data flow",
+      "title": "Datawhale FDE Case 100 | No. 24: Using AI to connect overseas sell-in and sell-through data for consumer goods",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-016",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=234",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 24,
+      "printed_page": 233,
+      "pdf_page": 234
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1000,6 +1084,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 24",
+        "url": "https://fde100.datawhale.cn/cases/cases-016"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1035,7 +1123,7 @@
     "human": "Dispatchers handle unusual cargo, special restraint and final loading.",
     "result": "The case highlighted that loading thresholds such as 98 were directly related to profits; specific company indicators were not made public.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-010",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=56",
     "architecture": [
       "ERP/WMS/orders/inventory/supplier/constraint data",
       "Harmonization of entity and operational calibre",
@@ -1073,14 +1161,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Cross-border logistics smart loader planning",
+      "title": "Datawhale FDE Case 100 | No. 6: From experience-based loading to intelligent cross-border logistics planning",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-010",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=56",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 6,
+      "printed_page": 55,
+      "pdf_page": 56
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1094,6 +1186,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 6",
+        "url": "https://fde100.datawhale.cn/cases/cases-010"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1129,7 +1225,7 @@
     "human": "Operators review replenishment decisions under promotion, seasonal and financial constraints.",
     "result": "Reduce the burden of data aggregation and manual judgement; specific indicators are not made public.",
     "maturity": "In validation",
-    "url": "https://fde100.datawhale.cn/cases/cases-012",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=216",
     "architecture": [
       "ERP/WMS/orders/inventory/supplier/constraint data",
       "Harmonization of entity and operational calibre",
@@ -1167,14 +1263,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Practice of cross-border power vendor stock replenishment and advertising connection",
+      "title": "Datawhale FDE Case 100 | No. 22: Connecting inventory, replenishment, and advertising decisions in cross-border e-commerce",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-012",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=216",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 22,
+      "printed_page": 215,
+      "pdf_page": 216
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1188,6 +1288,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 22",
+        "url": "https://fde100.datawhale.cn/cases/cases-012"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1223,7 +1327,7 @@
     "human": "Operators decide to focus on people, negotiation and relationship maintenance.",
     "result": "Expansion of the number of persons covered by a single person; disclosure of information without disclosing its precise effect.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-013",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=47",
     "architecture": [
       "Commodity/door/addresser/brand information",
       "Structured material and brand rules",
@@ -1260,14 +1364,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "TikTok Human Development Association and Compliance Synergy Practice",
+      "title": "Datawhale FDE Case 100 | No. 5: AI-assisted TikTok creator discovery, outreach, and fulfillment",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-013",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=47",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 5,
+      "printed_page": 46,
+      "pdf_page": 47
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1281,6 +1389,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 5",
+        "url": "https://fde100.datawhale.cn/cases/cases-013"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1316,7 +1428,7 @@
     "human": "The operator is responsible for business judgement, price and final delivery.",
     "result": "Reduce duplication of paperwork; specific indicators are not made public.",
     "maturity": "Deployed / iterating",
-    "url": "https://fde100.datawhale.cn/cases/cases-004",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=106",
     "architecture": [
       "Commodity/door/addresser/brand information",
       "Structured material and brand rules",
@@ -1353,14 +1465,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Cross-border power provider AI workflow matrix",
+      "title": "Datawhale FDE Case 100 | No. 11: Turning scattered foreign-trade files into reusable business assets",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-004",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=106",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 11,
+      "printed_page": 105,
+      "pdf_page": 106
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1374,6 +1490,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 11",
+        "url": "https://fde100.datawhale.cn/cases/cases-004"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1409,7 +1529,7 @@
     "human": "Design and operation is responsible for brand consistency and eventual release.",
     "result": "Enhancing content mass production capacity; specific ROI is not publicly available.",
     "maturity": "Deployed",
-    "url": "https://fde100.datawhale.cn/cases/cases-021",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=119",
     "architecture": [
       "Commodity/door/addresser/brand information",
       "Structured material and brand rules",
@@ -1446,14 +1566,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "AI Reshaping Shoes for Electrical Materials",
+      "title": "Datawhale FDE Case 100 | No. 12: From manual image review to company-scale fashion e-commerce content production",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-021",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=119",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 12,
+      "printed_page": 118,
+      "pdf_page": 119
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1467,6 +1591,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 12",
+        "url": "https://fde100.datawhale.cn/cases/cases-021"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1502,7 +1630,7 @@
     "human": "Operators select topics, review brands and risk of non-compliance.",
     "result": "The focus is on reducing production costs and increasing production of individual content.",
     "maturity": "Deployed / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-003",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=146",
     "architecture": [
       "Commodity/door/addresser/brand information",
       "Structured material and brand rules",
@@ -1539,14 +1667,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Local life short video content ALI production practice",
+      "title": "Datawhale FDE Case 100 | No. 15: From experience-based writing to scaled local-services video production",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-003",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=146",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 15,
+      "printed_page": 145,
+      "pdf_page": 146
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1560,6 +1692,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 15",
+        "url": "https://fde100.datawhale.cn/cases/cases-003"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1595,7 +1731,7 @@
     "human": "Construction/engineering professionals retain design responsibility and security judgement.",
     "result": "Reduction in time for duplicate inspections and documentation; indicators not made public.",
     "maturity": "POC / validating",
-    "url": "https://fde100.datawhale.cn/cases/cases-002",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=207",
     "architecture": [
       "Business Data/Documents/System Inputs",
       "Data cleansing and business semantics",
@@ -1632,14 +1768,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Building fire construction graphics intelligent generation",
+      "title": "Datawhale FDE Case 100 | No. 21: From manual drafting to intelligent collaboration in architectural delivery",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-002",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=207",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 21,
+      "printed_page": 206,
+      "pdf_page": 207
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1653,6 +1793,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 21",
+        "url": "https://fde100.datawhale.cn/cases/cases-002"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765"
@@ -1688,7 +1832,7 @@
     "human": "Network experts identify root causes and disposal recommendations.",
     "result": "The goal is to obtain insight at the minute level; public materials do not disclose uniform effects.",
     "maturity": "In validation",
-    "url": "https://fde100.datawhale.cn/cases/cases-005",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=158",
     "architecture": [
       "SOP / History Case / Expert Interview",
       "Document Parsing, Cutting and Metadata Tags",
@@ -1725,14 +1869,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From manual analysis to minute insight: AI reconfigured telecommunication network data analysis",
+      "title": "Datawhale FDE Case 100 | No. 16: From manual analysis to minute-level telecom-network insight",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-005",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=158",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 16,
+      "printed_page": 157,
+      "pdf_page": 158
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1746,6 +1894,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 16",
+        "url": "https://fde100.datawhale.cn/cases/cases-005"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1781,7 +1933,7 @@
     "human": "Operations staff maintain critical facts and review operational findings.",
     "result": "A common data base and question portal is formed; indicators are not publicly available.",
     "maturity": "In validation",
-    "url": "https://fde100.datawhale.cn/cases/cases-020",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=178",
     "architecture": [
       "Business Data/Documents/System Inputs",
       "Data cleansing and business semantics",
@@ -1818,14 +1970,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From paper counter accounts to AI operations: zero frames of a company listed in biotech.",
+      "title": "Datawhale FDE Case 100 | No. 18: From paper ledgers to AI-assisted operations at a listed biotech company",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-020",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=178",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 18,
+      "printed_page": 177,
+      "pdf_page": 178
     },
     "analysis_boundary": {
       "business_problem": "Summary based on public material",
@@ -1839,6 +1995,10 @@
       "The source can be directly located in the case; the value remains disclosed by the source and does not represent an independent audit."
     ],
     "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 18",
+        "url": "https://fde100.datawhale.cn/cases/cases-020"
+      },
       {
         "title": "Secondary collation or aggregation source used in the old version",
         "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100"
@@ -1877,7 +2037,7 @@
     "result": "Datawhale reviewed the case and stated that the legal scene would save one legal production, covering the costs of approximately 10 person/years of labour in legal matters, finance, personnel, operations, technology, etc.",
     "maturity": "Deployed / expanding",
     "maturity_stage": "In production",
-    "url": "https://fde100.datawhale.cn/cases/cases-014",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=136",
     "architecture": [
       "OA / ERP / Data Center and Job Knowledge",
       "Knowledge extraction and implicit process visibility",
@@ -1912,14 +2072,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "State Enterprise AI's job is on the ground.",
+      "title": "Datawhale FDE Case 100 | No. 14: From technical delivery to business-owned AI workflows in a state-owned enterprise",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-014",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=136",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 14,
+      "printed_page": 135,
+      "pdf_page": 136
     },
     "analysis_boundary": {
       "business_problem": "Public Page Disclosure",
@@ -1932,7 +2096,12 @@
       "Page marked as VERIFED CASE/ approval.",
       "The effect figures are disclosed by the issuer of the case and do not represent an independent audit."
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 14",
+        "url": "https://fde100.datawhale.cn/cases/cases-014"
+      }
+    ],
     "detail_score": 12,
     "detail_level": "deep",
     "detail_label": "Deep case | Key delivery chain is substantially documented",
@@ -1961,7 +2130,7 @@
     "result": "The Datawhale review of the case reported savings of about one third in code writing time and more than 50 per cent in document writing time.",
     "maturity": "Deployed / continuing iteration",
     "maturity_stage": "In production",
-    "url": "https://fde100.datawhale.cn/cases/cases-017",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=68",
     "architecture": [
       "Real R&D tasks and existing collaborative processes",
       "Team competencies and tools use baseline diagnostics",
@@ -1996,14 +2165,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Foundation AI Coding Research and Development Transformation",
+      "title": "Datawhale FDE Case 100 | No. 7: From individual productivity to organization-wide R&D capability",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-017",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=68",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 7,
+      "printed_page": 67,
+      "pdf_page": 68
     },
     "analysis_boundary": {
       "business_problem": "Public Page Disclosure",
@@ -2016,7 +2189,12 @@
       "Page marked as VERIFED CASE/ approval.",
       "The effect figures are disclosed by the issuer of the case and do not represent an independent audit."
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 7",
+        "url": "https://fde100.datawhale.cn/cases/cases-017"
+      }
+    ],
     "detail_score": 12,
     "detail_level": "deep",
     "detail_label": "Deep case | Key delivery chain is substantially documented",
@@ -2046,7 +2224,7 @@
     "result": "The order was formed through full chain penetration, unusual proactive reminders and operating watchboards; no uniform quantification of benefits was disclosed on the Datawhale public page.",
     "maturity": "Deployed / demonstrated",
     "maturity_stage": "In production",
-    "url": "https://fde100.datawhale.cn/cases/cases-022",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=197",
     "architecture": [
       "Data on orders/purchases/inventory/distributions/refunds in the housekeeper ' s mother-in-law ' s ERP",
       "Read-only synchronise to stand-alone business mirrors",
@@ -2081,14 +2259,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "Transparency of manufacturing business processes",
+      "title": "Datawhale FDE Case 100 | No. 20: Using AI to make manufacturing order and operating workflows transparent",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-022",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=197",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 20,
+      "printed_page": 196,
+      "pdf_page": 197
     },
     "analysis_boundary": {
       "business_problem": "Public Page Disclosure",
@@ -2101,7 +2283,12 @@
       "Page marked as VERIFED CASE/ approval.",
       "The public page does not give uniform quantitative results."
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 20",
+        "url": "https://fde100.datawhale.cn/cases/cases-022"
+      }
+    ],
     "detail_score": 11,
     "detail_level": "deep",
     "detail_label": "Deep case | Key delivery chain is substantially documented",
@@ -2133,7 +2320,7 @@
     "result": "The formation of pre-packaging, product life-cycle knowledge sedimentation and business Builder culture programmes; no uniform quantitative benefits are disclosed on the Datawhale public page.",
     "maturity": "Deployed / continuing iteration",
     "maturity_stage": "In production",
-    "url": "https://fde100.datawhale.cn/cases/cases-023",
+    "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=186",
     "architecture": [
       "Product requirements, formulations, drafts, regulations and channel rules",
       "OCR/VLM parsing packaging",
@@ -2168,14 +2355,18 @@
     "evidence_level": "A",
     "evidence_label": "Level A | Direct case-level source",
     "source_record": {
-      "title": "From manual queuing to pre-screening: AI re-engineering of consumer goods research and development coordinated and packaged audit",
+      "title": "Datawhale FDE Case 100 | No. 19: AI-assisted consumer-product R&D collaboration and packaging review",
       "publisher": "Datawhale FDE100",
-      "url": "https://fde100.datawhale.cn/cases/cases-023",
-      "source_type": "Disorder cases cleared by the publisher",
+      "url": "https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf#page=186",
+      "source_type": "Official case collection PDF",
       "directness": "Direct sources at the case level",
       "claim_origin": "Disclosure by the author of the case",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-09-19",
+      "collection_title": "Datawhale FDE Case 100",
+      "case_number": 19,
+      "printed_page": 185,
+      "pdf_page": 186
     },
     "analysis_boundary": {
       "business_problem": "Public Page Disclosure",
@@ -2188,7 +2379,12 @@
       "Page marked as VERIFED CASE/ approval.",
       "The public page does not give uniform quantitative results."
     ],
-    "additional_sources": [],
+    "additional_sources": [
+      {
+        "title": "Datawhale FDE100 case webpage | No. 19",
+        "url": "https://fde100.datawhale.cn/cases/cases-023"
+      }
+    ],
     "detail_score": 11,
     "detail_level": "deep",
     "detail_label": "Deep case | Key delivery chain is substantially documented",

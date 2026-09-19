@@ -18,7 +18,7 @@
 
 来源包括：
 
-- Datawhale FDE100 审核案例：24 条
+- [Datawhale《FDE案例100》官方 PDF](https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf)：24 条，案例主链接可直接跳到对应 PDF 页
 - Palantir 客户部署案例：45 条
 - OpenAI 客户部署案例：34 条
 - 企业年报、投资者材料、工程博客与内部项目复盘：12 条
@@ -105,6 +105,8 @@ npm test
 
 修改案例正文后，先运行 `npm run classify:detail` 更新派生分类，再运行 `npm test`。
 
+Datawhale 24 条案例的 PDF 页码映射由 `npm run link:datawhale-pdf` 维护。主来源指向官方 PDF 的准确物理页码，原单案例网页保留在补充来源中。
+
 ## 如何引用
 
 建议同时引用：
@@ -154,7 +156,7 @@ The repository contains **123 cases**, grouped by disclosed level of detail:
 
 Source coverage:
 
-- Datawhale FDE100 reviewed cases: 24
+- [Official Datawhale *FDE Case 100* PDF](https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf): 24 cases, with primary links opening the corresponding PDF page
 - Palantir customer deployments: 45
 - OpenAI customer deployments: 34
 - First-party annual reports, investor materials, engineering blogs, and internal project retrospectives: 12
@@ -205,6 +207,8 @@ npm test
 ```
 
 Validation covers required fields, stable IDs, HTTPS sources, detail-score consistency, source ledgers, evidence boundaries, bilingual case parity, generated browser data, language-switch links, and JavaScript syntax in both pages.
+
+The 24 Datawhale PDF page mappings are maintained by `npm run link:datawhale-pdf`. Each primary source opens the exact physical PDF page; the original single-case webpage remains available as an additional source.
 
 ## How to cite a case
 
