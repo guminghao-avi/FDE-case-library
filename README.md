@@ -128,9 +128,9 @@ npm test
 
 ## 许可证
 
-本仓库原创代码、结构化数据和编辑内容采用 [Apache License 2.0](LICENSE)。与 MIT 相比，该协议额外包含明确的专利授权与终止条款，并要求再分发时保留许可证、归属声明以及对修改文件的显著说明。
+本仓库原创代码、结构化数据和编辑内容采用 [MIT License](LICENSE)。允许商业使用、复制、修改、合并、发布、分发、再许可和销售副本；再分发时只需保留版权与许可证声明。
 
-案例所引用的第三方商标、原始文章、图片、报告和其他来源材料仍归各自权利人所有；Apache License 2.0 不会改变这些第三方材料的权利归属。项目只授权仓库内由维护者原创的代码、摘要、字段设计和结构化整理。
+案例所引用的第三方商标、原始文章、图片、报告和其他来源材料仍归各自权利人所有；MIT License 只适用于仓库内由维护者原创的代码、摘要、字段设计和结构化整理，不授予任何第三方材料的权利。
 
 ---
 
@@ -227,6 +227,6 @@ Contributions that add deep links, report page numbers, first-party evidence, in
 
 ## License
 
-Original code, structured data, and editorial content in this repository are licensed under the [Apache License 2.0](LICENSE). Compared with MIT, Apache 2.0 adds an explicit patent grant and termination clause and requires redistributed modifications to retain the license, attribution notices, and prominent change notices.
+Original code, structured data, and editorial content in this repository are licensed under the [MIT License](LICENSE). Commercial use, copying, modification, merging, publishing, distribution, sublicensing, and sale are permitted, provided the copyright and license notice are retained.
 
-Third-party trademarks, source articles, images, reports, and other referenced material remain the property of their respective owners. The Apache License applies only to original repository code, summaries, field design, and structured editorial work.
+Third-party trademarks, source articles, images, reports, and other referenced material remain the property of their respective owners. The MIT License applies only to original repository code, summaries, field design, and structured editorial work; it does not grant rights to third-party material.

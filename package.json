@@ -2,7 +2,7 @@
   "name": "fde-enterprise-ai-case-library",
   "version": "0.2.0",
   "private": true,
-  "license": "Apache-2.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "migrate:legacy": "node scripts/migrate-legacy.mjs",
