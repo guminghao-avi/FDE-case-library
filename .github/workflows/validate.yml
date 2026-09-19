@@ -15,4 +15,4 @@ jobs:
           node-version: 22
       - run: npm test
       - name: Ensure generated browser data is committed
-        run: git diff --exit-code -- data/cases.js
+        run: git diff --exit-code -- data/cases.js data/cases.en.js index.en.html

@@ -7,8 +7,8 @@
   "scripts": {
     "migrate:legacy": "node scripts/migrate-legacy.mjs",
     "classify:detail": "node scripts/recalculate-detail.mjs",
-    "build:data": "node scripts/build-data.mjs",
-    "validate": "node scripts/build-data.mjs",
+    "build:data": "node scripts/build-data.mjs && node scripts/refine-english-cases.mjs && node scripts/build-english-data.mjs && node scripts/build-english-page.mjs",
+    "validate": "npm run build:data",
     "check:html": "node scripts/check-html.mjs",
     "test": "npm run validate && npm run check:html"
   }

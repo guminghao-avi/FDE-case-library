@@ -4,34 +4,44 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const errors = [];
 
-const requiredSnippets = [
-  '<script src="data/cases.js"></script>',
-  'const CASES = window.FDE_CASES || [];',
-  'id="evidence"',
-  'id="source"',
-  'id="industry"',
-  'id="detailSegment"',
-  'id="modal"',
-  'source_record',
+const pages = [
+  { file: 'index.html', data: 'data/cases.js', languageLink: 'index.en.html' },
+  { file: 'index.en.html', data: 'data/cases.en.js', languageLink: 'index.html' },
 ];
 
-for (const snippet of requiredSnippets) {
-  if (!html.includes(snippet)) errors.push(`缺少首页关键标记：${snippet}`);
-}
+let scriptCount = 0;
+for (const page of pages) {
+  const html = fs.readFileSync(path.join(root, page.file), 'utf8');
+  const requiredSnippets = [
+    `<script src="${page.data}"></script>`,
+    'const CASES = window.FDE_CASES || [];',
+    `href="${page.languageLink}"`,
+    'id="evidence"',
+    'id="source"',
+    'id="industry"',
+    'id="detailSegment"',
+    'id="modal"',
+    'source_record',
+  ];
 
-if (html.indexOf('data/cases.js') > html.indexOf('const CASES = window.FDE_CASES || [];')) {
-  errors.push('data/cases.js 必须在首页逻辑之前加载。');
-}
+  for (const snippet of requiredSnippets) {
+    if (!html.includes(snippet)) errors.push(`${page.file} 缺少关键标记：${snippet}`);
+  }
 
-const inlineScripts = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)];
-for (const [index, match] of inlineScripts.entries()) {
-  try {
-    new vm.Script(match[1], { filename: `index.html:inline-script-${index + 1}` });
-  } catch (error) {
-    errors.push(`首页内联脚本 ${index + 1} 语法错误：${error.message}`);
+  if (html.indexOf(page.data) > html.indexOf('const CASES = window.FDE_CASES || [];')) {
+    errors.push(`${page.file}: ${page.data} 必须在页面逻辑之前加载。`);
+  }
+
+  const inlineScripts = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)];
+  scriptCount += inlineScripts.length;
+  for (const [index, match] of inlineScripts.entries()) {
+    try {
+      new vm.Script(match[1], { filename: `${page.file}:inline-script-${index + 1}` });
+    } catch (error) {
+      errors.push(`${page.file} 内联脚本 ${index + 1} 语法错误：${error.message}`);
+    }
   }
 }
 
@@ -41,4 +51,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`首页检查通过：${inlineScripts.length} 段内联脚本语法有效，关键数据与筛选入口齐全。`);
+console.log(`中英文页面检查通过：${scriptCount} 段内联脚本语法有效，关键数据、语言入口与筛选功能齐全。`);
