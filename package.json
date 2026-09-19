@@ -1,0 +1,15 @@
+{
+  "name": "fde-enterprise-ai-case-library",
+  "version": "0.2.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "migrate:legacy": "node scripts/migrate-legacy.mjs",
+    "classify:detail": "node scripts/recalculate-detail.mjs",
+    "build:data": "node scripts/build-data.mjs",
+    "validate": "node scripts/build-data.mjs",
+    "check:html": "node scripts/check-html.mjs",
+    "test": "npm run validate && npm run check:html"
+  }
+}

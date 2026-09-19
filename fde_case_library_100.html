@@ -1,0 +1,2131 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FDE 企业 AI 落地案例库 ｜ Datawhale × Palantir × OpenAI</title>
+  <meta name="description" content="按公司、行业和部署方式整理 Datawhale、Palantir 与 OpenAI 100个企业AI落地案例，深度拆解技术架构、FDE动作、人机边界与可复用方法。">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <style>
+    /* ==========================================================================
+       Apple Design Tokens & CSS System Variables
+       ========================================================================== */
+    :root {
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Consolas, monospace;
+      
+      /* Light Theme (Apple Studio Off-white Canvas) */
+      --bg-page: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-secondary: #fbfbfd;
+      --bg-tertiary: #f2f2f7;
+      --bg-subtle: rgba(0, 0, 0, 0.035);
+      --bg-frosted: rgba(245, 245, 247, 0.82);
+      --bg-frosted-modal: rgba(255, 255, 255, 0.94);
+      --overlay-backdrop: rgba(0, 0, 0, 0.36);
+
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --text-quaternary: #aeaeb2;
+
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-subtle: rgba(0, 0, 0, 0.04);
+      --border-strong: rgba(0, 0, 0, 0.16);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(0, 0, 0, 0.03);
+      --shadow-card-hover: 0 8px 26px rgba(0, 0, 0, 0.07), 0 18px 46px rgba(0, 0, 0, 0.05);
+      --shadow-modal: 0 28px 80px rgba(0, 0, 0, 0.22), 0 6px 20px rgba(0, 0, 0, 0.08);
+      --shadow-float: 0 4px 18px rgba(0, 0, 0, 0.1);
+
+      /* Apple System Accents */
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-blue-subtle: rgba(0, 113, 227, 0.08);
+      --apple-blue-border: rgba(0, 113, 227, 0.22);
+      --apple-blue-text: #0066cc;
+
+      --palantir-purple: #af52de;
+      --palantir-purple-subtle: rgba(175, 82, 222, 0.08);
+      --palantir-purple-border: rgba(175, 82, 222, 0.24);
+      --palantir-purple-text: #8e38b7;
+
+      --openai-green: #34c759;
+      --openai-green-subtle: rgba(52, 199, 89, 0.09);
+      --openai-green-border: rgba(52, 199, 89, 0.25);
+      --openai-green-text: #248a3d;
+
+      --apple-amber: #ff9500;
+      --apple-amber-subtle: rgba(255, 149, 0, 0.09);
+      --apple-amber-border: rgba(255, 149, 0, 0.28);
+      --apple-amber-text: #b25900;
+
+      --segment-bg: rgba(0, 0, 0, 0.055);
+      --segment-active-bg: #ffffff;
+      --segment-active-text: #1d1d1f;
+      --segment-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 9999px;
+
+      --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Theme (Apple Space Black & Pro Dark) */
+      --bg-page: #000000;
+      --bg-elevated: #1c1c1e;
+      --bg-secondary: #161618;
+      --bg-tertiary: #2c2c2e;
+      --bg-subtle: rgba(255, 255, 255, 0.05);
+      --bg-frosted: rgba(20, 20, 22, 0.85);
+      --bg-frosted-modal: rgba(28, 28, 30, 0.94);
+      --overlay-backdrop: rgba(0, 0, 0, 0.78);
+
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-tertiary: #86868b;
+      --text-quaternary: #636366;
+
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-strong: rgba(255, 255, 255, 0.22);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.45);
+      --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.16);
+      --shadow-modal: 0 28px 80px rgba(0, 0, 0, 0.88);
+      --shadow-float: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+      --apple-blue: #2997ff;
+      --apple-blue-hover: #40a9ff;
+      --apple-blue-subtle: rgba(41, 151, 255, 0.16);
+      --apple-blue-border: rgba(41, 151, 255, 0.32);
+      --apple-blue-text: #6cb5ff;
+
+      --palantir-purple: #bf5af2;
+      --palantir-purple-subtle: rgba(191, 90, 242, 0.16);
+      --palantir-purple-border: rgba(191, 90, 242, 0.35);
+      --palantir-purple-text: #d889ff;
+
+      --openai-green: #30d158;
+      --openai-green-subtle: rgba(48, 209, 88, 0.16);
+      --openai-green-border: rgba(48, 209, 88, 0.35);
+      --openai-green-text: #6ce086;
+
+      --apple-amber: #ff9f0a;
+      --apple-amber-subtle: rgba(255, 159, 10, 0.16);
+      --apple-amber-border: rgba(255, 159, 10, 0.35);
+      --apple-amber-text: #ffb84d;
+
+      --segment-bg: rgba(255, 255, 255, 0.08);
+      --segment-active-bg: #2c2c2e;
+      --segment-active-text: #f5f5f7;
+      --segment-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 15px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.3s var(--ease-apple), color 0.3s var(--ease-apple);
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* ==========================================================================
+       Sticky Frosted Top Navigation
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      height: 52px;
+      background: var(--bg-frosted);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      transition: border-color 0.3s var(--ease-apple), background-color 0.3s var(--ease-apple);
+    }
+
+    .nav-content {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .nav-apple-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .theme-toggle-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .nav-search-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-tertiary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .nav-search-trigger:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .kbd-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 1px 5px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ==========================================================================
+       Layout Wrap
+       ========================================================================== */
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ==========================================================================
+       Apple Bento Hero Section
+       ========================================================================== */
+    .hero {
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--apple-blue-text);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 4.2vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero-lead {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 980px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* Metric Bento Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s var(--ease-apple), box-shadow 0.22s var(--ease-apple), border-color 0.22s var(--ease-apple);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--border-strong);
+    }
+
+    .stat-card.active {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 1px var(--apple-blue), var(--shadow-card);
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text-primary);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .stat-label {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+    }
+
+    .stat-card[data-source="Palantir"] .stat-indicator { background: var(--palantir-purple); }
+    .stat-card[data-source="OpenAI"] .stat-indicator { background: var(--openai-green); }
+    .stat-card[data-source="Datawhale"] .stat-indicator { background: var(--apple-blue); }
+    .stat-card[data-source=""] .stat-indicator { background: var(--text-primary); }
+
+    /* Apple Callout Note */
+    .apple-callout {
+      margin-top: 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .apple-callout-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--apple-amber);
+      margin-top: 2px;
+    }
+
+    .apple-callout-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .apple-callout-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       Sticky Search & Filter Control Panel
+       ========================================================================== */
+    .filter-panel {
+      position: sticky;
+      top: 52px;
+      z-index: 80;
+      margin: 24px 0 16px;
+      padding: 14px 18px;
+      background: var(--bg-frosted);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s var(--ease-apple);
+    }
+
+    .filter-row-primary {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Spotlight Search Box */
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      width: 16px;
+      height: 16px;
+      fill: var(--text-tertiary);
+      pointer-events: none;
+      transition: fill 0.2s var(--ease-apple);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 0 42px 0 38px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .search-input:focus {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      transition: all 0.15s;
+    }
+
+    .search-clear-btn:hover {
+      background: var(--text-tertiary);
+      color: var(--bg-elevated);
+    }
+
+    /* Apple Segmented Control for Source */
+    .segmented-control {
+      display: flex;
+      background: var(--segment-bg);
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      height: 42px;
+      gap: 2px;
+      position: relative;
+    }
+
+    .segment-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      white-space: nowrap;
+      padding: 0 10px;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .segment-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .segment-btn.active {
+      background: var(--segment-active-bg);
+      color: var(--segment-active-text);
+      font-weight: 600;
+      box-shadow: var(--segment-active-shadow);
+    }
+
+    .segment-count {
+      font-size: 11px;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    /* Native-styled Select Dropdowns */
+    .select-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .apple-select {
+      width: 100%;
+      height: 42px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0 32px 0 14px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .apple-select:focus {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      fill: var(--text-tertiary);
+      pointer-events: none;
+    }
+
+    /* Quick Industry Filter Row */
+    .filter-quick-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .filter-quick-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-tag-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      margin-right: 2px;
+    }
+
+    .quick-tag {
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s var(--ease-apple);
+    }
+
+    .quick-tag:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      background: var(--bg-tertiary);
+    }
+
+    .quick-tag.active {
+      background: var(--apple-blue);
+      color: #ffffff;
+      border-color: var(--apple-blue);
+    }
+
+    /* Toolbar / Results status */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 4px 14px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .result-count-badge {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .reset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--apple-blue);
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .reset-btn:hover {
+      background: var(--apple-blue);
+      color: #ffffff;
+    }
+
+    .toolbar-hint {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       Cards Grid (Apple Minimalist Bento Grid)
+       ========================================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s var(--ease-apple), box-shadow 0.22s var(--ease-apple), border-color 0.22s var(--ease-apple);
+      outline: none;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--border-strong);
+    }
+
+    .card:focus-visible {
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle), var(--shadow-card-hover);
+      border-color: var(--apple-blue);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1.4;
+      border: 1px solid transparent;
+    }
+
+    .badge-source-Palantir {
+      color: var(--palantir-purple-text);
+      background: var(--palantir-purple-subtle);
+      border-color: var(--palantir-purple-border);
+    }
+
+    .badge-source-OpenAI {
+      color: var(--openai-green-text);
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .badge-source-Datawhale {
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border-color: var(--apple-blue-border);
+    }
+
+    .badge-industry {
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border-color: var(--border-color);
+    }
+
+    .badge-fde {
+      color: var(--text-tertiary);
+      background: var(--bg-subtle);
+      border-color: var(--border-subtle);
+      font-size: 10.5px;
+    }
+
+    .company-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .scenario-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .card-content-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .card-row {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .card-row-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .card-row-val {
+      color: var(--text-secondary);
+    }
+
+    .card-row.highlight {
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .card-row.highlight .card-row-label {
+      color: var(--openai-green-text);
+    }
+
+    .card-row.highlight .card-row-val {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .card-maturity {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .card-maturity::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--openai-green);
+    }
+
+    .card-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      color: var(--apple-blue);
+      transition: transform 0.2s var(--ease-apple);
+    }
+
+    .card:hover .card-action-link svg {
+      transform: translateX(3px);
+    }
+
+    .card-action-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      transition: transform 0.2s var(--ease-apple);
+    }
+
+    /* ==========================================================================
+       Empty State
+       ========================================================================== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .empty-icon {
+      width: 48px;
+      height: 48px;
+      fill: var(--text-tertiary);
+      margin-bottom: 14px;
+      opacity: 0.7;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .empty-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto 18px;
+    }
+
+    /* ==========================================================================
+       Apple Sheet Modal (Detail View)
+       ========================================================================== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--overlay-backdrop);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      opacity: 0;
+      transition: opacity 0.25s var(--ease-apple);
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-box {
+      width: min(1080px, 96vw);
+      max-height: 90vh;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-modal);
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.96) translateY(12px);
+      transition: transform 0.25s var(--ease-apple);
+    }
+
+    .modal.show .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg-frosted-modal);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .modal-title-wrap {
+      flex: 1;
+    }
+
+    .modal-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .modal-scenario {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 6px 0 10px;
+    }
+
+    .modal-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .modal-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .modal-counter {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-right: 4px;
+    }
+
+    .modal-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.15s;
+    }
+
+    .modal-nav-btn:hover:not(:disabled) {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .modal-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .modal-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .modal-body {
+      padding: 24px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Bento Key Summary Banner */
+    .bento-summary-banner {
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .bento-summary-banner svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--apple-blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .bento-summary-text {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Bento grid inside modal */
+    .bento-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .bento-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    .bento-section.full {
+      grid-column: 1 / -1;
+    }
+
+    .bento-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .bento-heading svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .bento-content {
+      color: var(--text-primary);
+    }
+
+    .bento-content p {
+      margin-bottom: 8px;
+    }
+
+    .bento-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Architecture Step Flow */
+    .arch-flow {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+      scrollbar-width: thin;
+    }
+
+    .arch-step {
+      min-width: 170px;
+      max-width: 220px;
+      flex-shrink: 0;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-primary);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .arch-step-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--apple-blue);
+      background: var(--apple-blue-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .arch-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--text-tertiary);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Technology Chips */
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 5px 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Action & Reusable Lists */
+    .clean-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clean-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .clean-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--apple-blue);
+    }
+
+    .clean-list.reusable-list li::before {
+      background: var(--palantir-purple);
+    }
+
+    /* Result Callout */
+    .bento-section.result-section {
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .bento-section.result-section .bento-heading {
+      color: var(--openai-green-text);
+    }
+
+    .bento-section.result-section .bento-content {
+      color: var(--text-primary);
+      font-size: 14.5px;
+      font-weight: 500;
+    }
+
+    /* Evidence callout */
+    .bento-section.evidence-section {
+      background: var(--apple-amber-subtle);
+      border-color: var(--apple-amber-border);
+    }
+
+    .bento-section.evidence-section .bento-heading {
+      color: var(--apple-amber-text);
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+      margin-top: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-footer-note {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .copy-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .apple-primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--apple-blue);
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--apple-blue-subtle);
+      transition: all 0.18s var(--ease-apple);
+    }
+
+    .apple-primary-btn:hover {
+      background: var(--apple-blue-hover);
+      box-shadow: 0 4px 14px var(--apple-blue-subtle);
+      transform: translateY(-1px);
+    }
+
+    .apple-primary-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Toast Notification */
+    .apple-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--text-primary);
+      color: var(--bg-elevated);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-float);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2000;
+      transition: transform 0.25s var(--ease-apple), opacity 0.25s var(--ease-apple);
+    }
+
+    .apple-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       Scroll to Top Button
+       ========================================================================== */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 70;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-float);
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .scroll-top-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .scroll-top-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+    @media (max-width: 1040px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .filter-row-primary {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding: 24px 16px 60px;
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .filter-panel {
+        top: 52px;
+        padding: 12px;
+      }
+      .filter-row-primary {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .bento-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .modal {
+        padding: 10px;
+      }
+      .modal-box {
+        max-height: 94vh;
+        border-radius: var(--radius-lg);
+      }
+      .modal-header {
+        padding: 16px 20px 14px;
+      }
+      .modal-body {
+        padding: 18px 20px 24px;
+      }
+      .modal-title {
+        font-size: 21px;
+      }
+      .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .apple-primary-btn {
+        justify-content: center;
+      }
+      .modal-footer-left {
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Frosted Top Navigation -->
+  <header class="top-nav">
+    <div class="nav-content">
+      <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg class="nav-apple-icon" viewBox="0 0 170 170">
+          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.67-7.81-11.96-14.34-6.3-9.59-11.1-20.73-14.4-33.43-3.3-12.7-4.96-24.16-4.96-34.39 0-14.37 3.63-26.24 10.89-35.61 7.26-9.37 16.32-14.16 27.18-14.37 4.96 0 10.36 1.34 16.19 4.02 5.84 2.68 9.53 4.08 11.08 4.2 1.94-.32 5.92-1.84 11.96-4.55 6.03-2.71 11.39-3.96 16.08-3.76 12.39.63 22.38 5.43 29.96 14.4-10.84 6.56-16.15 15.65-15.93 27.27.22 9.25 3.82 17.06 10.8 23.44 3.73 3.48 8.08 6.08 13.06 7.8-2.61 7.69-5.74 15.42-9.39 23.19zM119.22 32.64c0-7.23 2.65-13.97 7.96-20.21 5.3-6.24 11.77-10.38 19.41-12.43.11 1.06.16 2.01.16 2.86 0 7.13-2.73 13.96-8.2 20.48-5.46 6.53-12.08 10.49-19.85 11.89-.11-.85-.16-1.7-.16-2.59z"/>
+        </svg>
+        <span>FDE 案例库</span>
+        <span class="nav-badge">100 实战精选</span>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-search-trigger" id="navSearchTrigger" title="快捷搜索 (⌘K / /)">
+          <svg style="width:13px;height:13px;fill:currentColor;" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <span>搜索</span>
+          <span class="kbd-pill">⌘K</span>
+        </button>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="切换显示外观 (跟随系统 / 亮色 / 暗色)">
+          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+          <span id="themeLabel">外观</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span>Enterprise AI / Forward Deployed Engineering</span>
+      </div>
+      <h1>FDE 企业 AI 落地案例库</h1>
+      <p class="hero-lead">
+        精选 100 个来自 <strong>Datawhale、Palantir 与 OpenAI</strong> 的真实企业级 AI 部署实践。按公司、行业和部署方式深入拆解：还原真实技术架构、FDE 跟岗具体工作、人机协作边界与可复用方法论。
+      </p>
+
+      <!-- Bento Metric Cards (Clickable Filter) -->
+      <div class="stats-grid">
+        <div class="stat-card active" data-source="" title="查看全部案例">
+          <div class="stat-num">100</div>
+          <div class="stat-label">
+            <span>全部精选案例</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-source="Palantir" title="筛选 Palantir 案例">
+          <div class="stat-num">45</div>
+          <div class="stat-label">
+            <span>Palantir 深度实战</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-source="OpenAI" title="筛选 OpenAI 案例">
+          <div class="stat-num">35</div>
+          <div class="stat-label">
+            <span>OpenAI 产业赋能</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-source="Datawhale" title="筛选 Datawhale 案例">
+          <div class="stat-num">20</div>
+          <div class="stat-label">
+            <span>Datawhale 国内本土落地</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Callout Note -->
+      <div class="apple-callout">
+        <svg class="apple-callout-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <div class="apple-callout-text">
+          <strong>真实性与客观边界：</strong>案例拆解中的“技术架构”严格分为两类：公开材料明确披露的技术栈直接注明；未披露底层代码的案例仅做业务层架构抽象，并在“证据边界”中如实标注，杜绝虚构包装。所有“原始来源”均提供公开权威资料溯源。
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Filter Panel -->
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-row-primary">
+        <!-- Spotlight Search Input -->
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="search" class="search-input" placeholder="搜索公司、行业、场景、架构或技术组件... (快捷键 ⌘K)" autocomplete="off">
+          <button class="search-clear-btn" id="searchClearBtn" title="清空搜索">✕</button>
+        </div>
+
+        <!-- Apple Segmented Control for Source -->
+        <div class="segmented-control" id="sourceSegment">
+          <button class="segment-btn active" data-source="">全部 <span class="segment-count">100</span></button>
+          <button class="segment-btn" data-source="Palantir">Palantir <span class="segment-count">45</span></button>
+          <button class="segment-btn" data-source="OpenAI">OpenAI <span class="segment-count">35</span></button>
+          <button class="segment-btn" data-source="Datawhale">Datawhale <span class="segment-count">20</span></button>
+        </div>
+
+        <!-- Select: Industry -->
+        <div class="select-wrap">
+          <select id="industry" class="apple-select">
+            <option value="">全部所属行业 (68)</option>
+            <option>AI开发工具</option><option>HR科技/SaaS</option><option>IT服务</option><option>SaaS/客服</option><option>互联网/媒体/游戏</option><option>交通基础设施</option><option>企业软件</option><option>会员/非营利</option><option>体育/赛车</option><option>保险</option><option>保险/理赔</option><option>公用事业</option><option>制造/印刷</option><option>制造业</option><option>医疗</option><option>医疗/保险</option><option>医药/CRO</option><option>半导体/科技</option><option>国防/工业</option><option>工业制造</option><option>工业零配件/服务</option><option>工程/工业</option><option>建材/制造</option><option>建筑/工程</option><option>房地产/建筑</option><option>招聘/平台</option><option>政务/公共服务</option><option>政府/公共服务</option><option>政府/农业</option><option>旅行/保险</option><option>材料/制造</option><option>汽车/制造</option><option>汽车/平台</option><option>法律/专业服务</option><option>消费品/零售</option><option>消费品/食品</option><option>物流/供应链</option><option>生命科学</option><option>电信</option><option>电商</option><option>电子/制造</option><option>电池/制造</option><option>矿业</option><option>科技/制造</option><option>科技/软件</option><option>网络安全/软件</option><option>能源/油气</option><option>航空/旅行</option><option>航空制造</option><option>航空航天</option><option>航空航天/制造</option><option>营销/内容</option><option>财务/企业服务</option><option>贸易/外贸</option><option>资产管理</option><option>赛车/体育</option><option>赛车/制造</option><option>金融</option><option>金融/电商</option><option>铁路/制造</option><option>铁路/物流</option><option>零售</option><option>零售/医疗</option><option>零售/电商</option><option>零售/科技/金融</option><option>食品/制造</option><option>餐饮/供应链</option><option>餐饮/服务</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+
+        <!-- Select: Deployment Type -->
+        <div class="select-wrap">
+          <select id="fde" class="apple-select">
+            <option value="">全部部署形态</option>
+            <option>企业部署案例</option><option>伴随式部署</option><option>典型Forward Deployed</option><option>明确FDE</option><option>明确FDE/伴随式部署</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="filter-quick-row">
+        <span class="quick-tag-label">高频领域：</span>
+        <button class="quick-tag active" data-industry="">全部</button>
+        <button class="quick-tag" data-industry="制造业">制造业</button><button class="quick-tag" data-industry="金融">金融</button><button class="quick-tag" data-industry="政务/公共服务">政务/公共服务</button><button class="quick-tag" data-industry="电商">电商</button><button class="quick-tag" data-industry="消费品/零售">消费品/零售</button><button class="quick-tag" data-industry="物流/供应链">物流/供应链</button><button class="quick-tag" data-industry="医疗">医疗</button><button class="quick-tag" data-industry="科技/软件">科技/软件</button><button class="quick-tag" data-industry="法律/专业服务">法律/专业服务</button><button class="quick-tag" data-industry="汽车/制造">汽车/制造</button>
+      </div>
+    </div>
+
+    <!-- Toolbar / Status bar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <span id="count" class="result-count-badge">正在加载案例...</span>
+        <button id="resetFilterBtn" class="reset-btn" style="display: none;">
+          <svg style="width:12px;height:12px;fill:currentColor;" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          重置筛选
+        </button>
+      </div>
+      <div class="toolbar-hint">
+        <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span>点击任意卡片查看深度架构拆解与 FDE 工作流</span>
+      </div>
+    </div>
+
+    <!-- Cards Bento Grid -->
+    <main id="grid" class="cards-grid"></main>
+  </div>
+
+  <!-- Detail Sheet Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title" id="mTitle"></div>
+          <div class="modal-scenario" id="mScenario"></div>
+          <div class="modal-badges" id="mBadges"></div>
+        </div>
+
+        <div class="modal-nav-actions">
+          <span class="modal-counter" id="mCounter"></span>
+          <button class="modal-nav-btn" id="mPrevBtn" title="上一个案例 (快捷键 ←)" aria-label="上一个案例">‹</button>
+          <button class="modal-nav-btn" id="mNextBtn" title="下一个案例 (快捷键 →)" aria-label="下一个案例">›</button>
+          <button class="modal-close-btn" id="close" title="关闭 (Esc)" aria-label="关闭">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Bento Layout) -->
+      <div class="modal-body" id="mBody"></div>
+    </div>
+  </div>
+
+  <!-- Floating Toast -->
+  <div class="apple-toast" id="toast">已复制内容到剪贴板</div>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top-btn" id="scrollTopBtn" title="返回顶部" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- Data and Client Logic -->
+  <script>
+    const CASES = [{"source": "Datawhale", "company": "匿名德国零部件企业", "industry": "制造业", "scenario": "老师傅经验传承 / 新人培训", "fde": "明确FDE", "problem": "关键工艺与故障处理经验主要存在于资深员工脑中，新人遇到问题高度依赖找老师傅。", "solution": "FDE先跟岗观察培训与现场处理流程，再把隐性经验、SOP和历史案例组织成可检索知识，并嵌入新人实际工作场景。", "human": "AI负责检索与建议；资深员工提供经验、审核高风险建议。", "result": "公开材料强调新人培养与经验沉淀得到改善；未披露统一财务指标。", "maturity": "已落地/持续迭代", "url": "https://finance.sina.com.cn/roll/2026-09-06/doc-iniqxiqt0968091.shtml", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“老师傅经验传承 / 新人培训”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名工业企业", "industry": "制造业", "scenario": "工业采购 / 物料定位", "fde": "明确FDE", "problem": "SKU与物料体系复杂，采购人员依赖老员工经验定位替代料与正确物料。", "solution": "整合产品资料、历史采购与业务规则，用语义检索和AI辅助物料匹配。", "human": "采购人员确认关键物料与异常替代建议。", "result": "案例聚焦缩短定位时间与减少经验依赖；公开资料未披露统一ROI。", "maturity": "已落地/验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“工业采购 / 物料定位”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名非标制造企业", "industry": "制造业", "scenario": "售前方案与报价", "fde": "明确FDE", "problem": "售前报价高度依赖工程师理解非标需求并从历史方案中找相似项目。", "solution": "AI读取客户需求，检索历史方案、配置与报价依据，生成方案/报价初稿。", "human": "销售与工程师负责最终技术边界、价格和承诺。", "result": "提升方案初稿产出效率；公开资料未披露精确数值。", "maturity": "POC/落地", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“售前方案与报价”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名工程租赁企业", "industry": "制造业", "scenario": "长尾需求承接 / 产品匹配", "fde": "明确FDE", "problem": "大量长尾工程需求依赖人工判断设备与方案，销售承接成本高。", "solution": "用AI理解需求、匹配产品和历史服务方案，降低一线查找与沟通成本。", "human": "业务人员确认高价值订单和非标准方案。", "result": "重点是扩大长尾需求可承接范围；公开材料未给统一指标。", "maturity": "验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“长尾需求承接 / 产品匹配”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名车管所", "industry": "政务/公共服务", "scenario": "网上业务材料预审", "fde": "明确FDE", "problem": "网上业务材料需要人工逐项检查，审核慢且重复劳动多。", "solution": "OCR/多模态识别材料，结合业务规则与大模型做预审，并把异常件交给人工。", "human": "人工处理低置信度、规则冲突和最终责任事项。", "result": "公开二次整理称单次审核从约15分钟降到3–5分钟。", "maturity": "已见成效", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["用户上传证件/申请材料", "OCR/多模态解析图片与文档", "字段标准化并关联业务类型", "规则引擎检查硬性条件；LLM辅助理解非标准文本/材料", "置信度与异常检测", "标准件自动形成预审结果；异常件进入人工队列", "人工结论回写异常类型和规则库"], "components": ["OCR/多模态", "LLM", "规则引擎", "置信度路由", "审核工作台"], "fde_actions": ["统计人工审核真正耗时的材料类型和错误类型", "把“看材料”拆成字段识别、规则判断、语义理解三层", "优先用规则覆盖确定性要求，用模型处理非结构化理解", "定义不能自动过的异常和低置信度阈值", "用单件审核时间、人工介入率和错误率验证PoC"], "reusable": ["政务/合规类流程应把硬规则和LLM分开", "自动化目标不是100%无人，而是让人只看异常件", "可审计的判断路径比“模型回答得像人”重要"], "evidence": "中：公开材料披露业务链路与约15分钟→3–5分钟的二次整理指标；具体模型与阈值未公开。", "case_summary": "这个案例的关键不是单点使用AI，而是把“网上业务材料预审”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名城市规划机构", "industry": "政务/公共服务", "scenario": "城市规划研判", "fde": "明确FDE", "problem": "规划数据、政策、报告分散，人工汇总与研判周期长。", "solution": "汇集多源数据与文档，用AI辅助检索、归纳、研判和报告生成。", "human": "规划专家负责判断、政策解释与正式结论。", "result": "缩短案头分析周期；具体指标未公开。", "maturity": "验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“城市规划研判”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名消防维保企业", "industry": "政务/公共服务", "scenario": "纸质记录数字化 / 维保报告", "fde": "明确FDE", "problem": "巡检、维保记录大量存在于纸质单据与非结构化材料中。", "solution": "文档识别后结构化入库，再自动生成记录、检索历史问题与辅助报告。", "human": "现场人员确认真实设备状态与异常。", "result": "减少手工录入与文书工作；指标未公开。", "maturity": "已落地/验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“纸质记录数字化 / 维保报告”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名律师团队", "industry": "法律/专业服务", "scenario": "诉讼检索 / 证据梳理 / 文书初稿", "fde": "明确FDE", "problem": "律师大量时间用于检索、整理案卷与重复性初稿工作。", "solution": "搭建面向案件材料与法律资料的检索、证据梳理和文书辅助工作流。", "human": "律师保留事实认定、法律判断和最终签发。", "result": "降低案头工作时间；公开材料未给统一量化效果。", "maturity": "落地/迭代", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“诉讼检索 / 证据梳理 / 文书初稿”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名央国企", "industry": "财务/企业服务", "scenario": "财务流程自动化", "fde": "明确FDE", "problem": "报销、建单、审核等流程既有语义判断，也有大量重复系统操作，且责任要求高。", "solution": "AI负责信息组织、分类判断与风险识别；RPA/API负责建单、填表和提交；高风险事项升级人工。", "human": "人工承担高风险、低置信度和最终审批责任。", "result": "形成“AI判断 + RPA执行 + 人终审”的可迁移架构；部分案例推动私有化算力投入。", "maturity": "已落地/规模化", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["业务材料/发票/单据/申请", "OCR/字段抽取 + 业务材料结构化", "AI识别业务类型、补齐上下文并做初步风险判断", "规则/监督逻辑复核：金额、材料完整性、规则冲突、低置信度", "RPA/API进入ERP/OA完成建单、填表、附件上传、提交", "高风险/异常 → 财务人员复核和最终审批", "审批结果、异常原因沉淀为后续规则和样例"], "components": ["OCR/文档解析", "LLM", "规则/监督逻辑", "RPA/API", "ERP/OA/财务系统", "Human-in-the-loop"], "fde_actions": ["跟岗观察真实财务操作，找出员工自己说不清的隐性判断", "把流程拆成“语义判断 / 机械执行 / 最终责任”三类任务", "访谈老员工并把经验转成明确规则、例外和升级条件", "尽量复用原ERP/OA，把AI做成上层intelligence而非重做财务系统", "从小场景PoC验证，再决定私有部署和算力投入", "用低置信度和高风险路由设计责任边界"], "reusable": ["企业AI不等于一个万能Agent；最稳的结构往往是 AI判断 + 确定性执行 + 人负责", "先改造一段高频流程，再扩展基础设施", "FDE的第一产物常常是新的工作流，而不是模型"], "evidence": "中：Datawhale案例公开了业务分工和落地方法；具体模型、框架、接口产品未完整披露，组件层使用通用技术类别表示。", "case_summary": "这个案例的关键不是单点使用AI，而是把“财务流程自动化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名线下零售企业", "industry": "零售", "scenario": "门店对账", "fde": "明确FDE", "problem": "多门店、多支付渠道和多系统账单需要财务人员人工勾稽。", "solution": "统一账单口径，自动匹配交易并把差异与异常集中交给财务人员处理。", "human": "财务人员只处理未匹配、异常和高风险交易。", "result": "目标是从逐笔核对转为异常处理；公开资料未披露统一ROI。", "maturity": "已落地/验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["发票/单据/账单/业务材料", "OCR/字段抽取 + 业务分类", "LLM/规则判断业务类型与风险", "确定性匹配/校验/对账", "RPA/API写入ERP/OA/财务系统", "异常件 → 人工复核 → 结果回写"], "components": ["OCR/信息抽取", "LLM", "规则引擎", "RPA/API", "ERP/OA", "Human-in-the-loop"], "fde_actions": ["shadowing财务人员，把“看材料—判断—建单—复核”拆成原子动作", "区分语义判断、机械执行和责任审批三类任务", "把老员工隐性审核规则显性化并建立异常类型", "优先接现有ERP/OA，不重造系统", "设置低置信度、金额阈值、规则冲突等人工升级条件"], "reusable": ["AI负责判断，RPA/API负责确定性执行，人承担责任", "先自动化标准件，再集中处理异常件", "财务类项目的核心不是聊天，而是可审计的流程编排"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“门店对账”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名跨境快消企业", "industry": "消费品/零售", "scenario": "Sell-in / Sell-through经营分析", "fde": "明确FDE", "problem": "总部发货、渠道销售和终端动销口径断裂，漂亮报表并不能回答真实经营问题。", "solution": "先统一数据口径并要求每个AI答案可追溯到原始记录，再做经营问数与洞察。", "human": "业务人员定义口径并验证异常解释。", "result": "建立可溯源的经营分析链路，而不是单纯做聊天式BI。", "maturity": "已落地/持续迭代", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“Sell-in / Sell-through经营分析”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名跨境物流企业", "industry": "物流/供应链", "scenario": "集装箱装载优化", "fde": "明确FDE", "problem": "装载率直接决定利润，但排载高度依赖人工经验。", "solution": "将空间、货物属性和业务约束转为优化问题，并用AI辅助解释与编排。", "human": "调度人员处理异常货物、特殊约束与最终排载。", "result": "案例强调98方等装载阈值与利润直接相关；具体公司指标未公开。", "maturity": "已落地/验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["ERP/WMS/订单/库存/供应商/约束数据", "统一实体与业务口径", "预测/优化/LLM识别异常与候选动作", "规则与优化器计算可行方案", "业务人员确认高影响动作", "执行结果回写并更新库存/订单状态"], "components": ["ERP/WMS数据", "语义/实体层", "预测/优化算法", "LLM/AIP", "规则引擎", "业务工作台"], "fde_actions": ["和计划/采购/调度人员一起定义真正的决策单位和约束", "统一SKU、工厂、订单、供应商等实体口径", "把“看报表”改成“识别异常→给动作→执行”的闭环", "用财务影响/服务水平给建议排序", "把人工采纳/拒绝原因反馈给系统"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“集装箱装载优化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名跨境电商企业", "industry": "电商", "scenario": "库存与补货", "fde": "明确FDE", "problem": "多平台销售、仓储和库存数据分散，库存判断与补货依赖人工汇总。", "solution": "整合平台与库存数据，自动做库存诊断、补货建议和风险预警。", "human": "运营人员审核促销、季节性和资金约束下的补货决策。", "result": "减少数据汇总与人工判断负担；具体指标未公开。", "maturity": "验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["ERP/WMS/订单/库存/供应商/约束数据", "统一实体与业务口径", "预测/优化/LLM识别异常与候选动作", "规则与优化器计算可行方案", "业务人员确认高影响动作", "执行结果回写并更新库存/订单状态"], "components": ["ERP/WMS数据", "语义/实体层", "预测/优化算法", "LLM/AIP", "规则引擎", "业务工作台"], "fde_actions": ["和计划/采购/调度人员一起定义真正的决策单位和约束", "统一SKU、工厂、订单、供应商等实体口径", "把“看报表”改成“识别异常→给动作→执行”的闭环", "用财务影响/服务水平给建议排序", "把人工采纳/拒绝原因反馈给系统"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“库存与补货”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名TikTok电商团队", "industry": "电商", "scenario": "达人筛选与建联", "fde": "明确FDE", "problem": "找达人、筛达人、生成邀约和持续跟进耗费大量运营时间。", "solution": "把达人数据筛选、匹配、邀约草稿和跟进编排成半自动工作流。", "human": "运营人员决定重点达人、谈判与关系维护。", "result": "扩大单人可覆盖达人数量；公开资料未披露精确效果。", "maturity": "已落地/验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["商品/门店/达人/品牌资料", "结构化素材与品牌规则", "LLM/多模态生成候选内容或邀约", "合规/品牌规则检查", "运营人员审核与发布", "表现数据回流用于模板与策略迭代"], "components": ["内容数据", "LLM/多模态模型", "模板/品牌规则", "审核工作台", "发布/CRM系统"], "fde_actions": ["从运营人员真实产能瓶颈出发选择批量化环节", "将品牌语气、禁用词、商品事实结构化", "把生成拆成可控模板和可编辑步骤", "接入审核/发布/CRM，而不是单独做生成页面", "跟踪采纳率、发布量和业务转化而非只看生成质量"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“达人筛选与建联”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名外贸企业", "industry": "贸易/外贸", "scenario": "邮件、报价与产品资料自动化", "fde": "明确FDE", "problem": "外贸人员重复处理询盘、产品资料、报价单与往来邮件。", "solution": "信息抽取 + 企业知识检索 + 文档/邮件生成，嵌入现有外贸流程。", "human": "业务员负责商业判断、价格与最终发送。", "result": "减少重复文书劳动；具体指标未公开。", "maturity": "落地/迭代", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["商品/门店/达人/品牌资料", "结构化素材与品牌规则", "LLM/多模态生成候选内容或邀约", "合规/品牌规则检查", "运营人员审核与发布", "表现数据回流用于模板与策略迭代"], "components": ["内容数据", "LLM/多模态模型", "模板/品牌规则", "审核工作台", "发布/CRM系统"], "fde_actions": ["从运营人员真实产能瓶颈出发选择批量化环节", "将品牌语气、禁用词、商品事实结构化", "把生成拆成可控模板和可编辑步骤", "接入审核/发布/CRM，而不是单独做生成页面", "跟踪采纳率、发布量和业务转化而非只看生成质量"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“邮件、报价与产品资料自动化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名鞋服电商企业", "industry": "电商", "scenario": "商品图片与文案生产", "fde": "明确FDE", "problem": "SKU多、上新频繁，图片和商品文案制作速度成为瓶颈。", "solution": "把商品数据与品牌规范接入生成式AI，批量生成并修改内容。", "human": "设计与运营负责品牌一致性和最终发布。", "result": "提升内容量产能力；具体ROI未公开。", "maturity": "已落地", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["商品/门店/达人/品牌资料", "结构化素材与品牌规则", "LLM/多模态生成候选内容或邀约", "合规/品牌规则检查", "运营人员审核与发布", "表现数据回流用于模板与策略迭代"], "components": ["内容数据", "LLM/多模态模型", "模板/品牌规则", "审核工作台", "发布/CRM系统"], "fde_actions": ["从运营人员真实产能瓶颈出发选择批量化环节", "将品牌语气、禁用词、商品事实结构化", "把生成拆成可控模板和可编辑步骤", "接入审核/发布/CRM，而不是单独做生成页面", "跟踪采纳率、发布量和业务转化而非只看生成质量"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“商品图片与文案生产”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名本地生活企业", "industry": "营销/内容", "scenario": "门店短视频内容工厂", "fde": "明确FDE", "problem": "大量门店需要持续生产低成本短视频，一线不会写脚本也没有制作能力。", "solution": "将门店信息、商品卖点和模板组织成脚本/素材/短视频生成工作流。", "human": "运营人员挑选主题、审核品牌与违规风险。", "result": "重点是降低单条内容生产成本并扩大产量。", "maturity": "已落地/验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["商品/门店/达人/品牌资料", "结构化素材与品牌规则", "LLM/多模态生成候选内容或邀约", "合规/品牌规则检查", "运营人员审核与发布", "表现数据回流用于模板与策略迭代"], "components": ["内容数据", "LLM/多模态模型", "模板/品牌规则", "审核工作台", "发布/CRM系统"], "fde_actions": ["从运营人员真实产能瓶颈出发选择批量化环节", "将品牌语气、禁用词、商品事实结构化", "把生成拆成可控模板和可编辑步骤", "接入审核/发布/CRM，而不是单独做生成页面", "跟踪采纳率、发布量和业务转化而非只看生成质量"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“门店短视频内容工厂”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名建筑设计企业", "industry": "建筑/工程", "scenario": "图纸理解与交付辅助", "fde": "明确FDE", "problem": "图纸和设计材料复杂，信息抽取、核对与交付过程耗时。", "solution": "多模态理解图纸和文档，辅助抽取、核对、归纳与设计交付。", "human": "建筑/工程专业人员保留设计责任与安全判断。", "result": "减少重复检查和资料整理时间；指标未公开。", "maturity": "POC/验证中", "url": "https://podcasts.apple.com/us/podcast/fde-24%E4%B8%AA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%A7%A3%E8%AF%BB/id1827758935?i=1000788554765", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“图纸理解与交付辅助”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名电信企业", "industry": "电信", "scenario": "网络数据分析 / 智能问数", "fde": "明确FDE", "problem": "网络日志与指标规模大，问题定位与分析报告高度依赖分析师。", "solution": "打通网络数据、指标口径与知识，允许AI查询、归因并生成分析草稿。", "human": "网络专家确认根因和处置建议。", "result": "目标是分钟级获取洞察；公开材料未披露统一效果。", "maturity": "验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“网络数据分析 / 智能问数”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Datawhale", "company": "匿名生物科技企业", "industry": "生命科学", "scenario": "经营台账数字化", "fde": "明确FDE", "problem": "经营与项目数据散落在Excel和文件中，查询、汇总和经营分析困难。", "solution": "先结构化台账和文档，再叠加查询、分析和经营助手。", "human": "业务人员维护关键事实并审核经营结论。", "result": "形成统一数据底座和问数入口；指标未公开。", "maturity": "验证中", "url": "https://bi-chao.com/articles/bank-lessons-from-datawhale-fde-case-100", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“经营台账数字化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Tyson Foods", "industry": "食品/制造", "scenario": "ACE → dbt 数据平台迁移", "fde": "典型Forward Deployed", "problem": "旧数据平台迁移到dbt需要大规模理解、重写、编译和审查数据模型，原估计需10–15人约3年。", "solution": "历史正确迁移作为golden examples → 向量检索相似案例 → LLM生成dbt → dbt语法/编译验证 → 人审 → GitLab合并，并把已批准迁移继续沉淀为上下文。", "human": "工程师审核翻译、给反馈、批准合并。", "result": "Palantir公开称由原估计10–15人×3年，缩短到1人约3–4个月。", "maturity": "生产级", "url": "https://www.palantir.com/", "architecture": ["Legacy ACE models + 已人工翻译的 dbt golden examples", "代码内容向量化，建立历史迁移语义索引", "从已批准案例抽取迁移 rules/insights，并由人审核", "新 ACE model → Semantic Search 找最相似迁移案例", "GPT-4o / AIP Logic 基于案例+规则生成 candidate dbt", "Ontology SDK 调 dbt 做 syntax / compilation checks", "Feedback Cockpit：工程师 approve 或 reject + comment", "批准后写入 GitLab，走标准 dbt testing / merge；新批准案例回到语义库"], "components": ["Foundry", "AIP / AIP Logic", "GPT-4o", "Vector Search / Embeddings", "Ontology / Ontology SDK", "dbt", "GitLab", "Human review"], "fde_actions": ["识别真正瓶颈不是“写代码慢”，而是成千上万次理解—翻译—验证—审查循环", "收集历史正确迁移，定义什么是可作为 golden example 的训练外上下文", "把迁移知识显式化为可审查 rules/insights，而不是依赖模型隐式记忆", "把LLM接入dbt编译器和GitLab，让生成结果进入真实工程链路", "设计Feedback Cockpit，把人工拒绝原因转为下一轮重译条件", "把批准后的迁移重新沉淀，形成无需fine-tuning的context flywheel"], "reusable": ["企业Agent的“学习”可以来自不断增长的上下文，而不一定重新训练模型", "历史成功案例 + 明确规则 + 确定性验证 + 人审，是高可靠Agent的通用组合", "FDE价值在于把一次性的AI生成改造成可持续生产流水线"], "evidence": "高：Palantir公开案例披露了 Seeding → Insights → Translation → Feedback/Harvesting 流程以及 dbt、GitLab、Ontology SDK 等组件。", "case_summary": "这个案例的关键不是单点使用AI，而是把“ACE → dbt 数据平台迁移”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "General Mills", "industry": "消费品/食品", "scenario": "供应链智能执行 Project ELF", "fde": "典型Forward Deployed", "problem": "4,000供应商、200+工厂、约120万订单，运营人员每年进行约5,000万次供应链决策。", "solution": "先将约200张主数据/运营表接入Ontology，再用AIP实时读取约束、产能、网络成本，对订单给出调度和节省建议。", "human": "供应链人员审核建议；公开材料称>70%建议被接受。", "result": "约3,000订单/日被评估，约400条建议/日，约$40K/日、$14M/年节省。", "maturity": "生产级/规模化", "url": "https://www.palantir.com/assets/xrfr7uokpv1b/1aLBn65y83vdytjpXJKZcO/16989b788b34cb677f6d763d56a72349/Building_an_Intelligent_AI-Driven_Supply_Chain_at_General_Mills_-_AIPCon_March_-24_Impact_Study.pdf", "architecture": ["约200张主数据/运营表 + 订单/产能/成本/网络数据", "Foundry数据管道统一清洗并建供应链Ontology", "每个订单映射到工厂、SKU、供应商、产能、运输等实体关系", "AIP实时读取业务约束并识别可优化订单", "算法/AI生成重路由、调度或节省建议并估算财务影响", "供应链人员在工作台审核建议", "接受的动作进入执行流程；采纳/拒绝反馈回流"], "components": ["Foundry", "Ontology", "AIP", "供应链优化逻辑", "运营工作台", "Human-in-the-loop"], "fde_actions": ["把5,000万次年度人工决策拆成可重复的订单级决策单元", "统一200张表中的实体和口径，使模型能理解订单与真实网络关系", "和业务共同定义不可违反的约束以及“好建议”的财务目标", "将AI从“分析报告”推进到每日约400条可执行建议", "用采纳率、日节省额和服务指标迭代建议质量"], "reusable": ["先建可行动的语义层，再谈Agent", "建议必须附带业务影响才能进入运营优先级", "采纳率比离线模型accuracy更接近真正的产品指标"], "evidence": "高：Palantir AIPCon Impact Study公开了数据规模、Ontology、建议数量、采纳率和节省指标。", "case_summary": "这个案例的关键不是单点使用AI，而是把“供应链智能执行 Project ELF”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Eaton", "industry": "工业制造", "scenario": "供应链短缺识别与处置", "fde": "典型Forward Deployed", "problem": "100k+每日销售订单、300+工厂、32M+零件、72+ ERP实例，缺料与优先级判断复杂。", "solution": "建立供应链Ontology，统一ERP视图；AIP按收入影响排序短缺，并参考历史处置自动提出材料建议。", "human": "供应链经理确认优先级和解决方案。", "result": "Palantir公开称生产率提升25%。", "maturity": "生产级", "url": "https://www.palantir.com/assets/xrfr7uokpv1b/5fyrfyRAFBtNSIBSWGc9xI/0741a1e422a8cacf1676dde769fb7102/One-Pager_-_Supply_Chain_Risk_Resilience.pdf", "architecture": ["ERP/WMS/订单/库存/供应商/约束数据", "统一实体与业务口径", "预测/优化/LLM识别异常与候选动作", "规则与优化器计算可行方案", "业务人员确认高影响动作", "执行结果回写并更新库存/订单状态"], "components": ["ERP/WMS数据", "语义/实体层", "预测/优化算法", "LLM/AIP", "规则引擎", "业务工作台"], "fde_actions": ["和计划/采购/调度人员一起定义真正的决策单位和约束", "统一SKU、工厂、订单、供应商等实体口径", "把“看报表”改成“识别异常→给动作→执行”的闭环", "用财务影响/服务水平给建议排序", "把人工采纳/拒绝原因反馈给系统"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“供应链短缺识别与处置”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Panasonic Energy North America", "industry": "电池/制造", "scenario": "Electrode Control Tower", "fde": "典型Forward Deployed", "problem": "电极制造过程的多步骤判断与现场数据查看高度人工化。", "solution": "Foundry/AIP把制造数据、流程和决策集中在一个控制塔中，实现快速判断与部分自动化。", "human": "现场工程师保留关键生产处置。", "result": "首个用例1个月交付；一个约4小时的多步骤流程降至约15分钟，并减少材料浪费。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q2%202023%20Business%20Update.pdf", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“Electrode Control Tower”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Tampa General Hospital", "industry": "医疗", "scenario": "患者流 / 排班 / Sepsis管理", "fde": "典型Forward Deployed", "problem": "医院数据分散，患者流、人员配置和临床运营决策需要实时统一视图。", "solution": "用Foundry Ontology整合关键数据，做预测规划、人员配置与患者流优化；在飓风Ian期间24小时内扩展出患者/医护360°实时视图。", "human": "临床和运营团队基于建议做最终安排。", "result": "后续公开资料称Sepsis患者住院时长降低约15%。", "maturity": "生产级/规模化", "url": "https://investors.palantir.com/news-details/2022/Tampa-General-Hospital-and-Palantir-Partner-to-Improve-Patient-Care-Through-Data-and-Analytics-Platform", "architecture": ["EHR/床位/人员/运营事件数据", "统一患者与运营实体", "实时状态 + 预测/规则/AI分析", "按临床/运营优先级产生建议", "医护/运营人员确认与执行", "结果回写并持续监测"], "components": ["医疗数据集成", "Ontology/统一实体", "预测/规则/AI", "权限审计", "临床/运营工作台"], "fde_actions": ["与临床/运营团队共同定义问题和安全边界", "先解决可度量的运营瓶颈，避免让AI承担诊断责任", "打通数据权限与实时更新", "设计告警、建议和人工确认机制", "用住院时长、床位周转等业务指标验收"], "reusable": ["医疗AI先从运营闭环切入通常更容易量化", "临床责任必须留在人类专业人员", "权限、审计、实时性和数据质量与模型同等重要"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“患者流 / 排班 / Sepsis管理”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Aramark", "industry": "餐饮/服务", "scenario": "产品匹配与餐食数据分类", "fde": "典型Forward Deployed", "problem": "产品、配方、供应和销售数据分散，产品匹配与分类依赖大量人工。", "solution": "统一数据模型与Ontology，使用AI做产品匹配和分类，低置信度项目交人工。", "human": "人工处理少数无法自动归类项目。", "result": "9个月内约99%的meal data elements实现自动分类。", "maturity": "生产级", "url": "https://www.palantir.com/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“产品匹配与餐食数据分类”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Associated Materials", "industry": "建材/制造", "scenario": "多业务用例 / OTIF提升", "fde": "典型Forward Deployed", "problem": "制造与履约数据碎片化，多个业务流程缺乏统一决策底座。", "solution": "在Foundry/AIP上连续开发十余个运营用例，统一计划与执行。", "human": "运营团队在统一工作流中执行。", "result": "Palantir公开称9个月内上线10+用例，OTIF从40%提升到90%。", "maturity": "规模化", "url": "https://investors.palantir.com/files/Palantir%20Q3%202024%20Business%20Update.pdf", "architecture": ["代码库/历史变更/需求", "检索相关文件与历史正确样例", "LLM/Coding Agent生成修改", "编译/测试/Lint等确定性验证", "工程师Review与反馈", "Git/CI合并 → 已批准变更成为新上下文"], "components": ["代码检索", "Coding Agent/LLM", "编译器/测试框架", "Git/CI/CD", "Human code review"], "fde_actions": ["盘点代码库、依赖关系、测试体系与发布流程", "把历史正确改动作为golden examples，而不是只写prompt", "为Agent接上编译、测试、Git等可验证工具", "定义哪些修改可以自动推进、哪些必须人工Review", "将被批准的变更和反馈持续沉淀"], "reusable": ["编码Agent真正的壁垒在上下文、工具和验证闭环，不只是模型", "优先使用编译/测试这种确定性反馈", "批准后的结果形成学习飞轮"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“多业务用例 / OTIF提升”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Trinity Rail", "industry": "铁路/制造", "scenario": "库存优化", "fde": "典型Forward Deployed", "problem": "库存资金占用与跨业务库存决策复杂。", "solution": "用AIP构建库存工作流，统一库存事实、异常与决策动作。", "human": "供应链与运营人员审批执行。", "result": "3个月构建，公开称带来约$30M节省并改善运营利润率。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q3%202024%20Business%20Update.pdf", "architecture": ["ERP/WMS/订单/库存/供应商/约束数据", "统一实体与业务口径", "预测/优化/LLM识别异常与候选动作", "规则与优化器计算可行方案", "业务人员确认高影响动作", "执行结果回写并更新库存/订单状态"], "components": ["ERP/WMS数据", "语义/实体层", "预测/优化算法", "LLM/AIP", "规则引擎", "业务工作台"], "fde_actions": ["和计划/采购/调度人员一起定义真正的决策单位和约束", "统一SKU、工厂、订单、供应商等实体口径", "把“看报表”改成“识别异常→给动作→执行”的闭环", "用财务影响/服务水平给建议排序", "把人工采纳/拒绝原因反馈给系统"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“库存优化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Nebraska Medicine", "industry": "医疗", "scenario": "Discharge Lounge / 床位周转", "fde": "典型Forward Deployed", "problem": "患者出院后床位释放不及时，影响医院容量。", "solution": "将出院、床位与患者流程数据集中，优化Discharge Lounge使用和床位释放。", "human": "医护与运营团队执行调度。", "result": "公开称Discharge Lounge利用率提升超过2,000%。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q3%202024%20Business%20Update.pdf", "architecture": ["EHR/床位/人员/运营事件数据", "统一患者与运营实体", "实时状态 + 预测/规则/AI分析", "按临床/运营优先级产生建议", "医护/运营人员确认与执行", "结果回写并持续监测"], "components": ["医疗数据集成", "Ontology/统一实体", "预测/规则/AI", "权限审计", "临床/运营工作台"], "fde_actions": ["与临床/运营团队共同定义问题和安全边界", "先解决可度量的运营瓶颈，避免让AI承担诊断责任", "打通数据权限与实时更新", "设计告警、建议和人工确认机制", "用住院时长、床位周转等业务指标验收"], "reusable": ["医疗AI先从运营闭环切入通常更容易量化", "临床责任必须留在人类专业人员", "权限、审计、实时性和数据质量与模型同等重要"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“Discharge Lounge / 床位周转”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Mount Sinai", "industry": "医疗", "scenario": "临床/运营流程效率", "fde": "典型Forward Deployed", "problem": "关键临床运营流程消耗大量人工并限制周转。", "solution": "用Foundry/AIP重构数据与运营流程。", "human": "医护和业务团队保留临床责任。", "result": "公开称实现100% FTE效率提升，并预计新增>$13M收入。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q3%202024%20Business%20Update.pdf", "architecture": ["EHR/床位/人员/运营事件数据", "统一患者与运营实体", "实时状态 + 预测/规则/AI分析", "按临床/运营优先级产生建议", "医护/运营人员确认与执行", "结果回写并持续监测"], "components": ["医疗数据集成", "Ontology/统一实体", "预测/规则/AI", "权限审计", "临床/运营工作台"], "fde_actions": ["与临床/运营团队共同定义问题和安全边界", "先解决可度量的运营瓶颈，避免让AI承担诊断责任", "打通数据权限与实时更新", "设计告警、建议和人工确认机制", "用住院时长、床位周转等业务指标验收"], "reusable": ["医疗AI先从运营闭环切入通常更容易量化", "临床责任必须留在人类专业人员", "权限、审计、实时性和数据质量与模型同等重要"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“临床/运营流程效率”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "United Airlines", "industry": "航空/旅行", "scenario": "技术运营延误预防 Chime", "fde": "典型Forward Deployed", "problem": "航班技术运营事件需要跨数据源快速识别与协调，延误/取消成本高。", "solution": "在Foundry/AIP上构建事件识别与协同应用Chime。", "human": "技术运营团队判断并执行处置。", "result": "公开称已避免近300次延误、20次取消，对应数百万美元成本避免。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“技术运营延误预防 Chime”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Fujitsu", "industry": "科技/制造", "scenario": "预测、库存与告警", "fde": "典型Forward Deployed", "problem": "运营数据与机器学习能力分散，难以直接进入日常运营。", "solution": "把Foundry数据集成能力与Fujitsu ML结合，构建告警、需求预测和库存控制。", "human": "运营人员使用预测和告警做决策。", "result": "公开称3个月实现约$9M年化成本降低。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["ERP/WMS/订单/库存/供应商/约束数据", "统一实体与业务口径", "预测/优化/LLM识别异常与候选动作", "规则与优化器计算可行方案", "业务人员确认高影响动作", "执行结果回写并更新库存/订单状态"], "components": ["ERP/WMS数据", "语义/实体层", "预测/优化算法", "LLM/AIP", "规则引擎", "业务工作台"], "fde_actions": ["和计划/采购/调度人员一起定义真正的决策单位和约束", "统一SKU、工厂、订单、供应商等实体口径", "把“看报表”改成“识别异常→给动作→执行”的闭环", "用财务影响/服务水平给建议排序", "把人工采纳/拒绝原因反馈给系统"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“预测、库存与告警”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Jacobs", "industry": "工程/工业", "scenario": "工厂能耗与动态维护", "fde": "典型Forward Deployed", "problem": "工业现场能耗、化学品使用和维护决策与传感数据脱节。", "solution": "在Foundry中连接预测AI与日常现场操作，做过程优化和动态维护。", "human": "现场工程团队决定最终操作。", "result": "试点站点6个月实现约20%年度全厂能耗降低。", "maturity": "生产级/扩张", "url": "https://investors.palantir.com/news-details/2023/Palantir-Launches-Foundry-for-Manufacturing-on-AWS-to-the-Broader-Market/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“工厂能耗与动态维护”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Walgreens", "industry": "零售/医疗", "scenario": "药房端到端AI工作流", "fde": "典型Forward Deployed", "problem": "原计划小规模试点，药房运营需要跨门店、流程与系统快速扩张。", "solution": "Foundry/AIP组合端到端工作流，从试点直接扩展到大量门店。", "human": "药房和运营团队执行与审核。", "result": "公开称原计划6个月10家试点，约8个月扩到约4,000家门店。", "maturity": "大规模部署", "url": "https://www.palantir.com/new-homepage/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“药房端到端AI工作流”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Lowe's", "industry": "零售", "scenario": "AI运营应用从POC到生产", "fde": "典型Forward Deployed", "problem": "零售场景需要快速把AI试点变成真实生产工作流。", "solution": "Palantir与业务/数据团队共同将数据、模型和操作界面组合成生产应用。", "human": "业务团队持续使用并反馈。", "result": "公开称不到4个月从POC推进到生产。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“AI运营应用从POC到生产”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Virgin Atlantic", "industry": "航空/旅行", "scenario": "遗留代码重构与移动App质量", "fde": "企业部署案例", "problem": "航空App上线窗口风险高，遗留代码重构和测试覆盖需要大量时间。", "solution": "使用Codex加强测试覆盖、重构legacy code，并让分析团队直接在数据仓库上构建工具。", "human": "工程师审核代码、测试与上线；生产责任仍由航空公司团队承担。", "result": "遗留重构从约2周降到约30分钟；新App接近100%单测覆盖，发布时0个P1缺陷。", "maturity": "生产级", "url": "https://openai.com/index/virgin-atlantic/", "architecture": ["大型移动App代码库 + issue/需求 + 既有测试", "Codex读取相关代码与依赖上下文", "生成/修改legacy code并补充单元测试", "本地/CI测试与静态检查", "工程师review、修正和批准", "合并进入发布流水线；新测试提高后续Agent可验证性"], "components": ["Codex", "代码库上下文", "单元测试", "CI/CD", "Human code review"], "fde_actions": ["选择发布风险最高、又能被测试验证的工程任务切入", "帮助团队把Codex接入真实repo和工程习惯，而不是孤立聊天", "把测试覆盖率作为Agent工作的护栏", "让分析/工程人员直接在原数据和代码环境工作", "以重构周期、测试覆盖和P1缺陷等生产指标验收"], "reusable": ["先补测试，再扩大coding agent自治范围", "代码场景非常适合“生成→确定性测试→人审”的Agent闭环", "衡量上线质量而不是只看代码生成速度"], "evidence": "高：OpenAI客户案例公开披露约2周→30分钟、接近100%单测覆盖、0个P1缺陷等结果。", "case_summary": "这个案例的关键不是单点使用AI，而是把“遗留代码重构与移动App质量”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Virgin Atlantic", "industry": "航空/旅行", "scenario": "客户旅程研究与产品规划", "fde": "企业部署案例", "problem": "浏览、购买、值机、乘机、反馈等客户旅程信息分散在不同系统与报告中。", "solution": "ChatGPT Work帮助团队汇集信息、做竞品研究、产品规划与分析，将洞察转为行动。", "human": "产品和管理团队决定优先级与战略。", "result": "公开称将数周研究缩短至数小时。", "maturity": "生产级", "url": "https://openai.com/index/virgin-atlantic/chatgpt-work/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“客户旅程研究与产品规划”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "MUFG", "industry": "金融", "scenario": "全员AI助手 / 零售金融创新", "fde": "企业部署案例", "problem": "大型金融集团需要在治理、安全和大规模员工采用之间取得平衡。", "solution": "ChatGPT Enterprise面向约35,000名三菱UFJ银行员工部署，并与OpenAI共同推进运营转型和零售客户体验。", "human": "员工和业务部门在治理框架下使用AI。", "result": "约35,000名员工部署使用。", "maturity": "大规模部署", "url": "https://openai.com/index/mufg/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“全员AI助手 / 零售金融创新”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Samsung Electronics", "industry": "电子/制造", "scenario": "研发、制造、营销与软件开发", "fde": "企业部署案例", "problem": "需要把通用AI和编码Agent安全扩展到全球复杂组织。", "solution": "ChatGPT Enterprise与Codex覆盖韩国全员及全球DX部门，并用于软件、营销、产品开发和制造。", "human": "各职能团队使用AI并保留专业决策。", "result": "OpenAI称这是其规模最大的企业部署之一。", "maturity": "大规模部署", "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment/", "architecture": ["商品/门店/达人/品牌资料", "结构化素材与品牌规则", "LLM/多模态生成候选内容或邀约", "合规/品牌规则检查", "运营人员审核与发布", "表现数据回流用于模板与策略迭代"], "components": ["内容数据", "LLM/多模态模型", "模板/品牌规则", "审核工作台", "发布/CRM系统"], "fde_actions": ["从运营人员真实产能瓶颈出发选择批量化环节", "将品牌语气、禁用词、商品事实结构化", "把生成拆成可控模板和可编辑步骤", "接入审核/发布/CRM，而不是单独做生成页面", "跟踪采纳率、发布量和业务转化而非只看生成质量"], "reusable": ["编码Agent真正的壁垒在上下文、工具和验证闭环，不只是模型", "优先使用编译/测试这种确定性反馈", "批准后的结果形成学习飞轮"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“研发、制造、营销与软件开发”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Chip Ganassi Racing", "industry": "体育/赛车", "scenario": "比赛日数据与策略工具", "fde": "明确FDE/伴随式部署", "problem": "赛车拥有200+传感器，比赛每小时接近10亿数据点，工程师需要在比赛中快速读取并连接信息。", "solution": "OpenAI研究人员与FDE直接和车队共建race-day tools，把实时数据、分析与工程师工作流连接起来。", "human": "赛车工程师与策略团队做最终比赛决策。", "result": "公开案例强调决策速度与数据访问改善，未给单一ROI。", "maturity": "生产/现场使用", "url": "https://openai.com/stories/", "architecture": ["赛车200+传感器 + 实时遥测/历史比赛数据", "数据流标准化与可访问接口", "FDE/研究团队和车队共同定义比赛日问题", "AI工具按工程师问题调用/汇总相关数据并生成分析", "工程师与策略团队结合赛况做最终决策", "比赛后复盘，把新问题和工具需求反馈到下一轮"], "components": ["实时遥测数据", "分析/检索工具", "OpenAI模型", "比赛日工作台", "Human-in-the-loop"], "fde_actions": ["直接进入车队场景，观察比赛日信息如何流动", "和工程师共同选择时间敏感且能影响策略的查询/分析任务", "把模型接上实时数据工具而不是依赖静态prompt", "围绕比赛日延迟和可用性迭代交互", "保留工程师作为最终策略责任人"], "reusable": ["FDE最有价值时往往处在“数据很多但决策窗口很短”的现场", "实时工具的关键指标是决策时延与可用性，不只是答案质量", "与领域专家共建比通用助手更能形成壁垒"], "evidence": "中高：OpenAI公开明确出现Forward Deployed Engineer与车队共建race-day tools；底层具体技术栈未完整披露。", "case_summary": "这个案例的关键不是单点使用AI，而是把“比赛日数据与策略工具”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "BBVA", "industry": "金融", "scenario": "从AI试点到组织级规模化", "fde": "企业部署案例", "problem": "银行需要把个人生产力工具扩展为组织可治理、可复用的AI能力。", "solution": "企业级ChatGPT与定制化工作流逐步进入知识、分析和内部协作。", "human": "员工在银行治理与权限下使用。", "result": "列入OpenAI企业级代表案例；网页首版保留官方案例入口，具体指标以后可继续补。", "maturity": "规模化", "url": "https://openai.com/business/why-openai/enterprises/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“从AI试点到组织级规模化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Moderna", "industry": "生命科学", "scenario": "研究与企业知识工作", "fde": "企业部署案例", "problem": "药企希望将生成式AI扩展到研究、分析和员工日常工作。", "solution": "ChatGPT Enterprise与内部GPT/工作流用于研究、知识和企业职能。", "human": "科研与职能团队保留科学和合规判断。", "result": "OpenAI 2025企业AI报告将其列为代表案例。", "maturity": "规模化", "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“研究与企业知识工作”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Intercom", "industry": "SaaS/客服", "scenario": "AI客服", "fde": "企业部署案例", "problem": "客服需要在质量、响应速度与规模之间平衡。", "solution": "将OpenAI模型嵌入客户服务产品与工作流，自动处理可标准化请求。", "human": "复杂问题升级人工客服。", "result": "OpenAI 2025企业AI报告代表案例之一。", "maturity": "生产级", "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“AI客服”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Lowe's", "industry": "零售", "scenario": "员工与客户AI体验", "fde": "企业部署案例", "problem": "大型零售需要把商品、服务和内部知识更快交到员工与客户手中。", "solution": "将OpenAI能力嵌入零售知识与服务场景。", "human": "门店和业务人员处理复杂/责任性任务。", "result": "OpenAI 2025企业AI报告代表案例之一。", "maturity": "生产级", "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“员工与客户AI体验”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Indeed", "industry": "招聘/平台", "scenario": "招聘匹配与求职体验", "fde": "企业部署案例", "problem": "大规模职位与求职者匹配需要更强语义理解和个性化。", "solution": "OpenAI模型进入匹配与用户体验工作流。", "human": "招聘方和求职者做最终选择。", "result": "OpenAI 2025企业AI报告代表案例之一。", "maturity": "生产级", "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/", "architecture": ["业务数据/文档/系统输入", "数据清洗与业务语义整理", "AI/规则完成理解、匹配或生成", "确定性校验或业务规则检查", "人工处理低置信度/高风险事项", "结果写回原业务流程并持续沉淀反馈"], "components": ["企业数据/文档", "LLM/语义理解", "业务规则", "Human-in-the-loop", "原有业务系统"], "fde_actions": ["跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档", "盘点可用数据、权限、系统接口和隐性业务规则", "把任务拆成 AI、规则/传统软件、人三类责任边界", "先做窄场景 PoC，用真实样本验证准确率与业务价值", "嵌入原有系统，设计异常升级、反馈和后续迭代机制"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“招聘匹配与求职体验”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Oscar Health", "industry": "医疗/保险", "scenario": "医疗保险运营与知识工作", "fde": "企业部署案例", "problem": "保险与医疗运营流程文本密集、规则复杂。", "solution": "将OpenAI能力用于知识、运营和自动化场景。", "human": "医疗与保险专业人员保留高风险判断。", "result": "OpenAI 2025企业AI报告代表案例之一。", "maturity": "生产级", "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/", "architecture": ["EHR/床位/人员/运营事件数据", "统一患者与运营实体", "实时状态 + 预测/规则/AI分析", "按临床/运营优先级产生建议", "医护/运营人员确认与执行", "结果回写并持续监测"], "components": ["医疗数据集成", "Ontology/统一实体", "预测/规则/AI", "权限审计", "临床/运营工作台"], "fde_actions": ["与临床/运营团队共同定义问题和安全边界", "先解决可度量的运营瓶颈，避免让AI承担诊断责任", "打通数据权限与实时更新", "设计告警、建议和人工确认机制", "用住院时长、床位周转等业务指标验收"], "reusable": ["医疗AI先从运营闭环切入通常更容易量化", "临床责任必须留在人类专业人员", "权限、审计、实时性和数据质量与模型同等重要"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“医疗保险运营与知识工作”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "1Password", "industry": "网络安全/软件", "scenario": "工程开发效率", "fde": "企业部署案例", "problem": "大型代码库中的开发、修改与验证消耗工程时间。", "solution": "Codex进入工程工作流，承担代码理解、修改和测试任务。", "human": "工程师审查并负责合并。", "result": "OpenAI客户案例页称工程生产力提升21%。", "maturity": "生产级", "url": "https://openai.com/business/customer-stories/", "architecture": ["代码库/历史变更/需求", "检索相关文件与历史正确样例", "LLM/Coding Agent生成修改", "编译/测试/Lint等确定性验证", "工程师Review与反馈", "Git/CI合并 → 已批准变更成为新上下文"], "components": ["代码检索", "Coding Agent/LLM", "编译器/测试框架", "Git/CI/CD", "Human code review"], "fde_actions": ["盘点代码库、依赖关系、测试体系与发布流程", "把历史正确改动作为golden examples，而不是只写prompt", "为Agent接上编译、测试、Git等可验证工具", "定义哪些修改可以自动推进、哪些必须人工Review", "将被批准的变更和反馈持续沉淀"], "reusable": ["编码Agent真正的壁垒在上下文、工具和验证闭环，不只是模型", "优先使用编译/测试这种确定性反馈", "批准后的结果形成学习飞轮"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“工程开发效率”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Gilbert + Tobin", "industry": "法律/专业服务", "scenario": "律所AI治理与规模化", "fde": "企业部署案例", "problem": "法律行业既希望扩大AI使用，又需要严格治理、保密和专业责任。", "solution": "与OpenAI建立治理与规模化采用框架，把AI用于法律知识工作。", "human": "律师保留专业判断与最终责任。", "result": "2026年9月公开案例；首版不补写未核准数值。", "maturity": "规模化", "url": "https://openai.com/business/customer-stories/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“律所AI治理与规模化”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "Polimill", "industry": "政务/公共服务", "scenario": "日本公共AI基础设施", "fde": "伴随式部署", "problem": "地方政府需要共享专家经验，同时满足公共部门治理和可持续运营。", "solution": "与OpenAI伴随式建设可复用公共AI基础设施与知识能力。", "human": "政府工作人员与专家负责政策、事实和最终决策。", "result": "2026年8月公开案例；重点是把专家隐性知识变成跨自治体可复用资产。", "maturity": "部署中/规模化", "url": "https://openai.com/business/customer-stories/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“日本公共AI基础设施”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "OpenAI", "company": "NVIDIA", "industry": "半导体/科技", "scenario": "组织知识与专业能力扩展", "fde": "企业部署案例", "problem": "超大规模技术组织需要把专业知识、研究和协作能力扩展到更多员工。", "solution": "使用ChatGPT Work连接专业知识与日常工作。", "human": "工程和业务专家保留技术决策。", "result": "2026年8月公开客户案例。", "maturity": "规模化", "url": "https://openai.com/business/customer-stories/", "architecture": ["SOP / 历史案例 / 专家访谈", "文档解析、切分与元数据标注", "Embedding / 语义索引", "按当前问题检索相似案例与规则", "LLM基于证据生成建议并附出处", "专家确认 → 新经验回写知识库"], "components": ["知识库/RAG", "Embedding/向量检索", "权限与元数据", "LLM", "专家审核"], "fde_actions": ["跟岗识别“什么时候员工会去找老师傅”", "访谈专家，把隐性判断条件转成可检索案例和规则", "设计知识粒度、标签、版本和权限，而不是只做文档上传", "用真实问题做召回率/答案可用性验证", "把反馈、错答和新案例持续回灌"], "reusable": ["先选高频、高成本、可验证的窄流程", "能用确定性工具验证的步骤，不让模型自评", "高风险动作保留人工责任", "把每次人工修正变成后续可检索的上下文/规则"], "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象", "case_summary": "这个案例的关键不是单点使用AI，而是把“组织知识与专业能力扩展”重构成可执行、可验证、有人类责任边界的生产工作流。"}, {"source": "Palantir", "company": "Wendy's Quality Supply Chain Co-op", "industry": "餐饮/供应链", "scenario": "餐饮供应链库存与异常处置", "fde": "典型Forward Deployed", "problem": "库存和供应异常过去可能持续数天甚至数周，团队需要跨供应链数据快速定位根因。", "solution": "用Foundry/AIP把库存、供应商、订单和运营信号放到统一工作流中，让异常被快速识别、定位并处置。", "human": "供应链团队确认关键处置与供应商动作。", "result": "Palantir公开称原本可能持续数天/数周的问题可在约5分钟内处理。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q1%202025%20Investor%20Presentation.pdf", "architecture": ["ERP/WMS/TMS/订单/库存/产能等多源数据", "Foundry数据管道统一口径并映射到Ontology", "规则/优化模型/AIP识别风险、约束与候选动作", "运营工作台按业务影响排序建议", "Human-in-the-loop确认或修改", "Action写回业务系统，结果沉淀为下一轮上下文"], "components": ["Foundry", "AIP", "Ontology", "供应链数据", "运营工作台"], "fde_actions": ["和供应链一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方AIPCon/Business Update明确披露业务结果；具体内部模型与规则未公开。", "case_summary": "这个案例的重点是把“餐饮供应链库存与异常处置”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "AT&T", "industry": "电信", "scenario": "S.C.O.U.T. 网络运营应用体系", "fde": "典型Forward Deployed", "problem": "大型电信网络的数据与运营流程极其分散，需要让工程团队在同一平台持续构建运营应用。", "solution": "Palantir与AT&T共同建设S.C.O.U.T.等应用，并把Foundry作为大规模内部应用底座。", "human": "AT&T自有工程团队持续开发和运营应用，Palantir负责平台与前期共同构建。", "result": "官方公开称S.C.O.U.T.从联合项目成长为100+名AT&T专职工程师维护，Foundry上已有约660个应用。", "maturity": "规模化", "url": "https://www.palantir.com/new-homepage/", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "Ontology", "内部应用开发", "权限治理", "运营数据"], "fde_actions": ["和网络运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "Palantir官网公开客户引述明确披露100+专职工程师与约660个Foundry应用；单个应用技术栈未完全公开。", "case_summary": "这个案例的重点是把“S.C.O.U.T. 网络运营应用体系”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Parexel", "industry": "医药/CRO", "scenario": "监管申报材料生成与标准化", "fde": "典型Forward Deployed", "problem": "临床/监管申报材料需要跨文档、数据和专家反复整理，周期长且标准化困难。", "solution": "将试验数据、申报文档与流程规则连接到统一数据/文档工作流，用AIP辅助材料准备、核对和标准化。", "human": "医学、统计和监管专家负责最终内容与合规签发。", "result": "Palantir官网公开称申报材料周期可从平均10–12周缩短到约3–4周，降幅超过50%。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["业务文档/合同/研究材料/历史案例", "Document Intelligence/OCR/结构化抽取", "Ontology把文档事实与业务实体连接", "AIP检索证据并生成草稿/建议", "规则/Evals/专家复核", "批准结果进入标准流程并留存审计轨迹"], "components": ["Foundry", "AIP", "文档处理", "Ontology", "审计/权限"], "fde_actions": ["和临床与监管一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官网明确披露周期改善；具体LLM、提示词与监管规则实现未公开。", "case_summary": "这个案例的重点是把“监管申报材料生成与标准化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Heineken USA", "industry": "消费品/食品", "scenario": "配送与运输供应链Agent", "fde": "典型Forward Deployed", "problem": "配送、运输与供应链计划需要处理复杂约束，旧方式开发周期长。", "solution": "用Foundry/AIP把订单、物流、配送约束和运营规则组合成AI驱动的供应链工作流与Agent。", "human": "供应链人员审核异常、优先级和实际调度动作。", "result": "AIPCon公开称团队用3个月构建出过去花3年才完成的能力。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q1%202025%20Investor%20Presentation.pdf", "architecture": ["ERP/WMS/TMS/订单/库存/产能等多源数据", "Foundry数据管道统一口径并映射到Ontology", "规则/优化模型/AIP识别风险、约束与候选动作", "运营工作台按业务影响排序建议", "Human-in-the-loop确认或修改", "Action写回业务系统，结果沉淀为下一轮上下文"], "components": ["Foundry", "AIP Agents", "Ontology", "物流/订单数据", "优化与规则"], "fde_actions": ["和物流与配送一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update明确披露3个月对比3年的建设周期；具体Agent编排未公开。", "case_summary": "这个案例的重点是把“配送与运输供应链Agent”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "L3Harris", "industry": "国防/工业", "scenario": "制造与供应链预测决策", "fde": "典型Forward Deployed", "problem": "管理者不缺“发生了什么”的看板，而缺能提前预测风险并给出可执行方案的系统。", "solution": "将制造、供应、成本和交付数据映射到Ontology，用预测/优化/AIP把风险转成行动建议。", "human": "业务与工程负责人负责高风险决策和资源调配。", "result": "官方客户引述强调从事后看板转向预测和决策敏捷性，公开材料未给统一量化ROI。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "Ontology", "AIP", "预测/优化", "制造与供应链数据"], "fde_actions": ["和制造与供应链一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "Palantir官网明确披露客户目标与部署方向；未披露单一财务指标与具体模型。", "case_summary": "这个案例的重点是把“制造与供应链预测决策”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "SOMPO Japan", "industry": "保险", "scenario": "商业保险盈利与销售决策", "fde": "典型Forward Deployed", "problem": "商业保险销售与承保需要把分散业务数据转成可执行的客户/风险决策。", "solution": "以Foundry/RDP为业务数据底座，将盈利、客户、销售和灾害响应等数据接入工作流，并扩展到销售团队。", "human": "销售、承保和管理团队根据建议做最终商业判断。", "result": "Palantir官网公开客户引述称过去三年利润改善约6000万美元，并预计未来三年再增约1亿美元；相关工作流扩展到10,000+销售人员。", "maturity": "规模化", "url": "https://investors.palantir.com/news-details/2023/Palantir-Signs-50-Million-Expansion-with-SOMPO-Holdings/", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "Real Data Platform", "Ontology", "商业保险数据", "销售工作流"], "fde_actions": ["和保险销售与承保一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿确认10,000+销售人员扩展与商业保险盈利工作流；利润数字来自Palantir官网客户引述。", "case_summary": "这个案例的重点是把“商业保险盈利与销售决策”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "AARP", "industry": "会员/非营利", "scenario": "会员服务原型快速生产化", "fde": "典型Forward Deployed", "problem": "大型会员组织需要快速验证AI是否能改善会员服务与内部运营，而传统项目周期过长。", "solution": "通过AIP/Foundry快速将会员数据、知识和服务规则组合成可用原型，并从原型继续生产化。", "human": "业务团队验证用户价值、服务边界与内容准确性。", "result": "官方客户引述称首个原型在45天内上线。", "maturity": "生产/扩展中", "url": "https://www.palantir.com/new-homepage/", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "AIP", "会员数据", "知识检索", "快速应用开发"], "fde_actions": ["和会员服务一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官网明确披露45天原型周期；具体原型场景和底层模型未全部公开。", "case_summary": "这个案例的重点是把“会员服务原型快速生产化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "CAZ Investments", "industry": "资产管理", "scenario": "投资线索筛选与伙伴服务", "fde": "典型Forward Deployed", "problem": "投资团队每年审阅大量私募机会，同时需要扩展合作伙伴服务而不线性增加人力。", "solution": "用AIP做线索/材料理解、优先级排序和next-best-action，把投资机会与伙伴关系数据接入统一工作流。", "human": "投资经理负责最终尽调、投资判断和客户关系。", "result": "Palantir官网称相同资源可处理超过100倍线索，线索处理时间下降90%以上。", "maturity": "生产级", "url": "https://investors.palantir.com/news-details/2023/CAZ-Investments-Selects-Palantir-for-its-Artificial-Intelligence-Platform-AIP/", "architecture": ["业务文档/合同/研究材料/历史案例", "Document Intelligence/OCR/结构化抽取", "Ontology把文档事实与业务实体连接", "AIP检索证据并生成草稿/建议", "规则/Evals/专家复核", "批准结果进入标准流程并留存审计轨迹"], "components": ["AIP", "Foundry", "Ontology", "投资文档", "Next-best-action"], "fde_actions": ["和投资筛选与伙伴服务一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿明确用途；100x与>90%来自Palantir官网客户引述。", "case_summary": "这个案例的重点是把“投资线索筛选与伙伴服务”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "ESI", "industry": "保险/理赔", "scenario": "扫描件理解与理赔判断辅助", "fde": "典型Forward Deployed", "problem": "保险业务存在大量质量较差的扫描文档，人工提取和判断耗时。", "solution": "在AIP Bootcamp中把低质量扫描文档接入文档理解和业务判断流程，快速验证自动提取与建议。", "human": "理赔/业务人员复核AI判断并承担最终决定。", "result": "官方客户引述称团队在约90分钟内构建出可读取质量很差扫描件并给出较好判断的AIP模块。", "maturity": "POC→生产验证", "url": "https://www.palantir.com/new-homepage/", "architecture": ["业务文档/合同/研究材料/历史案例", "Document Intelligence/OCR/结构化抽取", "Ontology把文档事实与业务实体连接", "AIP检索证据并生成草稿/建议", "规则/Evals/专家复核", "批准结果进入标准流程并留存审计轨迹"], "components": ["AIP", "文档理解/OCR", "业务规则", "Human review"], "fde_actions": ["和理赔/文档运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官网客户引述明确披露90分钟Bootcamp原型；后续规模化指标未公开。", "case_summary": "这个案例的重点是把“扫描件理解与理赔判断辅助”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Lennar", "industry": "房地产/建筑", "scenario": "企业数据与AI现场应用", "fde": "典型Forward Deployed", "problem": "住宅开发流程横跨土地、施工、销售和客户数据，需要让一线团队直接看到AI带来的可操作价值。", "solution": "通过AIP Bootcamp/联合构建，把企业数据和业务流程快速变成现场可操作应用。", "human": "业务负责人和一线团队验证结果并决定落地。", "result": "Palantir官网客户引述描述演示在约14分钟内让业务团队看到显著效果；公开材料未披露统一ROI。", "maturity": "POC→扩展", "url": "https://www.palantir.com/new-homepage/", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "AIP", "Ontology", "快速原型", "业务应用"], "fde_actions": ["和房地产运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官网确认客户现场反应与快速构建特征；具体流程和量化结果披露有限。", "case_summary": "这个案例的重点是把“企业数据与AI现场应用”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Archer Aviation", "industry": "航空制造", "scenario": "eVTOL制造与认证数据底座", "fde": "典型Forward Deployed", "problem": "新型航空器制造和认证需要把工程、制造、供应链与认证证据持续对齐，传统系统割裂。", "solution": "Foundry/AIP建立飞机项目Ontology，并用于扩大制造能力，同时延伸到空管、运行控制和路径规划等下一代系统。", "human": "工程、制造和认证专家保留安全与适航责任。", "result": "官方合作公告称双方以AI基础加速制造规模化；客户公开引述强调Ontology帮助大型认证项目更快整合。", "maturity": "生产/扩展中", "url": "https://investors.palantir.com/news-details/2025/Archer-and-Palantir-to-Build-the-AI-Foundation-for-the-Future-of-Next-Gen-Aviation-Technologies/", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "AIP", "Ontology", "制造数据", "认证/工程工作流"], "fde_actions": ["和航空制造与认证一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿明确披露制造与下一代航空系统合作；具体认证节省比例未公开。", "case_summary": "这个案例的重点是把“eVTOL制造与认证数据底座”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Cummins", "industry": "工业制造", "scenario": "制造数据Ontology与运营决策", "fde": "典型Forward Deployed", "problem": "制造数据虽大量存在，但业务团队难以快速按真实业务对象访问并行动。", "solution": "用Foundry把设备、零件、订单、工艺等数据组织成Ontology，供分析与AI工作流调用。", "human": "工程和运营团队负责现场执行与安全判断。", "result": "公开客户引述重点强调Ontology让企业能更快、更高效访问数据；未公开统一ROI。", "maturity": "生产级", "url": "https://www.palantir.com/new-homepage/", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "Ontology", "制造数据", "AIP/分析", "权限治理"], "fde_actions": ["和制造运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官网公开客户引述确认Ontology价值；技术实现细节和指标披露有限。", "case_summary": "这个案例的重点是把“制造数据Ontology与运营决策”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "HCA Healthcare", "industry": "医疗", "scenario": "护理人员排班与能力匹配", "fde": "典型Forward Deployed", "problem": "传统排班难同时考虑病区需求、技能组合、员工偏好和未来人力需求，且数据轨迹不完整。", "solution": "将人才画像、偏好、患者量预测、成本和业务规则组织成排班Ontology与数字化调度流程。", "human": "护理管理者确认最终班表并处理临床例外。", "result": "官方资料称已扩展到9个急性住院设施，并计划面向180+医院、约90,000名护士。", "maturity": "规模化", "url": "https://investors.palantir.com/files/Palantir%20Q3%202023%20Business%20Update.pdf", "architecture": ["患者/排班/保险/床位/运营等数据", "Foundry统一受控数据层", "Ontology建立患者、人员、资源、事件与规则", "AIP/预测/规则定位瓶颈并生成建议", "临床/运营人员审核与执行", "结果持续回写用于容量和流程优化"], "components": ["Foundry", "Ontology", "预测", "排班优化", "护理运营工作台"], "fde_actions": ["和护理排班一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update披露工作流图和扩展规模；未公开单一成本节省数字。", "case_summary": "这个案例的重点是把“护理人员排班与能力匹配”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Cintra Ferrovial", "industry": "交通基础设施", "scenario": "道路事件实时响应", "fde": "典型Forward Deployed", "problem": "高速公路事故与异常事件需要跨传感、交通和运营数据快速发现并派出支援。", "solution": "把实时交通与资产数据统一到Foundry/AIP，形成事件检测、定位、通知和资源调度工作流。", "human": "交通运营人员确认高风险事件和现场处置。", "result": "官方客户引述强调实时派出帮助既提升效率也能挽救生命；未披露统一ROI。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q3%202023%20Business%20Update.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "实时数据", "Ontology", "事件告警", "运营Action"], "fde_actions": ["和道路运营与应急一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方AIPCon材料确认客户展示AIP工作流；具体算法和量化指标未完整披露。", "case_summary": "这个案例的重点是把“道路事件实时响应”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "CPKC", "industry": "铁路/物流", "scenario": "铁路运营数据与可扩展决策平台", "fde": "典型Forward Deployed", "problem": "跨区域铁路网络涉及列车、人员、货物和资产的复杂实时协调，需要统一且可扩展的运营平台。", "solution": "以Foundry/AIP作为铁路业务数据和应用底座，把运营数据、分析和业务工作流逐步迁入统一平台。", "human": "调度与运营团队负责最终运行决策。", "result": "官方AIPCon客户引述强调平台可面向未来扩展；具体ROI未公开。", "maturity": "生产/扩展中", "url": "https://investors.palantir.com/files/Palantir%20Q3%202023%20Business%20Update.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "AIP", "Ontology", "铁路运营数据", "应用平台"], "fde_actions": ["和铁路运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方AIPCon确认CPKC展示AIP工作流；公开资料对具体单点结果披露有限。", "case_summary": "这个案例的重点是把“铁路运营数据与可扩展决策平台”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Hospital for Special Surgery", "industry": "医疗", "scenario": "保险拒赔申诉自动化", "fde": "典型Forward Deployed", "problem": "保险拒赔申诉需要人工读取材料、核对索赔和准备申诉，单件耗时长。", "solution": "AIP处理非结构化申诉材料，关联索赔数据和组织规则，生成供申诉协调员采取行动的建议。", "human": "申诉人员复核证据与最终提交。", "result": "官方Business Update称约45分钟人工工作降到约5分钟，应用在5周内构建。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q3%202025%20Investor%20Presentation.pdf", "architecture": ["业务文档/合同/研究材料/历史案例", "Document Intelligence/OCR/结构化抽取", "Ontology把文档事实与业务实体连接", "AIP检索证据并生成草稿/建议", "规则/Evals/专家复核", "批准结果进入标准流程并留存审计轨迹"], "components": ["AIP", "文档理解", "索赔数据", "组织规则", "Human review"], "fde_actions": ["和保险申诉一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "AIPCon 8/Business Update明确披露45→5分钟和5周建设周期。", "case_summary": "这个案例的重点是把“保险拒赔申诉自动化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "American Airlines", "industry": "航空/旅行", "scenario": "航线网络规划生态", "fde": "典型Forward Deployed", "problem": "航线网络规划需要在飞机、机场、需求、时刻和运营约束之间做复杂权衡。", "solution": "用Foundry/AIP重构网络规划生态，将数据、模型和规划动作放入统一运营系统。", "human": "网络规划和运营团队负责最终航线与资源决策。", "result": "官方Business Update称约一年内已实现数千万美元节省。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q3%202025%20Investor%20Presentation.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "AIP", "Ontology", "网络规划模型", "运营工作台"], "fde_actions": ["和航空网络规划一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "AIPCon 8/Business Update明确披露约一年与数千万美元节省；模型细节未公开。", "case_summary": "这个案例的重点是把“航线网络规划生态”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "bp", "industry": "能源/油气", "scenario": "油井故障管理", "fde": "典型Forward Deployed", "problem": "油井故障涉及实时设备、维护、生产与历史故障数据，传统排查反应慢。", "solution": "将井、设备、故障和维护上下文接到Foundry/AIP，识别故障风险并把处置建议嵌入运营流程。", "human": "工程师和现场团队确认安全相关动作。", "result": "官方客户引述称对Palantir投资持续取得“三位数”回报。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q3%202025%20Investor%20Presentation.pdf", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "AIP", "设备/井数据", "Ontology", "维护工作流"], "fde_actions": ["和油井与维护运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "AIPCon 8/Business Update确认“well failure management”与三位数回报引述；具体ROI口径未细化。", "case_summary": "这个案例的重点是把“油井故障管理”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Land O'Frost", "industry": "食品/制造", "scenario": "生产排程优化", "fde": "典型Forward Deployed", "problem": "生产排程需要同时考虑订单、产线、换线、原料和交付约束，人工编排耗时。", "solution": "将约束和实时生产数据组织进AIP排程工作流，快速生成可审查的生产计划。", "human": "供应链/生产计划人员审核并处理特殊约束。", "result": "官方Business Update称排程从约40小时缩短至30分钟。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q2%202025%20Business%20Update.pdf", "architecture": ["ERP/WMS/TMS/订单/库存/产能等多源数据", "Foundry数据管道统一口径并映射到Ontology", "规则/优化模型/AIP识别风险、约束与候选动作", "运营工作台按业务影响排序建议", "Human-in-the-loop确认或修改", "Action写回业务系统，结果沉淀为下一轮上下文"], "components": ["AIP", "Foundry", "排程优化", "生产约束", "Human review"], "fde_actions": ["和生产计划一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "AIPCon 7/Business Update明确披露40小时→30分钟。", "case_summary": "这个案例的重点是把“生产排程优化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "U.S. Department of State", "industry": "政府/公共服务", "scenario": "外交人员医疗资格审查", "fde": "典型Forward Deployed", "problem": "外交人员任职前医疗审查涉及大量材料、规则和跨团队处理，周期长。", "solution": "用Palantir构建受控数据和审查应用，将材料、规则、状态和审核动作整合到一个工作流。", "human": "医疗与行政人员保留最终资格判断。", "result": "官方Business Update称首个应用3个月上线，将候选人clearance周期从60天降至12天。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20Q2%202025%20Business%20Update.pdf", "architecture": ["业务文档/合同/研究材料/历史案例", "Document Intelligence/OCR/结构化抽取", "Ontology把文档事实与业务实体连接", "AIP检索证据并生成草稿/建议", "规则/Evals/专家复核", "批准结果进入标准流程并留存审计轨迹"], "components": ["Foundry", "受控数据", "Ontology", "审查工作流", "Human approval"], "fde_actions": ["和医疗资格审查一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "AIPCon 7/Business Update明确披露3个月上线、60→12天。", "case_summary": "这个案例的重点是把“外交人员医疗资格审查”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "GE Aerospace", "industry": "航空航天/制造", "scenario": "机队管理与供应链性能", "fde": "典型Forward Deployed", "problem": "发动机生产与机队支持横跨复杂供应链、零件、质量和维修数据，交付压力高。", "solution": "AIP/Foundry把供应链和机队运营数据统一到可执行工作流，支持预测、优先级和资源配置。", "human": "工程、供应链和运营团队负责最终生产/维修行动。", "result": "官方Q1 2026材料称2025年商业与军用发动机产出同比增加26%；Palantir将AIP列为支持机队与供应链表现的系统。", "maturity": "规模化", "url": "https://investors.palantir.com/files/Palantir%20-%20Q1%202026%20Business%20Update.pdf", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "AIP", "Ontology", "供应链/机队数据", "预测与行动"], "fde_actions": ["和航空发动机生产与机队一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update明确将AIP与机队管理、供应链表现及26%产出提升并列；不能据此把全部增量单独归因于Palantir。", "case_summary": "这个案例的重点是把“机队管理与供应链性能”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "USDA", "industry": "政府/农业", "scenario": "农业项目统一Ontology与在线发放", "fde": "典型Forward Deployed", "problem": "数百个遗留系统碎片化，农民申请与项目发放需要跨系统统一事实和状态。", "solution": "用AIP把遗留系统整合为受治理Ontology，并在其上构建面向农民的项目申请与发放工作流。", "human": "项目管理和政府人员监督资格、异常和资金发放。", "result": "官方Q2 2026材料称项目开放62分钟即打破USDA在线报名记录，前5天向农民发放超过44亿美元。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20-%20Q2%202026%20Business%20Update.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "AIP", "Ontology", "遗留系统整合", "政府项目工作流"], "fde_actions": ["和农业项目交付一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update明确披露数百遗留系统、62分钟记录与前5天$4.4B+发放。", "case_summary": "这个案例的重点是把“农业项目统一Ontology与在线发放”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Parts Town", "industry": "工业零配件/服务", "scenario": "客服与现场服务运营", "fde": "典型Forward Deployed", "problem": "工业零配件业务的客户支持和现场服务需要把产品、订单、客户与服务历史快速结合。", "solution": "用AIP把客户支持和现场服务上下文接到统一Ontology，让团队获得建议、自动化和下一步动作。", "human": "客服和现场服务人员处理复杂例外与客户关系。", "result": "官方Q2 2026材料称项目价值机会预计超过200个基点的EBITDA margin。", "maturity": "生产/扩展中", "url": "https://investors.palantir.com/files/Palantir%20-%20Q2%202026%20Business%20Update.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["AIP", "Foundry", "Ontology", "客服数据", "现场服务数据"], "fde_actions": ["和客户支持与现场服务一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update明确披露场景和>200bps EBITDA margin机会；为公司预期价值而非审计后的实现值。", "case_summary": "这个案例的重点是把“客服与现场服务运营”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "SAP", "industry": "企业软件", "scenario": "SAP云迁移Agent", "fde": "典型Forward Deployed", "problem": "大型ERP迁移包含对象映射、代码/配置转换、校验和大量人工复核，时间与成本高。", "solution": "Palantir以AIP Agent连接源系统、目标SAP环境、迁移规则与验证工具，将迁移拆成可执行、可验证的Agent工作流。", "human": "迁移专家审核映射、异常和最终切换。", "result": "官方Q1 2026材料称早期项目两周内达到>99%验证准确率，并把迁移时间与成本降低70%以上。", "maturity": "生产验证/扩展", "url": "https://investors.palantir.com/files/Palantir%20-%20Q1%202026%20Business%20Update.pdf", "architecture": ["源ERP对象/代码/配置", "Ontology映射源与目标业务对象", "AIP Agent生成迁移映射与转换", "确定性验证/对账工具检查结果", "迁移专家处理异常并批准", "批准模式沉淀用于后续批次"], "components": ["AIP Agents", "Ontology", "ERP迁移规则", "验证/Evals", "SAP"], "fde_actions": ["和ERP迁移一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Q1 2026 Business Update引用SAP COO披露>99% validation accuracy与>70% timeline/cost reduction；具体客户名单未公开。", "case_summary": "这个案例的重点是把“SAP云迁移Agent”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Airbus", "industry": "航空航天", "scenario": "Skywise航空数据生态与A350生产", "fde": "典型Forward Deployed", "problem": "飞机设计、生产、供应商和航空公司运营数据分散，难以形成行业级共享运营系统。", "solution": "Palantir与Airbus长期共建Skywise，把生产、供应链、维护和航空公司运营数据连接到统一航空Ontology与应用生态。", "human": "Airbus、供应商与航空公司在各自权限下使用并执行。", "result": "Palantir官方资料称Skywise日常用户超过50,000；历史官方材料称A350生产加速33%，并识别每年17亿美元以上成本节省。", "maturity": "行业级规模化", "url": "https://www.palantir.com/assets/xrfr7uokpv1b/7uEHPTEM0MkKtBFcx2zh63/9d75da5b76439717ac95135b5012479e/Palantir-Airbus-Partnership_Overview.pdf", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "Skywise", "Ontology", "航空制造/运营数据", "多组织权限"], "fde_actions": ["和航空制造与运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方合作材料确认长期共建Skywise；用户数和历史价值来自Palantir官方Business Update/公司资料。", "case_summary": "这个案例的重点是把“Skywise航空数据生态与A350生产”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Rio Tinto", "industry": "矿业", "scenario": "矿山运营统一数据与价值链优化", "fde": "典型Forward Deployed", "problem": "矿业运营涉及地下作业、设备、人员、安全、供应链和交易数据，系统割裂。", "solution": "Foundry把多源运营与交易数据整合成关键矿山运营的统一表示，供现场与办公室人员共同决策。", "human": "矿山运营、安全和工程团队负责实际行动。", "result": "官方合作公告强调已在Borates价值链数字化、地下运营数据连接和员工安全等项目中落地；未披露统一ROI。", "maturity": "生产级", "url": "https://www.palantir.com/newsroom/press-releases/palantir-technologies-and-rio-tinto-sign-multi-year-enterprise-partnership", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "统一运营数据", "安全/权限", "矿业价值链", "现场应用"], "fde_actions": ["和矿山运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿明确披露多业务单元的成功数据整合项目；量化财务结果未公开。", "case_summary": "这个案例的重点是把“矿山运营统一数据与价值链优化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Scuderia Ferrari", "industry": "赛车/制造", "scenario": "F1动力单元性能与可靠性决策", "fde": "典型Forward Deployed", "problem": "赛道和工厂需要把比赛、测试台、零件与动力单元数据快速连接，支持性能与可靠性判断。", "solution": "Foundry整合Grand Prix、试验台和零件信息，让赛道与Maranello工程师共享分析和快速决策。", "human": "动力单元工程师负责最终工程和比赛决策。", "result": "官方新闻稿称过去需要数分钟计算的任务可在数秒完成。", "maturity": "生产级", "url": "https://investors.palantir.com/news-details/2022/Palantir-Technologies-Extends-Partnership-with-Ferrari-to-Bring-Data-Driven-Performance-Decisions-to-Race-Operations/", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "比赛/试验数据", "零件数据", "工程分析", "协同工作流"], "fde_actions": ["和赛车工程一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿明确披露数据源、动力单元场景和“分钟到秒”改善。", "case_summary": "这个案例的重点是把“F1动力单元性能与可靠性决策”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "PG&E", "industry": "公用事业", "scenario": "野火风险与公共安全断电(PSPS)", "fde": "典型Forward Deployed", "problem": "极端天气下需要在极短时间内综合气象、电网、客户与资产数据，精准决定哪些线路断电并持续通知客户。", "solution": "Foundry从数据摄取到PSPS范围计算、客户通知和外部系统写回形成端到端可审计工作流。", "human": "电网运营和应急团队确认断电范围与高风险行动。", "result": "Palantir官方资料称平台支持PSPS和野火风险缓解；公司概览称2022年受野火影响面积相较2018–2020下降99%。", "maturity": "生产级", "url": "https://investors.palantir.com/news-details/2021/Palantir-Providing-Technology-to-Enhance-Safety-and-Reliability-of-Electric-Grid-in-California/", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "Ontology", "气象与资产数据", "PSPS工作流", "客户通知/写回"], "fde_actions": ["和电网应急一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方新闻稿明确PSPS部署；99%面积指标来自Palantir官方公司概览，不能视为仅由软件单独造成。", "case_summary": "这个案例的重点是把“野火风险与公共安全断电(PSPS)”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Southern California Edison", "industry": "公用事业", "scenario": "电网资产、气象与客户通知", "fde": "典型Forward Deployed", "problem": "数千万资产、气象点和巡检记录需要统一，野火和电网事件下客户通知必须快速准确。", "solution": "Foundry连接资产、气象、巡检和客户数据，支持设备定位、风险分析与客户通知流程。", "human": "电网运营、气象和客户团队负责风险判断与执行。", "result": "官方FY2022 Business Update披露：20M资产、150M气象预测点、5M巡检/植被记录；客户通知由小时降至分钟，漏通知减少60%。", "maturity": "生产级", "url": "https://investors.palantir.com/files/Palantir%20FY%202022%20Business%20Update.pdf", "architecture": ["多源运营数据与历史事件", "Foundry统一数据模型与权限", "Ontology映射业务对象、关系、状态和可执行Action", "AIP/规则/预测模型生成建议或自动化步骤", "一线人员在Workshop/应用中确认与执行", "反馈、结果和新事实写回Ontology形成闭环"], "components": ["Foundry", "资产数据", "气象预测", "巡检数据", "客户通知工作流"], "fde_actions": ["和电网运营与野火防护一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "官方Business Update明确披露数据规模和通知指标。", "case_summary": "这个案例的重点是把“电网资产、气象与客户通知”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "Palantir", "company": "Andretti Racing", "industry": "赛车/体育", "scenario": "RaceOS实时赛车性能应用", "fde": "典型Forward Deployed", "problem": "赛道决策依赖实时赛车遥测、策略和历史性能数据，需要把多种分析快速变成可操作应用。", "solution": "Andretti在Palantir架构上构建RaceOS，将实时车辆表现连接到一系列AI驱动应用。", "human": "比赛工程和策略团队负责最终赛道行动。", "result": "Palantir架构文档将RaceOS列为客户扩展标准AIP/Foundry架构的代表案例；未披露统一ROI。", "maturity": "生产级", "url": "https://www.palantir.com/docs/foundry/architecture-center/platforms", "architecture": ["设备/质量/工艺/维护/供应链/历史事件", "Foundry整合实时与历史工业数据", "Ontology建立设备、零部件、订单、工艺与约束", "AIP/预测/优化发现风险与推荐动作", "工程师/现场人员确认并操作", "执行结果和故障反馈沉淀为后续模型与规则上下文"], "components": ["Foundry", "AIP", "Ontology", "实时遥测", "RaceOS应用"], "fde_actions": ["和赛车运营一线团队共同走完整流程，找出真正需要决策而不是展示数据的节点", "把分散数据源、权限和业务术语整理成统一可操作的Ontology", "将业务规则、优化模型、LLM和传统软件按可靠性边界组合，而不是让LLM包办", "把建议直接嵌入现有操作工作台，并设计批准、驳回、升级和写回Action", "用业务KPI验收并根据真实反馈继续改Ontology、规则和自动化"], "reusable": ["先把业务对象、关系、状态和Action建模清楚，再谈Agent", "建议必须进入可执行工作流，否则只是另一张仪表盘", "高价值部署往往是数据整合 + 规则/优化 + AI + Human-in-the-loop的组合", "持续把执行结果写回，才能形成可积累的运营记忆"], "evidence": "Palantir官方架构文档明确点名Andretti RaceOS及其连接实时赛车性能与AI应用；技术细节披露有限。", "case_summary": "这个案例的重点是把“RaceOS实时赛车性能应用”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Cisco", "industry": "科技/软件", "scenario": "Codex企业级软件工程闭环", "fde": "伴随式部署", "problem": "大型多仓库、C/C++代码库与严格安全治理让AI编码很难直接进入生产。", "solution": "Cisco与OpenAI直接合作，把Codex接入真实多仓库、CLI、构建、测试、缺陷修复和安全流程，并用生产反馈共同改进企业能力。", "human": "工程师定义规格、审查关键变更并负责发布。", "result": "官方称95%+新AI功能由Codex编写；缺陷修复吞吐提升10–15倍；每月节省1,500+工程小时。", "maturity": "大规模生产", "url": "https://openai.com/index/cisco/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["Codex", "CLI", "多仓库检索", "编译/测试", "CI/CD", "安全治理"], "fde_actions": ["与软件工程团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方客户案例明确披露工作流、指标以及Cisco与OpenAI直接共同改进Codex的方式。", "case_summary": "这个案例的重点是把“Codex企业级软件工程闭环”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "BNY", "industry": "金融", "scenario": "企业Agent平台 Eliza", "fde": "企业部署案例", "problem": "大型金融机构需要在安全治理下让大量员工自己构建Agent，而不是由中央团队逐个开发。", "solution": "BNY建立AI Hub和内部平台Eliza，接入OpenAI模型与企业治理，让员工在平台上开发受控Agent和工作流。", "human": "员工负责业务判断；中央AI/风险团队定义治理与平台边界。", "result": "官方称平台支持125+线上用例、20,000名员工主动构建Agent，法律审查时间减少75%。", "maturity": "规模化", "url": "https://openai.com/index/bny/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["OpenAI API", "ChatGPT", "内部Agent平台 Eliza", "企业治理", "权限/审计"], "fde_actions": ["与金融与企业知识工作团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露Eliza平台、20k构建者、125+用例和75%法律审查时间下降。", "case_summary": "这个案例的重点是把“企业Agent平台 Eliza”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Rakuten", "industry": "零售/科技/金融", "scenario": "Codex事件响应、CI/CD与自主开发", "fde": "企业部署案例", "problem": "复杂产品生态中既要加快故障恢复和开发，也不能降低代码审查与安全标准。", "solution": "Codex接入KQL日志分析、根因定位、CI/CD代码审查、漏洞检查和端到端项目构建。", "human": "SRE/工程师验证修复、定义标准并负责生产发布。", "result": "官方称MTTR下降约50%；部分项目从季度压缩到数周，潜在开发速度提升3–4倍。", "maturity": "生产级", "url": "https://openai.com/index/rakuten/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["Codex", "KQL/日志", "CI/CD", "漏洞检查", "FastAPI/Swift示例"], "fde_actions": ["与SRE与软件工程团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例详细披露三个工作流和指标。", "case_summary": "这个案例的重点是把“Codex事件响应、CI/CD与自主开发”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Boston Children's Hospital", "industry": "医疗", "scenario": "医院运营自动化 + 罕见病诊断辅助", "fde": "伴随式部署", "problem": "医院同时面临大量重复运营工作和极难的罕见病信息综合问题。", "solution": "将AI作为医院基础设施：运营侧建设50+自动化；临床侧把遗传、表型和文献连接给“co-pilot geneticist”产生证据化候选。", "human": "医院人员审核运营输出；医生与遗传专家负责临床确认。", "result": "官方称50+自动化节省约60,000小时、重配劳动力价值$7M+，并帮助确认40+此前未解决的罕见病。", "maturity": "规模化", "url": "https://openai.com/index/boston-childrens-hospital/", "architecture": ["临床/运营数据与医学文献", "受控检索与结构化上下文", "OpenAI推理模型生成证据链接的候选解释/草稿", "规则、Evals与专业人员复核", "医生/临床团队做最终诊断或运营决策", "确认结果与失败模式用于后续流程优化"], "components": ["ChatGPT", "OpenAI推理模型", "自动化工作流", "遗传/表型/文献数据", "专家复核"], "fde_actions": ["与医院运营与遗传诊断团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露运营与临床两类结果；诊断均由医生完成，模型只提供线索。", "case_summary": "这个案例的重点是把“医院运营自动化 + 罕见病诊断辅助”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Morgan Stanley", "industry": "金融", "scenario": "财富管理知识助手 + Evals体系", "fde": "伴随式部署", "problem": "财富顾问需要从庞大且高合规要求的研究与流程文档中快速获得可信答案。", "solution": "Morgan Stanley与OpenAI共同优化检索和Evals：对摘要、翻译、检索进行专家评分和回归测试，再扩展到Advisor Assistant和会议Debrief。", "human": "顾问与内部专家评估答案并承担客户建议责任。", "result": "官方称98%+顾问团队使用；可回答语料从约7,000问题扩到10万份文档；文档可访问率从20%升到80%。", "maturity": "大规模生产", "url": "https://openai.com/index/morgan-stanley/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["GPT-4", "RAG/检索", "Evals", "Whisper", "专家评分", "回归测试"], "fde_actions": ["与财富管理团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例详细披露Evals、检索迭代、采用率与文档覆盖变化。", "case_summary": "这个案例的重点是把“财富管理知识助手 + Evals体系”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Klarna", "industry": "金融/电商", "scenario": "AI客服助手", "fde": "企业部署案例", "problem": "大规模多语言支付与购物客服需要降低等待时间，同时保持解决率和客户满意度。", "solution": "OpenAI模型进入客服工作流，处理多语言咨询、退款、退货和财务健康相关问题，并将复杂事项升级人工。", "human": "人工客服处理复杂例外；产品团队监控质量和升级率。", "result": "上线首月处理230万次对话、约占客服聊天2/3；相当于700名全职坐席工作量，重复咨询下降25%，平均解决时间11分钟→<2分钟。", "maturity": "大规模生产", "url": "https://openai.com/index/klarna/", "architecture": ["用户请求/业务事件/历史上下文", "OpenAI模型识别意图并检索企业知识", "Agent调用业务系统/API/工具执行任务", "政策、权限、Evals和确定性检查约束行为", "复杂/高风险场景升级人工", "生产对话与失败案例进入持续改进循环"], "components": ["OpenAI模型", "客服知识", "业务系统动作", "多语言", "人工升级"], "fde_actions": ["与客服与支付运营团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露客服范围和多项指标。", "case_summary": "这个案例的重点是把“AI客服助手”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Commonwealth Bank of Australia", "industry": "金融", "scenario": "全员AI能力 + 客服/反欺诈Agent扩展", "fde": "企业部署案例", "problem": "大型银行既要普及AI，又要在安全、数据连接和高风险客户场景下维持一致治理。", "solution": "向近5万员工部署ChatGPT Enterprise，配套连接器、培训、领导示范和内部实验，再逐步扩展到客服、诈骗/欺诈响应等Agent场景。", "human": "员工与风险团队控制高风险客户动作。", "result": "官方称近50,000名员工部署ChatGPT Enterprise；后续Agent业务仍在扩展。", "maturity": "规模化", "url": "https://openai.com/index/commonwealth-bank-of-australia/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "Connectors", "培训/治理", "Agent扩展", "风险控制"], "fde_actions": ["与银行运营团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露近50k员工部署和下一阶段高影响场景；未披露具体Agent ROI。", "case_summary": "这个案例的重点是把“全员AI能力 + 客服/反欺诈Agent扩展”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Taisei Corporation", "industry": "建筑/工程", "scenario": "HR主导的全员AI人才培养", "fde": "企业部署案例", "problem": "传统建筑企业需要把AI从少数技术人员扩展为全员技能，同时真正进入日常工作。", "solution": "由HR牵头将ChatGPT Enterprise作为人才发展基础设施，鼓励员工构建自定义GPT并把成功模式在组织内扩散。", "human": "员工负责业务判断，HR/治理团队推动训练和规范。", "result": "官方称创建3,300个Custom GPT，周活跃率90%，每名员工每周节省5.5小时以上。", "maturity": "规模化", "url": "https://openai.com/index/taisei/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "Custom GPTs", "HR培训", "企业治理"], "fde_actions": ["与人才与知识工作团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露使用率、GPT数量与节省时间。", "case_summary": "这个案例的重点是把“HR主导的全员AI人才培养”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "ENEOS Materials", "industry": "材料/制造", "scenario": "制造企业全员知识与深度研究", "fde": "企业部署案例", "problem": "材料制造企业在用工紧张和成本上升下，需要安全使用专有信息并降低数据汇总与调查时间。", "solution": "先从ChatGPT Enterprise试点验证，再扩到全员；HR、研发和知识工作使用数据分析、深度研究与企业知识。", "human": "专业人员验证技术与业务结论。", "result": "官方称试点80%员工认为工作显著改善；HR数据汇总与分析时间下降90%；部分调查从数月降至分钟。", "maturity": "规模化", "url": "https://openai.com/index/eneos-materials/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "Deep Research", "数据分析", "企业知识"], "fde_actions": ["与制造知识工作团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露试点与时间节省指标。", "case_summary": "这个案例的重点是把“制造企业全员知识与深度研究”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Dai Nippon Printing (DNP)", "industry": "制造/印刷", "scenario": "跨部门流程自动化与处理量提升", "fde": "企业部署案例", "problem": "大型多事业部企业需要证明AI不是个人助手，而是能在多个部门形成可测量流程改造。", "solution": "ChatGPT Enterprise进入多事业部工作流，团队把重复流程改造成可复用的自动化和分析模板。", "human": "员工负责例外与最终业务输出。", "result": "官方称90%的用例取得可测量结果、周活100%、时间缩减相关自动化率87%，部分处理量提升10倍。", "maturity": "规模化", "url": "https://openai.com/index/dai-nippon-printing/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "流程模板", "数据分析", "企业治理"], "fde_actions": ["与跨部门流程团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露多项采用与效率指标。", "case_summary": "这个案例的重点是把“跨部门流程自动化与处理量提升”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Simplex", "industry": "科技/软件", "scenario": "量化验证AI原生软件交付", "fde": "企业部署案例", "problem": "系统集成项目需要知道AI到底在设计、开发、测试哪个环节真正节省时间，而不是凭感受部署。", "solution": "建立AI CoE，对ChatGPT Enterprise/Codex在设计、编码和集成测试环节进行量化测量，再将有效模式推广到项目。", "human": "工程师验证生成物并负责交付质量。", "result": "官方称单屏开发时间减少70%，设计减少40%，内部集成测试减少17%。", "maturity": "生产/规模化", "url": "https://openai.com/index/simplex/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["Codex", "ChatGPT Enterprise", "CoE", "软件生命周期测量", "测试"], "fde_actions": ["与系统开发团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露按SDLC环节测量的效率指标。", "case_summary": "这个案例的重点是把“量化验证AI原生软件交付”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Wayfair", "industry": "零售/电商", "scenario": "商品目录质量 + 供应商客服自动化", "fde": "企业部署案例", "problem": "数百万商品的属性和标签错误影响搜索与体验；同时供应商支持工单量巨大。", "solution": "把OpenAI模型嵌入商品目录和供应商支持系统，自动修正标签并处理可标准化工单。", "human": "目录与支持团队处理低置信度和复杂问题。", "result": "官方称修正250万商品标签，每月自动化41,000个供应商支持工单，并部署1,200个ChatGPT Enterprise席位。", "maturity": "大规模生产", "url": "https://openai.com/index/wayfair/", "architecture": ["用户请求/业务事件/历史上下文", "OpenAI模型识别意图并检索企业知识", "Agent调用业务系统/API/工具执行任务", "政策、权限、Evals和确定性检查约束行为", "复杂/高风险场景升级人工", "生产对话与失败案例进入持续改进循环"], "components": ["OpenAI API", "商品目录系统", "供应商客服", "分类/抽取", "Human escalation"], "fde_actions": ["与零售目录与供应商运营团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露嵌入核心内部系统及三项量化指标。", "case_summary": "这个案例的重点是把“商品目录质量 + 供应商客服自动化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "HiBob", "industry": "HR科技/SaaS", "scenario": "内部GPT实验到客户产品", "fde": "企业部署案例", "problem": "公司希望让员工快速实验AI，同时把真正有效的内部原型转成面向客户的产品能力。", "solution": "员工在ChatGPT Enterprise中构建大量GPT进行实验，成功工作流再用OpenAI API产品化到Bob平台。", "human": "员工与产品团队筛选有效原型并控制产品发布。", "result": "官方称90%+员工活跃使用；构建2,500+实验GPT，其中约200个成功进入内部工作流。", "maturity": "规模化", "url": "https://openai.com/index/hibob/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "Custom GPTs", "OpenAI API", "原型→产品化", "HR数据"], "fde_actions": ["与HR产品与内部运营团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露GPT漏斗与产品化路径。", "case_summary": "这个案例的重点是把“内部GPT实验到客户产品”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Scania", "industry": "汽车/制造", "scenario": "全球工业员工AI采用", "fde": "企业部署案例", "problem": "工程和一线团队知识密集，但AI采用不能只停留在总部或技术团队。", "solution": "ChatGPT Enterprise面向全球员工推广，通过底层试用、内部社区和场景共创，将AI带入工程、学习和运营。", "human": "工程与一线人员保持安全、质量和生产责任。", "result": "官方案例称工程与一线出现强烈bottom-up adoption，并在生产力、质量和运营流程出现早期收益；未披露统一ROI。", "maturity": "规模化", "url": "https://openai.com/index/scania/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "员工赋能", "知识工作", "治理/培训"], "fde_actions": ["与工业知识工作团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露采用方式和早期效果，但未给统一量化指标。", "case_summary": "这个案例的重点是把“全球工业员工AI采用”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "CyberAgent", "industry": "互联网/媒体/游戏", "scenario": "ChatGPT + Codex组织级采用", "fde": "企业部署案例", "problem": "互联网公司希望同时提升非技术知识工作和工程开发质量，并让AI自然进入团队决策。", "solution": "ChatGPT Enterprise提供安全通用入口；Codex用于实现前的方案思考、编码和开发流程，提高团队速度与信心。", "human": "产品与工程人员保留设计、审核和发布责任。", "result": "官方称ChatGPT Enterprise月活跃使用率93%。", "maturity": "规模化", "url": "https://openai.com/index/cyberagent/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["ChatGPT Enterprise", "Codex", "工程工作流", "安全治理"], "fde_actions": ["与互联网产品与工程团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露93%月活及Codex进入开发决策流程。", "case_summary": "这个案例的重点是把“ChatGPT + Codex组织级采用”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Braintrust", "industry": "AI开发工具", "scenario": "客户需求直接转预览分支", "fde": "企业部署案例", "problem": "客户反馈到可体验产品之间的周期限制了产品团队试错速度。", "solution": "工程师把客户feature request交给Codex，Agent直接创建可运行的preview branch，再由团队和客户快速验证。", "human": "工程师负责Review与是否合并，客户反馈决定方向。", "result": "官方称一个月内团队50%转向Codex；客户请求可在数分钟形成可演示分支。", "maturity": "生产级", "url": "https://openai.com/index/braintrust/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["Codex", "Git分支", "客户反馈", "测试/Review"], "fde_actions": ["与产品工程团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露“需求→preview branch”流程和50%团队迁移。", "case_summary": "这个案例的重点是把“客户需求直接转预览分支”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Cars24", "industry": "汽车/平台", "scenario": "语音/对话Agent + 服务流程自动化", "fde": "企业部署案例", "problem": "二手车平台交易链路人工、碎片化且高度依赖对话，丢失线索和服务周转时间直接影响收入。", "solution": "OpenAI驱动的Agent承接大规模对话，连接线索和服务工作流，用AI进行再触达与问题解决。", "human": "复杂交易、监管和高价值谈判升级人工。", "result": "官方称AI Agent每月处理100万+分钟对话，客服解决率提升50%，关键服务周转时间下降80%，追回12%此前丢失卖家线索。", "maturity": "大规模生产", "url": "https://openai.com/index/cars24/", "architecture": ["用户请求/业务事件/历史上下文", "OpenAI模型识别意图并检索企业知识", "Agent调用业务系统/API/工具执行任务", "政策、权限、Evals和确定性检查约束行为", "复杂/高风险场景升级人工", "生产对话与失败案例进入持续改进循环"], "components": ["OpenAI API", "语音/对话Agent", "CRM/线索系统", "服务工作流", "Human escalation"], "fde_actions": ["与汽车交易与客服团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露多个生产指标和Agent规模。", "case_summary": "这个案例的重点是把“语音/对话Agent + 服务流程自动化”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "Holiday Extras", "industry": "旅行/保险", "scenario": "全员AI生产力 + 旅行保险助手", "fde": "企业部署案例", "problem": "旅行公司需要既提高内部知识工作效率，又把AI扩展到客户保险和个性化旅行体验。", "solution": "内部用ChatGPT Enterprise做写作、分析、调试；客户侧用OpenAI API构建Syd AI解释旅行保险，并推进个性化super app。", "human": "员工审核业务内容，保险高风险解释保留受控知识与人工升级。", "result": "官方称95%受访员工每周使用，92%每周节省2小时以上，代码调试时间下降75%，每周累计节省500+小时，约合每年$500k。", "maturity": "规模化", "url": "https://openai.com/index/holiday-extras/", "architecture": ["企业知识/文件/数据/业务系统", "ChatGPT Enterprise/Work在权限范围内获取上下文", "员工或自定义GPT/Agent完成分析、生成或自动化", "连接器/规则/企业治理控制数据与动作边界", "员工复核关键输出并执行", "高频流程沉淀为模板、GPT或Agent并持续评估"], "components": ["ChatGPT Enterprise", "OpenAI API", "保险知识助手", "代码调试", "个性化推荐"], "fde_actions": ["与旅行运营与产品团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露采用率、时间节省与客户AI产品方向。", "case_summary": "这个案例的重点是把“全员AI生产力 + 旅行保险助手”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "NTT DATA Group", "industry": "IT服务", "scenario": "Codex复杂事故分析", "fde": "企业部署案例", "problem": "关键系统事故分析需要多位资深工程师数天拼接日志、代码和上下文。", "solution": "Codex在受治理环境中独立调查、执行、测试和修订，完成复杂incident analysis，并逐步扩展到技术与非技术员工。", "human": "工程师验证结论和修复，负责生产系统。", "result": "官方称一项原需5名资深工程师3天的事故分析由Codex在30分钟完成；Codex约9,000名活跃用户。", "maturity": "大规模生产", "url": "https://openai.com/index/ntt-data/", "architecture": ["代码库/Issue/日志/内部规范", "Codex检索相关代码与上下文", "Agent制定计划并生成修改", "CLI/编译/测试/安全检查形成确定性反馈", "工程师Review高风险变更", "CI/CD合并并用生产反馈继续改进"], "components": ["Codex", "日志/代码上下文", "Agent执行", "测试", "企业治理"], "fde_actions": ["与IT运维与系统开发团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露5人×3天→30分钟和约9,000用户。", "case_summary": "这个案例的重点是把“Codex复杂事故分析”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}, {"source": "OpenAI", "company": "AdventHealth", "industry": "医疗", "scenario": "临床行政负担与文档工作流", "fde": "企业部署案例", "problem": "大型医院系统临床人员花大量时间在记录、行政和支持任务，压缩患者照护时间。", "solution": "部署ChatGPT for Healthcare，围绕文档和行政支持重构临床工作流，把可自动化任务交给AI。", "human": "临床人员保留医疗判断和患者责任。", "result": "官方称部分行政任务时间减少80%。", "maturity": "生产/扩展中", "url": "https://openai.com/index/adventhealth/", "architecture": ["临床/运营数据与医学文献", "受控检索与结构化上下文", "OpenAI推理模型生成证据链接的候选解释/草稿", "规则、Evals与专业人员复核", "医生/临床团队做最终诊断或运营决策", "确认结果与失败模式用于后续流程优化"], "components": ["ChatGPT for Healthcare", "临床文档", "医疗治理", "Human review"], "fde_actions": ["与临床运营团队一起选择高频且可度量的生产工作流，而不是只部署聊天入口", "确定模型需要的企业上下文、系统权限、工具和安全边界", "把模型接入真实软件/数据/业务流程，并建立测试、Evals或确定性验证", "设计Human-in-the-loop与失败升级路径，确保责任边界清楚", "根据生产使用、错误和用户反馈持续迭代Prompt、上下文、工具和流程"], "reusable": ["企业AI效果取决于上下文、工具、验证和采用率，不只取决于模型能力", "先找可量化工作流，再把成功模式产品化/平台化", "编码Agent要尽量接入测试、CI/CD和安全检查形成闭环", "高风险行业必须把专业责任留给人，并建立持续Evals"], "evidence": "OpenAI官方案例明确披露80%行政任务时间下降；具体任务比例和系统架构未完全公开。", "case_summary": "这个案例的重点是把“临床行政负担与文档工作流”从一次性分析或单点工具，变成可嵌入真实业务、可验证、可持续迭代的生产工作流。"}];
+
+    // Global utility & element references
+    const esc = s => String(s || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+    const q = id => document.getElementById(id);
+    const grid = q('grid');
+
+    let currentFilteredIndices = [];
+    let currentModalFilteredIndex = -1;
+
+    // Toast notification
+    let toastTimer = null;
+    function showToast(msg = '已复制内容到剪贴板') {
+      const t = q('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        t.classList.remove('show');
+      }, 2200);
+    }
+
+    // Theme Management
+    function initTheme() {
+      const stored = localStorage.getItem('fde_apple_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (prefersDark ? 'dark' : 'light');
+      setTheme(theme, false);
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('fde_apple_theme')) {
+          setTheme(e.matches ? 'dark' : 'light', false);
+        }
+      });
+    }
+
+    function setTheme(theme, save = true) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (save) localStorage.setItem('fde_apple_theme', theme);
+      
+      const themeIcon = q('themeIcon');
+      const themeLabel = q('themeLabel');
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
+        themeLabel.textContent = '暗色';
+      } else {
+        themeIcon.innerHTML = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>';
+        themeLabel.textContent = '亮色';
+      }
+    }
+
+    q('themeToggleBtn').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark', true);
+    });
+
+    // Helper functions for modal render
+    function renderStepFlow(steps) {
+      if (!steps || !steps.length) return '';
+      return '<div class="arch-flow">' + steps.map((st, i) => `
+        <div class="arch-step">
+          <span class="arch-step-num">Step 0${i + 1}</span>
+          <div>${esc(st)}</div>
+        </div>
+        ${i < steps.length - 1 ? '<div class="arch-arrow">→</div>' : ''}
+      `).join('') + '</div>';
+    }
+
+    function renderCleanList(items, isReusable = false) {
+      if (!items || !items.length) return '<p style="color:var(--text-tertiary)">未披露</p>';
+      return `<ul class="clean-list ${isReusable ? 'reusable-list' : ''}">` +
+        items.map(x => `<li>${esc(x)}</li>`).join('') +
+        '</ul>';
+    }
+
+    function renderChips(chips) {
+      if (!chips || !chips.length) return '<p style="color:var(--text-tertiary)">未披露</p>';
+      return '<div class="chips-wrap">' +
+        chips.map(c => `<span class="tech-chip">${esc(c)}</span>`).join('') +
+        '</div>';
+    }
+
+    // Copy case content to clipboard
+    window.copyCaseSummary = function(origIdx) {
+      const c = CASES[origIdx];
+      const summary = `【${c.company} - ${c.scenario}】
+来源：${c.source} | 行业：${c.industry} | 部署：${c.fde}
+核心问题：${c.problem}
+破局方案：${c.solution}
+成效价值：${c.result}
+公开来源：${c.url}`;
+      navigator.clipboard.writeText(summary).then(() => {
+        showToast('已复制案例拆解摘要');
+      }).catch(() => {
+        showToast('复制失败，请手动选择');
+      });
+    };
+
+    // Open Modal
+    function openModalByFilteredIndex(filteredIdx) {
+      if (filteredIdx < 0 || filteredIdx >= currentFilteredIndices.length) return;
+      currentModalFilteredIndex = filteredIdx;
+      const originalIdx = currentFilteredIndices[filteredIdx];
+      const c = CASES[originalIdx];
+
+      q('mTitle').textContent = c.company;
+      q('mScenario').textContent = c.scenario;
+      q('mCounter').textContent = `${filteredIdx + 1} / ${currentFilteredIndices.length}`;
+      q('mBadges').innerHTML = `
+        <span class="badge badge-source-${esc(c.source)}">${esc(c.source)}</span>
+        <span class="badge badge-industry">${esc(c.industry)}</span>
+        <span class="badge badge-fde">${esc(c.fde)}</span>
+        <span class="badge" style="background:var(--bg-subtle);border-color:var(--border-color);color:var(--text-secondary);">${esc(c.maturity)}</span>
+      `;
+
+      q('mBody').innerHTML = `
+        <!-- Case Summary Top Callout -->
+        ${c.case_summary ? `
+          <div class="bento-summary-banner">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div class="bento-summary-text">${esc(c.case_summary)}</div>
+          </div>
+        ` : ''}
+
+        <div class="bento-grid-2">
+          <!-- Problem & Solution -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span>原始业务痛点</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.problem)}</p></div>
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span>核心破局方案</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.solution)}</p></div>
+          </section>
+
+          <!-- Technical Architecture / Step Flow -->
+          <section class="bento-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+              <span>技术架构与生产工作流拆解</span>
+            </div>
+            ${renderStepFlow(c.architecture)}
+          </section>
+
+          <!-- Components & Human In the Loop -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              <span>关键技术与基础设施组件</span>
+            </div>
+            ${renderChips(c.components)}
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span>人机分工与责任边界</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.human)}</p></div>
+          </section>
+
+          <!-- FDE Actions & Reusable Methods -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+              <span>FDE 工程师具体做了什么</span>
+            </div>
+            ${renderCleanList(c.fde_actions)}
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>可迁移复用的落地方法论</span>
+            </div>
+            ${renderCleanList(c.reusable, true)}
+          </section>
+
+          <!-- Result & Value -->
+          <section class="bento-section result-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+              <span>业务成效与交付成果</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.result)}</p></div>
+          </section>
+
+          <!-- Evidence Boundaries -->
+          <section class="bento-section evidence-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <span>公开材料证据与真实性边界</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.evidence)}</p></div>
+          </section>
+        </div>
+
+        <div class="modal-footer">
+          <div class="modal-footer-left">
+            <button class="copy-btn" onclick="copyCaseSummary(${originalIdx})">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              <span>复制摘要</span>
+            </button>
+            <span class="modal-footer-note">公开权威资料溯源</span>
+          </div>
+          <a class="apple-primary-btn" href="${esc(c.url)}" target="_blank" rel="noopener">
+            <span>访问公开原始来源</span>
+            <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
+      `;
+
+      // Update Prev / Next Buttons state
+      q('mPrevBtn').disabled = filteredIdx <= 0;
+      q('mNextBtn').disabled = filteredIdx >= currentFilteredIndices.length - 1;
+
+      q('modal').classList.add('show');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      q('modal').classList.remove('show');
+      document.body.classList.remove('modal-open');
+    }
+
+    function modalPrev() {
+      if (currentModalFilteredIndex > 0) {
+        openModalByFilteredIndex(currentModalFilteredIndex - 1);
+      }
+    }
+
+    function modalNext() {
+      if (currentModalFilteredIndex < currentFilteredIndices.length - 1) {
+        openModalByFilteredIndex(currentModalFilteredIndex + 1);
+      }
+    }
+
+    // State management for current filters
+    let currentSource = '';
+    let currentIndustry = '';
+    let currentFde = '';
+
+    function render() {
+      const searchText = q('search').value.trim().toLowerCase();
+      const industryVal = q('industry').value;
+      const fdeVal = q('fde').value;
+
+      // Filter
+      currentFilteredIndices = [];
+      CASES.forEach((c, idx) => {
+        const fullContent = (
+          c.company + ' ' +
+          c.industry + ' ' +
+          c.scenario + ' ' +
+          c.problem + ' ' +
+          c.solution + ' ' +
+          (c.components || []).join(' ') + ' ' +
+          (c.architecture || []).join(' ') + ' ' +
+          (c.fde_actions || []).join(' ') + ' ' +
+          (c.reusable || []).join(' ') + ' ' +
+          (c.case_summary || '') + ' ' +
+          c.fde
+        ).toLowerCase();
+
+        const matchSearch = !searchText || fullContent.includes(searchText);
+        const matchSource = !currentSource || c.source === currentSource;
+        const matchIndustry = !industryVal || c.industry === industryVal;
+        const matchFde = !fdeVal || c.fde === fdeVal;
+
+        if (matchSearch && matchSource && matchIndustry && matchFde) {
+          currentFilteredIndices.push(idx);
+        }
+      });
+
+      // Update count text & reset button
+      const hasFilter = searchText || currentSource || industryVal || fdeVal;
+      q('count').textContent = `显示 ${currentFilteredIndices.length} / ${CASES.length} 个案例`;
+      q('resetFilterBtn').style.display = hasFilter ? 'inline-flex' : 'none';
+
+      // Clear search button visibility
+      q('searchClearBtn').style.display = searchText ? 'inline-flex' : 'none';
+
+      // Sync Segment Control state
+      document.querySelectorAll('#sourceSegment .segment-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-source') === currentSource);
+      });
+
+      // Sync Hero stat cards state
+      document.querySelectorAll('.stat-card').forEach(card => {
+        card.classList.toggle('active', card.getAttribute('data-source') === currentSource);
+      });
+
+      // Sync Quick tag pills
+      document.querySelectorAll('.quick-tag').forEach(tag => {
+        tag.classList.toggle('active', tag.getAttribute('data-industry') === industryVal);
+      });
+
+      // Render cards or empty state
+      if (currentFilteredIndices.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <div class="empty-title">未找到匹配的案例</div>
+            <p class="empty-desc">请尝试减少筛选条件、调整搜索关键词或点击下方按钮重置筛选。</p>
+            <button class="reset-btn" onclick="resetAllFilters()" style="padding: 6px 16px; font-size: 13px;">重置全部筛选</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = currentFilteredIndices.map((origIdx, filteredIdx) => {
+        const c = CASES[origIdx];
+        return `
+          <article class="card" tabindex="0" onclick="openModalByFilteredIndex(${filteredIdx})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModalByFilteredIndex(${filteredIdx})}">
+            <div class="card-top">
+              <div class="card-badges">
+                <span class="badge badge-source-${esc(c.source)}">${esc(c.source)}</span>
+                <span class="badge badge-industry">${esc(c.industry)}</span>
+                <span class="badge badge-fde">${esc(c.fde)}</span>
+              </div>
+            </div>
+            
+            <h2 class="company-title">${esc(c.company)}</h2>
+            <div class="scenario-text">${esc(c.scenario)}</div>
+
+            <div class="card-content-block">
+              <div class="card-row">
+                <div class="card-row-label">原始挑战</div>
+                <div class="card-row-val">${esc(c.problem)}</div>
+              </div>
+
+              <div class="card-row highlight">
+                <div class="card-row-label">核心成果 / 进展</div>
+                <div class="card-row-val">${esc(c.result)}</div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="card-maturity">${esc(c.maturity)}</span>
+              <span class="card-action-link">
+                <span>查看架构拆解</span>
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+              </span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function resetAllFilters() {
+      q('search').value = '';
+      currentSource = '';
+      q('industry').value = '';
+      q('fde').value = '';
+      render();
+    }
+
+    // Event Bindings
+    q('search').addEventListener('input', render);
+    q('searchClearBtn').addEventListener('click', () => {
+      q('search').value = '';
+      q('search').focus();
+      render();
+    });
+
+    q('industry').addEventListener('change', render);
+    q('fde').addEventListener('change', render);
+    q('resetFilterBtn').addEventListener('click', resetAllFilters);
+
+    // Segmented Source button click
+    document.querySelectorAll('#sourceSegment .segment-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSource = btn.getAttribute('data-source') || '';
+        render();
+      });
+    });
+
+    // Hero stat card click
+    document.querySelectorAll('.stat-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const target = card.getAttribute('data-source') || '';
+        currentSource = (currentSource === target && target !== '') ? '' : target;
+        render();
+      });
+    });
+
+    // Quick tag pills click
+    document.querySelectorAll('.quick-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        const ind = tag.getAttribute('data-industry') || '';
+        q('industry').value = ind;
+        render();
+      });
+    });
+
+    // Top Search Trigger
+    q('navSearchTrigger').addEventListener('click', () => {
+      q('search').focus();
+      q('filterPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Modal navigation
+    q('close').addEventListener('click', closeModal);
+    q('mPrevBtn').addEventListener('click', modalPrev);
+    q('mNextBtn').addEventListener('click', modalNext);
+    q('modal').addEventListener('click', e => {
+      if (e.target === q('modal')) closeModal();
+    });
+
+    // Global keyboard listener
+    document.addEventListener('keydown', e => {
+      // Escape
+      if (e.key === 'Escape') {
+        if (q('modal').classList.contains('show')) {
+          closeModal();
+        } else if (q('search') === document.activeElement && q('search').value) {
+          q('search').value = '';
+          render();
+        }
+      }
+      // Command/Ctrl + K or Slash to search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        q('search').focus();
+        q('search').select();
+      }
+      if (e.key === '/' && document.activeElement !== q('search') && !q('modal').classList.contains('show')) {
+        e.preventDefault();
+        q('search').focus();
+      }
+      // Arrow keys in modal
+      if (q('modal').classList.contains('show')) {
+        if (e.key === 'ArrowLeft' || e.key === 'p' || e.key === 'P') {
+          modalPrev();
+        } else if (e.key === 'ArrowRight' || e.key === 'n' || e.key === 'N') {
+          modalNext();
+        }
+      }
+    });
+
+    // Scroll to Top
+    const scrollTopBtn = q('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.style.display = 'flex';
+      } else {
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initialization
+    initTheme();
+    render();
+  </script>
+</body>
+</html>

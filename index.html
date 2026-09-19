@@ -1,0 +1,2460 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>企业 AI 落地案例库｜用 FDE 视角拆解</title>
+  <meta name="description" content="开放、可追溯的企业 AI 落地案例库。区分公开事实、来源方披露与 FDE 视角分析。">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <style>
+    /* ==========================================================================
+       Apple Design Tokens & CSS System Variables
+       ========================================================================== */
+    :root {
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Consolas, monospace;
+      
+      /* Light Theme (Apple Studio Off-white Canvas) */
+      --bg-page: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-secondary: #fbfbfd;
+      --bg-tertiary: #f2f2f7;
+      --bg-subtle: rgba(0, 0, 0, 0.035);
+      --bg-frosted: rgba(245, 245, 247, 0.82);
+      --bg-frosted-modal: rgba(255, 255, 255, 0.94);
+      --overlay-backdrop: rgba(0, 0, 0, 0.36);
+
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --text-quaternary: #aeaeb2;
+
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-subtle: rgba(0, 0, 0, 0.04);
+      --border-strong: rgba(0, 0, 0, 0.16);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(0, 0, 0, 0.03);
+      --shadow-card-hover: 0 8px 26px rgba(0, 0, 0, 0.07), 0 18px 46px rgba(0, 0, 0, 0.05);
+      --shadow-modal: 0 28px 80px rgba(0, 0, 0, 0.22), 0 6px 20px rgba(0, 0, 0, 0.08);
+      --shadow-float: 0 4px 18px rgba(0, 0, 0, 0.1);
+
+      /* Apple System Accents */
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-blue-subtle: rgba(0, 113, 227, 0.08);
+      --apple-blue-border: rgba(0, 113, 227, 0.22);
+      --apple-blue-text: #0066cc;
+
+      --palantir-purple: #af52de;
+      --palantir-purple-subtle: rgba(175, 82, 222, 0.08);
+      --palantir-purple-border: rgba(175, 82, 222, 0.24);
+      --palantir-purple-text: #8e38b7;
+
+      --openai-green: #34c759;
+      --openai-green-subtle: rgba(52, 199, 89, 0.09);
+      --openai-green-border: rgba(52, 199, 89, 0.25);
+      --openai-green-text: #248a3d;
+
+      --apple-amber: #ff9500;
+      --apple-amber-subtle: rgba(255, 149, 0, 0.09);
+      --apple-amber-border: rgba(255, 149, 0, 0.28);
+      --apple-amber-text: #b25900;
+
+      --segment-bg: rgba(0, 0, 0, 0.055);
+      --segment-active-bg: #ffffff;
+      --segment-active-text: #1d1d1f;
+      --segment-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 9999px;
+
+      --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Theme (Apple Space Black & Pro Dark) */
+      --bg-page: #000000;
+      --bg-elevated: #1c1c1e;
+      --bg-secondary: #161618;
+      --bg-tertiary: #2c2c2e;
+      --bg-subtle: rgba(255, 255, 255, 0.05);
+      --bg-frosted: rgba(20, 20, 22, 0.85);
+      --bg-frosted-modal: rgba(28, 28, 30, 0.94);
+      --overlay-backdrop: rgba(0, 0, 0, 0.78);
+
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-tertiary: #86868b;
+      --text-quaternary: #636366;
+
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-strong: rgba(255, 255, 255, 0.22);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.45);
+      --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.16);
+      --shadow-modal: 0 28px 80px rgba(0, 0, 0, 0.88);
+      --shadow-float: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+      --apple-blue: #2997ff;
+      --apple-blue-hover: #40a9ff;
+      --apple-blue-subtle: rgba(41, 151, 255, 0.16);
+      --apple-blue-border: rgba(41, 151, 255, 0.32);
+      --apple-blue-text: #6cb5ff;
+
+      --palantir-purple: #bf5af2;
+      --palantir-purple-subtle: rgba(191, 90, 242, 0.16);
+      --palantir-purple-border: rgba(191, 90, 242, 0.35);
+      --palantir-purple-text: #d889ff;
+
+      --openai-green: #30d158;
+      --openai-green-subtle: rgba(48, 209, 88, 0.16);
+      --openai-green-border: rgba(48, 209, 88, 0.35);
+      --openai-green-text: #6ce086;
+
+      --apple-amber: #ff9f0a;
+      --apple-amber-subtle: rgba(255, 159, 10, 0.16);
+      --apple-amber-border: rgba(255, 159, 10, 0.35);
+      --apple-amber-text: #ffb84d;
+
+      --segment-bg: rgba(255, 255, 255, 0.08);
+      --segment-active-bg: #2c2c2e;
+      --segment-active-text: #f5f5f7;
+      --segment-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 15px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.3s var(--ease-apple), color 0.3s var(--ease-apple);
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* ==========================================================================
+       Sticky Frosted Top Navigation
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      height: 52px;
+      background: var(--bg-frosted);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      transition: border-color 0.3s var(--ease-apple), background-color 0.3s var(--ease-apple);
+    }
+
+    .nav-content {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .nav-apple-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .theme-toggle-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .nav-search-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-tertiary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .nav-search-trigger:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .kbd-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 1px 5px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ==========================================================================
+       Layout Wrap
+       ========================================================================== */
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ==========================================================================
+       Apple Bento Hero Section
+       ========================================================================== */
+    .hero {
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--apple-blue-text);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 4.2vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero-lead {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 980px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* Metric Bento Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s var(--ease-apple), box-shadow 0.22s var(--ease-apple), border-color 0.22s var(--ease-apple);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--border-strong);
+    }
+
+    .stat-card.active {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 1px var(--apple-blue), var(--shadow-card);
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text-primary);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .stat-label {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+    }
+
+    .stat-card[data-detail="deep"] .stat-indicator { background: var(--openai-green); }
+    .stat-card[data-detail="standard"] .stat-indicator { background: var(--apple-blue); }
+    .stat-card[data-detail="overview"] .stat-indicator { background: var(--apple-amber); }
+    .stat-card[data-detail=""] .stat-indicator { background: var(--text-primary); }
+
+    /* Apple Callout Note */
+    .apple-callout {
+      margin-top: 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .apple-callout-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--apple-amber);
+      margin-top: 2px;
+    }
+
+    .apple-callout-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .apple-callout-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       Sticky Search & Filter Control Panel
+       ========================================================================== */
+    .filter-panel {
+      position: sticky;
+      top: 52px;
+      z-index: 80;
+      margin: 24px 0 16px;
+      padding: 14px 18px;
+      background: var(--bg-frosted);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s var(--ease-apple);
+    }
+
+    .filter-row-primary {
+      display: grid;
+      grid-template-columns: 1.5fr 1.2fr 0.85fr 0.85fr 0.85fr 0.75fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Spotlight Search Box */
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      width: 16px;
+      height: 16px;
+      fill: var(--text-tertiary);
+      pointer-events: none;
+      transition: fill 0.2s var(--ease-apple);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 0 42px 0 38px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .search-input:focus {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      transition: all 0.15s;
+    }
+
+    .search-clear-btn:hover {
+      background: var(--text-tertiary);
+      color: var(--bg-elevated);
+    }
+
+    /* Apple Segmented Control for Source */
+    .segmented-control {
+      display: flex;
+      background: var(--segment-bg);
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      height: 42px;
+      gap: 2px;
+      position: relative;
+    }
+
+    .segment-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      white-space: nowrap;
+      padding: 0 10px;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .segment-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .segment-btn.active {
+      background: var(--segment-active-bg);
+      color: var(--segment-active-text);
+      font-weight: 600;
+      box-shadow: var(--segment-active-shadow);
+    }
+
+    .segment-count {
+      font-size: 11px;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    /* Native-styled Select Dropdowns */
+    .select-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .apple-select {
+      width: 100%;
+      height: 42px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0 32px 0 14px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .apple-select:focus {
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      fill: var(--text-tertiary);
+      pointer-events: none;
+    }
+
+    /* Quick Industry Filter Row */
+    .filter-quick-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .filter-quick-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-tag-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      margin-right: 2px;
+    }
+
+    .quick-tag {
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s var(--ease-apple);
+    }
+
+    .quick-tag:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      background: var(--bg-tertiary);
+    }
+
+    .quick-tag.active {
+      background: var(--apple-blue);
+      color: #ffffff;
+      border-color: var(--apple-blue);
+    }
+
+    /* Toolbar / Results status */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 4px 14px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .result-count-badge {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .reset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--apple-blue);
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .reset-btn:hover {
+      background: var(--apple-blue);
+      color: #ffffff;
+    }
+
+    .toolbar-hint {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       Cards Grid (Apple Minimalist Bento Grid)
+       ========================================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s var(--ease-apple), box-shadow 0.22s var(--ease-apple), border-color 0.22s var(--ease-apple);
+      outline: none;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--border-strong);
+    }
+
+    .card:focus-visible {
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle), var(--shadow-card-hover);
+      border-color: var(--apple-blue);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1.4;
+      border: 1px solid transparent;
+    }
+
+    .badge-source-Palantir {
+      color: var(--palantir-purple-text);
+      background: var(--palantir-purple-subtle);
+      border-color: var(--palantir-purple-border);
+    }
+
+    .badge-source-OpenAI {
+      color: var(--openai-green-text);
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .badge-source-Datawhale {
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border-color: var(--apple-blue-border);
+    }
+
+    .badge-industry {
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border-color: var(--border-color);
+    }
+
+    .badge-fde {
+      color: var(--text-tertiary);
+      background: var(--bg-subtle);
+      border-color: var(--border-subtle);
+      font-size: 10.5px;
+    }
+
+    .badge-technical {
+      color: var(--palantir-purple-text);
+      background: var(--palantir-purple-subtle);
+      border-color: var(--palantir-purple-border);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-evidence {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .evidence-A {
+      color: var(--openai-green-text);
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .evidence-B {
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border-color: var(--apple-blue-border);
+    }
+
+    .evidence-C, .evidence-D {
+      color: var(--apple-amber-text);
+      background: var(--apple-amber-subtle);
+      border-color: var(--apple-amber-border);
+    }
+
+    .badge-detail {
+      font-weight: 700;
+    }
+
+    .detail-deep {
+      color: var(--openai-green-text);
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .detail-standard {
+      color: var(--apple-blue-text);
+      background: var(--apple-blue-subtle);
+      border-color: var(--apple-blue-border);
+    }
+
+    .detail-overview {
+      color: var(--apple-amber-text);
+      background: var(--apple-amber-subtle);
+      border-color: var(--apple-amber-border);
+    }
+
+    .detail-profile {
+      margin-bottom: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--bg-subtle);
+    }
+
+    .detail-profile-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .detail-profile-score { color: var(--text-secondary); font-weight: 600; }
+
+    .detail-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .detail-dimension {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .detail-dimension strong { color: var(--text-primary); }
+
+    .detail-missing {
+      margin-top: 10px;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .company-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .scenario-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .card-content-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .card-row {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .card-row-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .card-row-val {
+      color: var(--text-secondary);
+    }
+
+    .card-row.highlight {
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .card-row.highlight .card-row-label {
+      color: var(--openai-green-text);
+    }
+
+    .card-row.highlight .card-row-val {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .card-maturity {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .card-maturity::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--openai-green);
+    }
+
+    .card-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      color: var(--apple-blue);
+      transition: transform 0.2s var(--ease-apple);
+    }
+
+    .card:hover .card-action-link svg {
+      transform: translateX(3px);
+    }
+
+    .card-action-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      transition: transform 0.2s var(--ease-apple);
+    }
+
+    /* ==========================================================================
+       Empty State
+       ========================================================================== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .empty-icon {
+      width: 48px;
+      height: 48px;
+      fill: var(--text-tertiary);
+      margin-bottom: 14px;
+      opacity: 0.7;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .empty-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto 18px;
+    }
+
+    /* ==========================================================================
+       Apple Sheet Modal (Detail View)
+       ========================================================================== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--overlay-backdrop);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      opacity: 0;
+      transition: opacity 0.25s var(--ease-apple);
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-box {
+      width: min(1080px, 96vw);
+      max-height: 90vh;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-modal);
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.96) translateY(12px);
+      transition: transform 0.25s var(--ease-apple);
+    }
+
+    .modal.show .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg-frosted-modal);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .modal-title-wrap {
+      flex: 1;
+    }
+
+    .modal-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .modal-scenario {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 6px 0 10px;
+    }
+
+    .modal-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .modal-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .modal-counter {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-right: 4px;
+    }
+
+    .modal-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.15s;
+    }
+
+    .modal-nav-btn:hover:not(:disabled) {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .modal-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .modal-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .modal-body {
+      padding: 24px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Bento Key Summary Banner */
+    .bento-summary-banner {
+      background: var(--apple-blue-subtle);
+      border: 1px solid var(--apple-blue-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .bento-summary-banner svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--apple-blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .bento-summary-text {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Bento grid inside modal */
+    .bento-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .bento-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    .bento-section.full {
+      grid-column: 1 / -1;
+    }
+
+    .bento-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .bento-heading svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .bento-content {
+      color: var(--text-primary);
+    }
+
+    .bento-content p {
+      margin-bottom: 8px;
+    }
+
+    .bento-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Architecture Step Flow */
+    .arch-flow {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+      scrollbar-width: thin;
+    }
+
+    .arch-step {
+      min-width: 170px;
+      max-width: 220px;
+      flex-shrink: 0;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-primary);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .arch-step-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--apple-blue);
+      background: var(--apple-blue-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .arch-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--text-tertiary);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Technology Chips */
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 5px 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Action & Reusable Lists */
+    .clean-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clean-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .clean-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--apple-blue);
+    }
+
+    .clean-list.reusable-list li::before {
+      background: var(--palantir-purple);
+    }
+
+    /* Result Callout */
+    .bento-section.result-section {
+      background: var(--openai-green-subtle);
+      border-color: var(--openai-green-border);
+    }
+
+    .bento-section.result-section .bento-heading {
+      color: var(--openai-green-text);
+    }
+
+    .bento-section.result-section .bento-content {
+      color: var(--text-primary);
+      font-size: 14.5px;
+      font-weight: 500;
+    }
+
+    /* Evidence callout */
+    .bento-section.evidence-section {
+      background: var(--apple-amber-subtle);
+      border-color: var(--apple-amber-border);
+    }
+
+    .bento-section.evidence-section .bento-heading {
+      color: var(--apple-amber-text);
+    }
+
+    .source-ledger {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px 18px;
+      margin-bottom: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+    }
+
+    .source-ledger-level {
+      grid-row: 1 / span 3;
+      align-self: start;
+      min-width: 72px;
+      padding: 12px 10px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      font-size: 22px;
+      font-weight: 750;
+      line-height: 1;
+    }
+
+    .source-ledger-level small {
+      display: block;
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .source-ledger-title {
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--text-primary);
+    }
+
+    .source-ledger-meta,
+    .field-origin,
+    .source-disclaimer {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: var(--text-tertiary);
+    }
+
+    .field-origin {
+      display: inline-flex;
+      margin-left: auto;
+      padding: 2px 7px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      background: var(--bg-subtle);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .source-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .source-links a {
+      color: var(--apple-blue-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+      margin-top: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-footer-note {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .copy-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .apple-primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--apple-blue);
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--apple-blue-subtle);
+      transition: all 0.18s var(--ease-apple);
+    }
+
+    .apple-primary-btn:hover {
+      background: var(--apple-blue-hover);
+      box-shadow: 0 4px 14px var(--apple-blue-subtle);
+      transform: translateY(-1px);
+    }
+
+    .apple-primary-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Toast Notification */
+    .apple-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--text-primary);
+      color: var(--bg-elevated);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-float);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2000;
+      transition: transform 0.25s var(--ease-apple), opacity 0.25s var(--ease-apple);
+    }
+
+    .apple-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       Scroll to Top Button
+       ========================================================================== */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 70;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-float);
+      cursor: pointer;
+      transition: all 0.2s var(--ease-apple);
+    }
+
+    .scroll-top-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .scroll-top-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+    @media (max-width: 1040px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .filter-row-primary {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding: 24px 16px 60px;
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .filter-panel {
+        top: 52px;
+        padding: 12px;
+      }
+      .filter-row-primary {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .bento-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .source-ledger {
+        grid-template-columns: 1fr;
+      }
+      .source-ledger-level {
+        grid-row: auto;
+        width: 84px;
+      }
+      .detail-dimensions {
+        grid-template-columns: 1fr 1fr;
+      }
+      .modal {
+        padding: 10px;
+      }
+      .modal-box {
+        max-height: 94vh;
+        border-radius: var(--radius-lg);
+      }
+      .modal-header {
+        padding: 16px 20px 14px;
+      }
+      .modal-body {
+        padding: 18px 20px 24px;
+      }
+      .modal-title {
+        font-size: 21px;
+      }
+      .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .apple-primary-btn {
+        justify-content: center;
+      }
+      .modal-footer-left {
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Frosted Top Navigation -->
+  <header class="top-nav">
+    <div class="nav-content">
+      <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg class="nav-apple-icon" viewBox="0 0 170 170">
+          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.67-7.81-11.96-14.34-6.3-9.59-11.1-20.73-14.4-33.43-3.3-12.7-4.96-24.16-4.96-34.39 0-14.37 3.63-26.24 10.89-35.61 7.26-9.37 16.32-14.16 27.18-14.37 4.96 0 10.36 1.34 16.19 4.02 5.84 2.68 9.53 4.08 11.08 4.2 1.94-.32 5.92-1.84 11.96-4.55 6.03-2.71 11.39-3.96 16.08-3.76 12.39.63 22.38 5.43 29.96 14.4-10.84 6.56-16.15 15.65-15.93 27.27.22 9.25 3.82 17.06 10.8 23.44 3.73 3.48 8.08 6.08 13.06 7.8-2.61 7.69-5.74 15.42-9.39 23.19zM119.22 32.64c0-7.23 2.65-13.97 7.96-20.21 5.3-6.24 11.77-10.38 19.41-12.43.11 1.06.16 2.01.16 2.86 0 7.13-2.73 13.96-8.2 20.48-5.46 6.53-12.08 10.49-19.85 11.89-.11-.85-.16-1.7-.16-2.59z"/>
+        </svg>
+        <span>企业 AI 案例库</span>
+        <span class="nav-badge" id="navCaseCount">开放数据</span>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-search-trigger" id="navSearchTrigger" title="快捷搜索 (⌘K / /)">
+          <svg style="width:13px;height:13px;fill:currentColor;" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <span>搜索</span>
+          <span class="kbd-pill">⌘K</span>
+        </button>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="切换显示外观 (跟随系统 / 亮色 / 暗色)">
+          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+          <span id="themeLabel">外观</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span>Enterprise AI / Forward Deployed Engineering</span>
+      </div>
+      <h1>企业 AI 落地案例库</h1>
+      <p class="hero-lead">
+        汇集企业年报、投资者材料与多家技术厂商的企业 AI 改造实践，用 FDE 视角拆解业务问题、技术工作流、人机边界与落地方法。案例首先按<strong>详细程度</strong>分层，同时明确区分公开事实、来源方披露和编辑分析。
+      </p>
+
+      <!-- Bento Metric Cards (Clickable Filter) -->
+      <div class="stats-grid">
+        <div class="stat-card active" data-detail="" title="查看全部案例" role="button" tabindex="0">
+          <div class="stat-num" data-stat-count="all">—</div>
+          <div class="stat-label">
+            <span>全部案例</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-detail="deep" title="筛选深度案例" role="button" tabindex="0">
+          <div class="stat-num" data-stat-count="deep">—</div>
+          <div class="stat-label">
+            <span>深度案例</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-detail="standard" title="筛选标准案例" role="button" tabindex="0">
+          <div class="stat-num" data-stat-count="standard">—</div>
+          <div class="stat-label">
+            <span>标准案例</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+        <div class="stat-card" data-detail="overview" title="筛选概览案例" role="button" tabindex="0">
+          <div class="stat-num" data-stat-count="overview">—</div>
+          <div class="stat-label">
+            <span>概览案例</span>
+            <span class="stat-indicator"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Callout Note -->
+      <div class="apple-callout">
+        <svg class="apple-callout-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <div class="apple-callout-text">
+          <strong>两套维度：</strong>深度/标准/概览按业务背景、改造流程、技术工作流、人机治理、量化结果和来源定位六项评分；A/B/C/D只表示证据可追溯程度。详细度高不等于经过独立审计。
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Filter Panel -->
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-row-primary">
+        <!-- Spotlight Search Input -->
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="search" class="search-input" placeholder="搜索公司、行业、场景、架构或技术组件... (快捷键 ⌘K)" autocomplete="off">
+          <button class="search-clear-btn" id="searchClearBtn" title="清空搜索">✕</button>
+        </div>
+
+        <!-- Apple Segmented Control for Detail Level -->
+        <div class="segmented-control" id="detailSegment">
+          <button class="segment-btn active" data-detail="">全部 <span class="segment-count" data-segment-count="all">—</span></button>
+          <button class="segment-btn" data-detail="deep">深度 <span class="segment-count" data-segment-count="deep">—</span></button>
+          <button class="segment-btn" data-detail="standard">标准 <span class="segment-count" data-segment-count="standard">—</span></button>
+          <button class="segment-btn" data-detail="overview">概览 <span class="segment-count" data-segment-count="overview">—</span></button>
+        </div>
+
+        <div class="select-wrap">
+          <select id="source" class="apple-select" aria-label="按来源筛选">
+            <option value="">全部来源</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+
+        <!-- Select: Industry -->
+        <div class="select-wrap">
+          <select id="industry" class="apple-select" aria-label="按一级行业筛选">
+            <option value="">全部一级行业</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+
+        <!-- Select: Deployment Type -->
+        <div class="select-wrap">
+          <select id="fde" class="apple-select">
+            <option value="">全部部署形态</option>
+            <option>企业部署案例</option><option>伴随式部署</option><option>典型Forward Deployed</option><option>明确FDE</option><option>明确FDE/伴随式部署</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+
+        <div class="select-wrap">
+          <select id="evidence" class="apple-select" aria-label="按证据等级筛选">
+            <option value="">全部证据等级</option>
+            <option value="A">A级｜案例级直接来源</option>
+            <option value="B">B级｜官方汇总来源</option>
+            <option value="C">C级｜可信二次材料</option>
+            <option value="D">D级｜线索待核验</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="filter-quick-row">
+        <span class="quick-tag-label">一级行业：</span>
+        <button class="quick-tag active" data-industry="">全部</button>
+        <button class="quick-tag" data-industry="制造与工业">制造与工业</button><button class="quick-tag" data-industry="金融与保险">金融与保险</button><button class="quick-tag" data-industry="政务与公共服务">政务与公共服务</button><button class="quick-tag" data-industry="零售与消费">零售与消费</button><button class="quick-tag" data-industry="交通、旅行与物流">交通与物流</button><button class="quick-tag" data-industry="医疗与生命科学">医疗与生命科学</button><button class="quick-tag" data-industry="科技与软件">科技与软件</button><button class="quick-tag" data-industry="专业服务">专业服务</button>
+      </div>
+    </div>
+
+    <!-- Toolbar / Status bar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <span id="count" class="result-count-badge">正在加载案例...</span>
+        <button id="resetFilterBtn" class="reset-btn" style="display: none;">
+          <svg style="width:12px;height:12px;fill:currentColor;" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          重置筛选
+        </button>
+      </div>
+      <div class="toolbar-hint">
+        <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span>默认按详细度从高到低排序；详细度与证据等级是两套独立指标</span>
+      </div>
+    </div>
+
+    <!-- Cards Bento Grid -->
+    <main id="grid" class="cards-grid"></main>
+  </div>
+
+  <!-- Detail Sheet Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-box">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title" id="mTitle"></div>
+          <div class="modal-scenario" id="mScenario"></div>
+          <div class="modal-badges" id="mBadges"></div>
+        </div>
+
+        <div class="modal-nav-actions">
+          <span class="modal-counter" id="mCounter"></span>
+          <button class="modal-nav-btn" id="mPrevBtn" title="上一个案例 (快捷键 ←)" aria-label="上一个案例">‹</button>
+          <button class="modal-nav-btn" id="mNextBtn" title="下一个案例 (快捷键 →)" aria-label="下一个案例">›</button>
+          <button class="modal-close-btn" id="close" title="关闭 (Esc)" aria-label="关闭">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Bento Layout) -->
+      <div class="modal-body" id="mBody"></div>
+    </div>
+  </div>
+
+  <!-- Floating Toast -->
+  <div class="apple-toast" id="toast">已复制内容到剪贴板</div>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top-btn" id="scrollTopBtn" title="返回顶部" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- Data and Client Logic -->
+  <script src="data/cases.js"></script>
+  <script>
+    const CASES = window.FDE_CASES || [];
+
+    // Global utility & element references
+    const esc = s => String(s || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+    const q = id => document.getElementById(id);
+    const grid = q('grid');
+
+    let currentFilteredIndices = [];
+    let currentModalFilteredIndex = -1;
+    let lastFocusedElement = null;
+
+    // Toast notification
+    let toastTimer = null;
+    function showToast(msg = '已复制内容到剪贴板') {
+      const t = q('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        t.classList.remove('show');
+      }, 2200);
+    }
+
+    // Theme Management
+    function initTheme() {
+      const stored = localStorage.getItem('fde_apple_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (prefersDark ? 'dark' : 'light');
+      setTheme(theme, false);
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('fde_apple_theme')) {
+          setTheme(e.matches ? 'dark' : 'light', false);
+        }
+      });
+    }
+
+    function setTheme(theme, save = true) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (save) localStorage.setItem('fde_apple_theme', theme);
+      
+      const themeIcon = q('themeIcon');
+      const themeLabel = q('themeLabel');
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
+        themeLabel.textContent = '暗色';
+      } else {
+        themeIcon.innerHTML = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>';
+        themeLabel.textContent = '亮色';
+      }
+    }
+
+    q('themeToggleBtn').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark', true);
+    });
+
+    // Helper functions for modal render
+    function renderStepFlow(steps) {
+      if (!steps || !steps.length) return '';
+      return '<div class="arch-flow">' + steps.map((st, i) => `
+        <div class="arch-step">
+          <span class="arch-step-num">Step 0${i + 1}</span>
+          <div>${esc(st)}</div>
+        </div>
+        ${i < steps.length - 1 ? '<div class="arch-arrow">→</div>' : ''}
+      `).join('') + '</div>';
+    }
+
+    function renderCleanList(items, isReusable = false) {
+      if (!items || !items.length) return '<p style="color:var(--text-tertiary)">未披露</p>';
+      return `<ul class="clean-list ${isReusable ? 'reusable-list' : ''}">` +
+        items.map(x => `<li>${esc(x)}</li>`).join('') +
+        '</ul>';
+    }
+
+    function renderChips(chips) {
+      if (!chips || !chips.length) return '<p style="color:var(--text-tertiary)">未披露</p>';
+      return '<div class="chips-wrap">' +
+        chips.map(c => `<span class="tech-chip">${esc(c)}</span>`).join('') +
+        '</div>';
+    }
+
+    function renderSourceLedger(c) {
+      const source = c.source_record || {};
+      const independent = source.independently_verified ? '是' : '否';
+      return `
+        <section class="source-ledger" aria-label="来源与证据账本">
+          <div class="source-ledger-level evidence-${esc(c.evidence_level)}">
+            ${esc(c.evidence_level)}
+            <small>证据等级</small>
+          </div>
+          <div class="source-ledger-title">${esc(source.title || `${c.company}：${c.scenario}`)}</div>
+          <div class="source-ledger-meta">
+            发布方：${esc(source.publisher || c.source)} · ${esc(source.source_type || '公开材料')} · ${esc(source.directness || '待核验')}
+          </div>
+          <div class="source-ledger-meta">
+            指标口径：${esc(source.claim_origin || '未注明')} · 独立核验：${independent} · 查阅日期：${esc(source.accessed_at || '未记录')}
+          </div>
+          <div class="source-disclaimer">证据等级衡量“能否定位和复核来源”，不评价厂商披露是否经过第三方审计。</div>
+        </section>`;
+    }
+
+    function renderDetailProfile(c) {
+      const labels = {
+        business_context: '业务背景', solution_workflow: '改造流程',
+        technical_workflow: '技术工作流', human_governance: '人机与治理',
+        measured_outcome: '量化结果', source_traceability: '来源定位',
+      };
+      const dimensions = c.detail_dimensions || {};
+      return `
+        <section class="detail-profile" aria-label="案例详细度评分">
+          <div class="detail-profile-head">
+            <span>${esc(c.detail_label || '详细度待评估')}</span>
+            <span class="detail-profile-score">${esc(c.detail_score ?? '—')} / 12</span>
+          </div>
+          <div class="detail-dimensions">
+            ${Object.entries(labels).map(([key, label]) => `
+              <div class="detail-dimension"><span>${label}</span><strong>${esc(dimensions[key] ?? 0)} / 2</strong></div>
+            `).join('')}
+          </div>
+          <div class="detail-missing">${c.missing_details?.length ? `仍可补强：${esc(c.missing_details.join('、'))}` : '六个维度均达到当前完整度标准。'}</div>
+        </section>`;
+    }
+
+    function renderSourceLinks(c) {
+      const links = [
+        { title: c.source_record?.title || '主要公开来源', url: c.url },
+        ...(c.additional_sources || []),
+      ];
+      return '<div class="source-links">' + links.map((link, index) => `
+        <a href="${esc(link.url)}" target="_blank" rel="noopener">
+          ${index === 0 ? '主要来源' : '补充来源'}：${esc(link.title)} ↗
+        </a>`).join('') + '</div>';
+    }
+
+    function initDataControls() {
+      if (!CASES.length) {
+        q('count').textContent = '数据加载失败，请确认 data/cases.js 可访问';
+        return;
+      }
+      const counts = { all: CASES.length, deep: 0, standard: 0, overview: 0 };
+      for (const c of CASES) counts[c.detail_level] = (counts[c.detail_level] || 0) + 1;
+      for (const [key, value] of Object.entries(counts)) {
+        document.querySelectorAll(`[data-stat-count="${key}"], [data-segment-count="${key}"]`)
+          .forEach((el) => { el.textContent = value; });
+      }
+      q('navCaseCount').textContent = `${CASES.length} 个开放案例`;
+      const sources = [...new Set(CASES.map((c) => c.source).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+      q('source').innerHTML = '<option value="">全部来源</option>' +
+        sources.map((source) => `<option value="${esc(source)}">${esc(source)}</option>`).join('');
+      const industries = [...new Set(CASES.map((c) => c.industry_group).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+      q('industry').innerHTML = '<option value="">全部一级行业</option>' +
+        industries.map((industry) => `<option value="${esc(industry)}">${esc(industry)}</option>`).join('');
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      const copied = document.execCommand('copy');
+      area.remove();
+      return copied ? Promise.resolve() : Promise.reject(new Error('copy failed'));
+    }
+
+    // Copy case content to clipboard
+    window.copyCaseSummary = function(origIdx) {
+      const c = CASES[origIdx];
+      const summary = `【${c.company} - ${c.scenario}】
+案例ID：${c.id}
+来源：${c.source} | 行业：${c.industry} | 部署：${c.fde}
+详细度：${c.detail_label}（${c.detail_score}/12）
+证据：${c.evidence_label} | 指标口径：${c.source_record?.claim_origin || '未注明'}
+核心问题：${c.problem}
+破局方案：${c.solution}
+成效价值：${c.result}
+公开来源：${c.url}`;
+      copyText(summary).then(() => {
+        showToast('已复制案例拆解摘要');
+      }).catch(() => {
+        showToast('复制失败，请手动选择');
+      });
+    };
+
+    // Open Modal
+    function openModalByFilteredIndex(filteredIdx) {
+      if (filteredIdx < 0 || filteredIdx >= currentFilteredIndices.length) return;
+      currentModalFilteredIndex = filteredIdx;
+      const originalIdx = currentFilteredIndices[filteredIdx];
+      const c = CASES[originalIdx];
+
+      q('mTitle').textContent = c.company;
+      q('mScenario').textContent = c.scenario;
+      q('mCounter').textContent = `${filteredIdx + 1} / ${currentFilteredIndices.length}`;
+      q('mBadges').innerHTML = `
+        <span class="badge badge-source-${esc(c.source)}">${esc(c.source)}</span>
+        <span class="badge badge-industry">${esc(c.industry)}</span>
+        <span class="badge badge-fde">${esc(c.fde)}</span>
+        ${c.technical_reference ? '<span class="badge badge-technical" title="包含来源支持的具体技术组件与实施流程">⚙ 技术方案</span>' : ''}
+        <span class="badge badge-detail detail-${esc(c.detail_level)}">${esc(c.detail_label)}</span>
+        <span class="badge badge-evidence evidence-${esc(c.evidence_level)}">${esc(c.evidence_level)}级证据</span>
+        <span class="badge" style="background:var(--bg-subtle);border-color:var(--border-color);color:var(--text-secondary);">${esc(c.maturity)}</span>
+      `;
+
+      q('mBody').innerHTML = `
+        ${renderSourceLedger(c)}
+        ${renderDetailProfile(c)}
+        <!-- Case Summary Top Callout -->
+        ${c.case_summary ? `
+          <div class="bento-summary-banner">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div class="bento-summary-text">${esc(c.case_summary)}</div>
+          </div>
+        ` : ''}
+
+        <div class="bento-grid-2">
+          <!-- Problem & Solution -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span>业务问题</span>
+              <span class="field-origin">${esc(c.analysis_boundary?.business_problem || '来源未标注')}</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.problem)}</p></div>
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span>解决方案</span>
+              <span class="field-origin">${esc(c.analysis_boundary?.solution || '来源未标注')}</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.solution)}</p></div>
+          </section>
+
+          <!-- Technical Architecture / Step Flow -->
+          <section class="bento-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+              <span>技术架构与生产工作流</span>
+              <span class="field-origin">${esc(c.analysis_boundary?.architecture || '来源未标注')}</span>
+            </div>
+            ${renderStepFlow(c.architecture)}
+          </section>
+
+          <!-- Components & Human In the Loop -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              <span>关键技术与基础设施组件</span>
+            </div>
+            ${renderChips(c.components)}
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span>人机分工与责任边界</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.human)}</p></div>
+          </section>
+
+          <!-- FDE Actions & Reusable Methods -->
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+              <span>FDE 动作拆解</span>
+              <span class="field-origin">${esc(c.analysis_boundary?.fde_actions || '来源未标注')}</span>
+            </div>
+            ${renderCleanList(c.fde_actions)}
+          </section>
+
+          <section class="bento-section">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>可迁移复用的落地方法论</span>
+            </div>
+            ${renderCleanList(c.reusable, true)}
+          </section>
+
+          <!-- Result & Value -->
+          <section class="bento-section result-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+              <span>业务成效与交付成果</span>
+              <span class="field-origin">${esc(c.analysis_boundary?.result || '来源未标注')}</span>
+            </div>
+            <div class="bento-content"><p>${esc(c.result)}</p></div>
+          </section>
+
+          <!-- Evidence Boundaries -->
+          <section class="bento-section evidence-section full">
+            <div class="bento-heading">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <span>证据边界与核验记录</span>
+            </div>
+            <div class="bento-content">
+              ${renderCleanList(c.verification_notes || [c.evidence])}
+              ${renderSourceLinks(c)}
+            </div>
+          </section>
+        </div>
+
+        <div class="modal-footer">
+          <div class="modal-footer-left">
+            <button class="copy-btn" onclick="copyCaseSummary(${originalIdx})">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              <span>复制摘要</span>
+            </button>
+            <span class="modal-footer-note">可追溯不等于独立审计</span>
+          </div>
+          <a class="apple-primary-btn" href="${esc(c.url)}" target="_blank" rel="noopener">
+            <span>访问主要公开来源</span>
+            <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
+      `;
+
+      // Update Prev / Next Buttons state
+      q('mPrevBtn').disabled = filteredIdx <= 0;
+      q('mNextBtn').disabled = filteredIdx >= currentFilteredIndices.length - 1;
+
+      lastFocusedElement = document.activeElement;
+      q('modal').classList.add('show');
+      document.body.classList.add('modal-open');
+      q('close').focus();
+    }
+
+    function closeModal() {
+      q('modal').classList.remove('show');
+      document.body.classList.remove('modal-open');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+    }
+
+    function modalPrev() {
+      if (currentModalFilteredIndex > 0) {
+        openModalByFilteredIndex(currentModalFilteredIndex - 1);
+      }
+    }
+
+    function modalNext() {
+      if (currentModalFilteredIndex < currentFilteredIndices.length - 1) {
+        openModalByFilteredIndex(currentModalFilteredIndex + 1);
+      }
+    }
+
+    // State management for current filters
+    let currentDetail = '';
+    function render() {
+      const searchText = q('search').value.trim().toLowerCase();
+      const sourceVal = q('source').value;
+      const industryVal = q('industry').value;
+      const fdeVal = q('fde').value;
+      const evidenceVal = q('evidence').value;
+
+      // Filter
+      currentFilteredIndices = [];
+      CASES.forEach((c, idx) => {
+        const fullContent = (
+          c.company + ' ' +
+          c.source + ' ' +
+          (c.detail_label || '') + ' ' +
+          c.industry + ' ' +
+          (c.industry_group || '') + ' ' +
+          c.scenario + ' ' +
+          c.problem + ' ' +
+          c.solution + ' ' +
+          (c.components || []).join(' ') + ' ' +
+          (c.architecture || []).join(' ') + ' ' +
+          (c.fde_actions || []).join(' ') + ' ' +
+          (c.reusable || []).join(' ') + ' ' +
+          (c.case_summary || '') + ' ' +
+          (c.source_record?.title || '') + ' ' +
+          c.fde
+        ).toLowerCase();
+
+        const matchSearch = !searchText || fullContent.includes(searchText);
+        const matchDetail = !currentDetail || c.detail_level === currentDetail;
+        const matchSource = !sourceVal || c.source === sourceVal;
+        const matchIndustry = !industryVal || c.industry_group === industryVal;
+        const matchFde = !fdeVal || c.fde === fdeVal;
+        const matchEvidence = !evidenceVal || c.evidence_level === evidenceVal;
+
+        if (matchSearch && matchDetail && matchSource && matchIndustry && matchFde && matchEvidence) {
+          currentFilteredIndices.push(idx);
+        }
+      });
+
+      currentFilteredIndices.sort((a, b) =>
+        (CASES[b].detail_score || 0) - (CASES[a].detail_score || 0) ||
+        CASES[a].company.localeCompare(CASES[b].company, 'zh-CN')
+      );
+
+      // Update count text & reset button
+      const hasFilter = searchText || currentDetail || sourceVal || industryVal || fdeVal || evidenceVal;
+      q('count').textContent = `显示 ${currentFilteredIndices.length} / ${CASES.length} 个案例`;
+      q('resetFilterBtn').style.display = hasFilter ? 'inline-flex' : 'none';
+
+      // Clear search button visibility
+      q('searchClearBtn').style.display = searchText ? 'inline-flex' : 'none';
+
+      // Sync Segment Control state
+      document.querySelectorAll('#detailSegment .segment-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-detail') === currentDetail);
+      });
+
+      // Sync Hero stat cards state
+      document.querySelectorAll('.stat-card').forEach(card => {
+        card.classList.toggle('active', card.getAttribute('data-detail') === currentDetail);
+      });
+
+      // Sync Quick tag pills
+      document.querySelectorAll('.quick-tag').forEach(tag => {
+        tag.classList.toggle('active', tag.getAttribute('data-industry') === industryVal);
+      });
+
+      // Render cards or empty state
+      if (currentFilteredIndices.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <div class="empty-title">未找到匹配的案例</div>
+            <p class="empty-desc">请尝试减少筛选条件、调整搜索关键词或点击下方按钮重置筛选。</p>
+            <button class="reset-btn" onclick="resetAllFilters()" style="padding: 6px 16px; font-size: 13px;">重置全部筛选</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = currentFilteredIndices.map((origIdx, filteredIdx) => {
+        const c = CASES[origIdx];
+        return `
+          <article class="card" tabindex="0" onclick="openModalByFilteredIndex(${filteredIdx})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModalByFilteredIndex(${filteredIdx})}">
+            <div class="card-top">
+              <div class="card-badges">
+                <span class="badge badge-source-${esc(c.source)}">${esc(c.source)}</span>
+                <span class="badge badge-industry">${esc(c.industry)}</span>
+                <span class="badge badge-fde">${esc(c.fde)}</span>
+                ${c.technical_reference ? '<span class="badge badge-technical" title="包含来源支持的具体技术组件与实施流程">⚙ 技术方案</span>' : ''}
+                <span class="badge badge-detail detail-${esc(c.detail_level)}">${esc(c.detail_level === 'deep' ? '深度' : c.detail_level === 'standard' ? '标准' : '概览')} ${esc(c.detail_score)}/12</span>
+                <span class="badge badge-evidence evidence-${esc(c.evidence_level)}">${esc(c.evidence_level)}级</span>
+              </div>
+            </div>
+            
+            <h2 class="company-title">${esc(c.company)}</h2>
+            <div class="scenario-text">${esc(c.scenario)}</div>
+
+            <div class="card-content-block">
+              <div class="card-row">
+                <div class="card-row-label">原始挑战</div>
+                <div class="card-row-val">${esc(c.problem)}</div>
+              </div>
+
+              <div class="card-row highlight">
+                <div class="card-row-label">核心成果 / 进展</div>
+                <div class="card-row-val">${esc(c.result)}</div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="card-maturity">${esc(c.maturity)}</span>
+              <span class="card-action-link">
+                <span>查看架构拆解</span>
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+              </span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function resetAllFilters() {
+      q('search').value = '';
+      currentDetail = '';
+      q('source').value = '';
+      q('industry').value = '';
+      q('fde').value = '';
+      q('evidence').value = '';
+      render();
+    }
+
+    // Event Bindings
+    q('search').addEventListener('input', render);
+    q('searchClearBtn').addEventListener('click', () => {
+      q('search').value = '';
+      q('search').focus();
+      render();
+    });
+
+    q('industry').addEventListener('change', render);
+    q('source').addEventListener('change', render);
+    q('fde').addEventListener('change', render);
+    q('evidence').addEventListener('change', render);
+    q('resetFilterBtn').addEventListener('click', resetAllFilters);
+
+    // Segmented detail-level button click
+    document.querySelectorAll('#detailSegment .segment-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentDetail = btn.getAttribute('data-detail') || '';
+        render();
+      });
+    });
+
+    // Hero stat card click
+    document.querySelectorAll('.stat-card').forEach(card => {
+      const applyDetailFilter = () => {
+        const target = card.getAttribute('data-detail') || '';
+        currentDetail = (currentDetail === target && target !== '') ? '' : target;
+        render();
+      };
+      card.addEventListener('click', applyDetailFilter);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          applyDetailFilter();
+        }
+      });
+    });
+
+    // Quick tag pills click
+    document.querySelectorAll('.quick-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        const ind = tag.getAttribute('data-industry') || '';
+        q('industry').value = ind;
+        render();
+      });
+    });
+
+    // Top Search Trigger
+    q('navSearchTrigger').addEventListener('click', () => {
+      q('search').focus();
+      q('filterPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Modal navigation
+    q('close').addEventListener('click', closeModal);
+    q('mPrevBtn').addEventListener('click', modalPrev);
+    q('mNextBtn').addEventListener('click', modalNext);
+    q('modal').addEventListener('click', e => {
+      if (e.target === q('modal')) closeModal();
+    });
+
+    // Global keyboard listener
+    document.addEventListener('keydown', e => {
+      // Escape
+      if (e.key === 'Escape') {
+        if (q('modal').classList.contains('show')) {
+          closeModal();
+        } else if (q('search') === document.activeElement && q('search').value) {
+          q('search').value = '';
+          render();
+        }
+      }
+      // Command/Ctrl + K or Slash to search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        q('search').focus();
+        q('search').select();
+      }
+      if (e.key === '/' && document.activeElement !== q('search') && !q('modal').classList.contains('show')) {
+        e.preventDefault();
+        q('search').focus();
+      }
+      // Arrow keys in modal
+      if (q('modal').classList.contains('show')) {
+        if (e.key === 'ArrowLeft' || e.key === 'p' || e.key === 'P') {
+          modalPrev();
+        } else if (e.key === 'ArrowRight' || e.key === 'n' || e.key === 'N') {
+          modalNext();
+        }
+      }
+    });
+
+    // Scroll to Top
+    const scrollTopBtn = q('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.style.display = 'flex';
+      } else {
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initialization
+    initTheme();
+    initDataControls();
+    render();
+  </script>
+</body>
+</html>
