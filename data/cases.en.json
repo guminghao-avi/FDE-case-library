@@ -11052,5 +11052,377 @@
       "source_traceability": 2
     },
     "missing_details": []
+  },
+  {
+    "id": "enterprise-bayer-prince-001",
+    "technical_reference": true,
+    "source": "First-party enterprise source",
+    "company": "Bayer",
+    "industry": "Pharmaceuticals / preclinical research",
+    "industry_group": "Healthcare & Life Sciences",
+    "scenario": "PRINCE: preclinical study search and a multi-agent research assistant",
+    "fde": "Embedded deployment",
+    "fde_relation": "Built jointly by Bayer and Thoughtworks; the sources do not call this an FDE engagement",
+    "problem": "Bayer's preclinical data was fragmented across systems: structured study metadata sat alongside decades of PDF safety-study reports, while historical migrations left some metadata missing or inaccurate. Keyword search could not reliably answer questions spanning studies and documents, so researchers spent substantial time finding and checking the approved reports.",
+    "solution": "Bayer and Thoughtworks evolved PRINCE from a structured-data search platform into a research assistant. The team integrated study metadata and reports, used RAG for PDF evidence and Text-to-SQL for structured data, and used LangGraph to coordinate intent clarification, planning, research, evidence sufficiency checks, and answer writing. Answers link back to source documents. Researchers review prompts before regulatory-related drafting and remain responsible for the final text.",
+    "human": "Researchers can select or adjust data sources and verify answers against linked report pages and original passages. For regulatory documents, a user reviews and edits the drafting prompt, then reviews, validates, and finalizes the output. Domain experts curate evaluation questions and reference answers; the team uses user feedback and production traffic to monitor quality.",
+    "result": "A paper coauthored by Bayer and Thoughtworks reports that PRINCE integrates more than 18,000 internal studies. Among 15 to 20 frequent users surveyed, 75% reported significantly less time spent searching for information. After the multi-agent system was introduced, average response times for complex queries improved by 30%. The system's ability to fully meet user needs scored 3.1/5 on average; no drug-development timeline or financial return was reported.",
+    "maturity": "Internal production use / ongoing iteration",
+    "maturity_stage": "In production",
+    "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+    "architecture": [
+      "Ingest internal study data and PDF reports into S3, extract and chunk documents, and attach study and section metadata",
+      "Query harmonized structured study metadata through Amazon Athena",
+      "Embed report chunks in OpenSearch; filter by metadata and combine keyword and vector retrieval with reranking",
+      "Generate read-only SELECT statements with relevant schemas and examples, validate operations, and cap returned rows",
+      "Use LangGraph to coordinate intent clarification, planning, Researcher, Reflection, and Writer, with citations in answers",
+      "Persist workflow checkpoints in PostgreSQL and application state in DynamoDB; retry failed steps or switch model providers",
+      "Store traces and expert evaluation sets in Langfuse; evaluate live queries daily without reference answers"
+    ],
+    "components": [
+      "React / FastAPI",
+      "LangGraph",
+      "Amazon S3 / Athena / OpenSearch",
+      "Hybrid RAG retrieval and reranking",
+      "Read-only Text-to-SQL validation",
+      "PostgreSQL / DynamoDB",
+      "Langfuse / RAGAS",
+      "Human review and source citations"
+    ],
+    "fde_actions": [
+      "Start with researchers' cross-system workflow for finding safety-study evidence and build a searchable data entry point",
+      "Connect PDF originals with incomplete historical metadata while retaining approved reports as verifiable sources",
+      "Route unstructured retrieval and structured SQL queries by question type, with bounded tool permissions",
+      "Use expert-curated question sets and real user feedback to evaluate retrieval, answers, and complex-query response time",
+      "Add checkpoints, node retries, model fallback, and production tracing to multi-step workflows",
+      "Preserve scientists' review, validation, and final accountability before and after drafting"
+    ],
+    "reusable": [
+      "When historical metadata is unreliable, treat approved original documents as traceable sources of truth",
+      "For structured tables and unstructured reports, design separate SQL and retrieval paths before synthesizing evidence",
+      "Multi-agent workflows need recoverable state, explicit tool boundaries, and stage-specific evaluations",
+      "High-stakes research and regulatory documents need granular citations and expert sign-off"
+    ],
+    "evidence": "A Thoughtworks project participant published the technical retrospective on martinfowler.com; a paper coauthored by Bayer and Thoughtworks describes the evolution, architecture, and limited user feedback. Both directly document PRINCE, but the paper is not an independent third-party audit.",
+    "case_summary": "PRINCE links decades of preclinical reports and structured study data in one traceable workflow. Its transferable lesson is to make citations, read-only SQL, human review, failure recovery, and continuous evaluation part of the production design.",
+    "evidence_level": "A",
+    "evidence_label": "Level A | Direct project-participant technical retrospective",
+    "source_record": {
+      "title": "Building Reliable Agentic AI Systems",
+      "publisher": "martinfowler.com / Thoughtworks project team",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "source_type": "Project-participant technical retrospective",
+      "directness": "Direct case-level source",
+      "claim_origin": "Project participants and Bayer-Thoughtworks coauthored paper",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Disclosed in the technical retrospective and Bayer-coauthored paper",
+      "solution": "Structured synthesis of two project-participant sources",
+      "architecture": "Components and workflow disclosed step by step in the sources",
+      "fde_actions": "Editorial synthesis of published delivery steps; no FDE staffing claim",
+      "result": "Internal evaluation and user feedback reported in the Bayer-Thoughtworks paper"
+    },
+    "verification_notes": [
+      "martinfowler.com hosts the article, but its author is Thoughtworks consultant Sarang Sanjay Kulkarni, not Martin Fowler.",
+      "Bayer and Thoughtworks project participants coauthored the paper; peer review does not make its outcome claims independently audited.",
+      "The 75% figure comes from feedback by 15 to 20 frequent users. The 30% figure concerns average response time for complex queries; the paper does not publish a full baseline or test sample.",
+      "The paper also reports a 3.1/5 user-needs score. Neither a shorter drug-development cycle nor automated regulatory decision-making is established.",
+      "Domain-specific Researcher sub-agents and automatic metadata repair are described as future work, not deployed capabilities."
+    ],
+    "additional_sources": [
+      {
+        "title": "Bayer-Thoughtworks coauthored paper | PRINCE evolution, implementation, and user feedback",
+        "url": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1636809/full"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "Deep case | Key delivery chain is substantially documented",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-nubank-support-agents-001",
+    "technical_reference": true,
+    "source": "First-party enterprise source",
+    "company": "Nubank",
+    "industry": "Digital banking / financial services",
+    "industry_group": "Financial Services & Insurance",
+    "scenario": "Five production customer-support agents built through evaluation-driven iteration and A/B rollout",
+    "fde": "Internal enterprise AI deployment",
+    "fde_relation": "Built by Nubank teams; no FDE role is disclosed",
+    "problem": "Nubank handles varied support requests for card delivery, debt, credit limits, card management, and product explanations. A knowledge-base-only bot cannot reliably use live business data, perform controlled actions, or follow conditional workflows. Offline answer scores alone cannot establish whether real customer satisfaction and self-service outcomes improve.",
+    "solution": "The team decomposed human support SOPs into independently versioned instructions, routines, tool descriptions, and working memory. The card-delivery agent retrieves profile and logistics data, investigates by address type, and can reissue a card or hand off with context. Human labels, LLM judges, offline simulation, and GEPA judge-prompt optimization guide changes before variants enter small-traffic A/B tests measuring transactional NPS and self-service rate.",
+    "human": "Human agents take over low-confidence, frustrated, or unresolved cases with context preserved. Domain experts label evaluation examples and calibrate automated judges. Credit and debt actions remain subject to existing regulated processes, human oversight, and avenues for review. Support data is minimized, pseudonymized, and access-controlled.",
+    "result": "The paper reports 5 production agents. Against previous variants, the card-delivery agent improved AI transactional NPS by 37 percentage points and self-service rate by 29 percentage points, while remaining 10 points below expert human agents on NPS. Debt management remained 23.6 points below expert humans; the product-explainer agent had a temporary 1.5-point self-service decline. No complete ROI or independent audit is published.",
+    "maturity": "Five production deployments with ongoing A/B iteration",
+    "maturity_stage": "In production",
+    "url": "https://arxiv.org/html/2606.08867",
+    "architecture": [
+      "Translate human support SOPs into composable, semantically versioned instructions, routines, tool descriptions, and working memory",
+      "Use profile, delivery-status, and card-reissue tools for controlled domain actions",
+      "Build scenario evaluation sets with human labels; calibrate LLM judges against human agreement",
+      "Optimize judge prompts with GEPA in DSPy and check evaluation stability across models",
+      "Launch new variants at 1% traffic before scaling online A/B exposure",
+      "Measure transactional NPS, self-service rate, and task completion while handing uncertain cases to people",
+      "Apply data minimization, pseudonymization, role-based audited access, and retention limits"
+    ],
+    "components": [
+      "Modular context engineering",
+      "Domain SOP routines",
+      "Customer profile and delivery tools",
+      "LLM-as-a-Judge",
+      "GEPA / DSPy",
+      "Offline simulation and human labels",
+      "Online A/B and transactional NPS",
+      "Human handoff and privacy controls"
+    ],
+    "fde_actions": [
+      "Choose a frequent, measurable card-delivery workflow and establish old-agent and human baselines",
+      "Break support SOPs into maintainable steps, tool permissions, and decision conditions",
+      "Calibrate automated evaluation with expert annotations rather than trusting model self-grading",
+      "Add logistics tools, reissue actions, frustration detection, and concise-response constraints in response to failures",
+      "Start online experiments at 1% traffic and measure both satisfaction and self-service",
+      "Set production boundaries for privacy, contestation, and human takeover"
+    ],
+    "reusable": [
+      "Offline quality metrics should be tested against online business outcomes",
+      "Satisfaction and self-service can trade off; neither metric is sufficient alone",
+      "Validate the framework in one frequent domain before extending it across support areas",
+      "Tool permissions, handoff, and data protection are as central as prompting"
+    ],
+    "evidence": "A KDD 2026 paper authored by Nubank staff directly describes five production agents, their technical workflow, and A/B results. Peer review does not independently audit company business metrics.",
+    "case_summary": "Nubank treats support agents as evaluation-driven production systems: modular SOPs and tools, human-calibrated judges, offline simulation, 1% initial traffic, online A/B metrics, and reuse across five domains.",
+    "evidence_level": "A",
+    "evidence_label": "Level A | Direct company-team paper",
+    "source_record": {
+      "title": "Building Customer Support AI Agents at 100M-User Scale: An Evaluation-Driven Framework",
+      "publisher": "Nubank team / KDD 2026 paper",
+      "url": "https://arxiv.org/html/2606.08867",
+      "source_type": "Technical paper authored by company employees",
+      "directness": "Direct case-level source",
+      "claim_origin": "Company project-team disclosure",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Disclosed in paper background and support cases",
+      "solution": "Structured from the published agent, evaluation, and rollout process",
+      "architecture": "Disclosed layer by layer in the paper",
+      "fde_actions": "Editorial synthesis; no FDE role disclosed",
+      "result": "Online A/B outcomes reported by company-team authors"
+    },
+    "verification_notes": [
+      "The 100M+ figure is Nubank's customer base, not the number of agent users.",
+      "The 37 and 29 gains are percentage points, not relative percentages; the comparison is against previous agent variants.",
+      "All five improved transactional NPS, but the product-explainer self-service rate temporarily declined.",
+      "Full ROI is not reported; online results and privacy controls remain first-party statements."
+    ],
+    "additional_sources": [
+      {
+        "title": "arXiv abstract, author list, and KDD 2026 metadata",
+        "url": "https://arxiv.org/abs/2606.08867"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "Deep case | Key delivery chain is substantially documented",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-meta-expert-second-brain-001",
+    "technical_reference": true,
+    "source": "First-party enterprise source",
+    "company": "Meta",
+    "industry": "Internet / enterprise compliance",
+    "industry_group": "Technology & Software",
+    "scenario": "Expert-knowledge agent and verified correction loop for a specific compliance domain",
+    "fde": "Internal enterprise AI deployment",
+    "fde_relation": "Built by a Meta engineering team; no FDE role disclosed",
+    "problem": "In a specific compliance domain, experts must synthesize organizational positions, historical decisions, and external material. Important reasoning lives in scattered documents or in people's heads. Basic RAG still requires the model to infer rules from raw chunks on each run, making assessments slow, inconsistent, and difficult to improve safely after a human correction.",
+    "solution": "Meta distilled more than 200 files into positions, vocabulary, routing rules, and gateways, using YAML dependencies to make the knowledge graph traceable. Frequently used dense knowledge lives in a structured wiki, while sparse references remain searchable through RAG. Composable recipes specify analytical steps separately from domain facts. Expert feedback goes through root-cause diagnosis, minimal file edits, blind replay, regression tests, and human-reviewed pull requests.",
+    "human": "Domain experts review intermediate analysis at checkpoints, redirect it, and resolve genuine ambiguity. Automated updates produce proposed diffs with an audit trail, but expert approval is required before changes land. Independent reviewing agents and deterministic structural checks help catch contradictions without replacing expert accountability.",
+    "result": "Meta Engineering reports that after 3 sprints over about 6 weeks, individual assessments moved from days to minutes. Recipe-driven stages cut tokens per turn by about 80%; the team reports zero regressions across improvement cycles. Sample size, detailed timing baselines, test counts, and independent audit are not published.",
+    "maturity": "Internal system for a specific domain / continuing iteration",
+    "maturity_stage": "Pilot",
+    "url": "https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/",
+    "architecture": [
+      "Distill internal and external material into 200+ position, terminology, routing, and gateway files",
+      "Use YAML depends_on and referenced_by metadata to track file applicability and dependencies",
+      "Keep dense frequent knowledge in a structured wiki and retrieve sparse references with semantic or lexical RAG",
+      "Route analyses through top-level and downstream recipes, loading only relevant knowledge by stage",
+      "Expose intermediate analyses to experts at checkpoints and escalate genuine ambiguity",
+      "Classify expert corrections as knowledge gaps, recipe defects, or ambiguity before proposing minimal edits",
+      "Require independent review, deterministic lint, blind targeted replay, regression tests, and expert-reviewed PRs"
+    ],
+    "components": [
+      "Structured knowledge wiki",
+      "Bidirectional YAML dependency graph",
+      "RAG retrieval",
+      "Composable recipe workflows",
+      "Expert checkpoints and escalation",
+      "Correction-compilation pipeline",
+      "Deterministic lint",
+      "Blind replay and regression tests"
+    ],
+    "fde_actions": [
+      "Select a compliance domain with costly, repeated expert judgments",
+      "Distill reviewable organizational positions rather than indiscriminately searching every document",
+      "Separate domain facts from analytical procedures, with explicit routing and dependencies",
+      "Design expert checkpoints and ambiguity escalation into the workflow",
+      "Diagnose each correction before applying a minimal knowledge or procedure fix",
+      "Gate changes through independent checks, replay, regression tests, and expert approval"
+    ],
+    "reusable": [
+      "Encode expert knowledge as versioned, auditable facts and procedures, not only vectors",
+      "For high-stakes judgment, engineering the correction loop may be more valuable than generating more answers",
+      "Turn each expert correction into a versioned change and a regression example",
+      "Internal efficiency claims should be read alongside missing sample and baseline details"
+    ],
+    "evidence": "A first-party Meta Engineering retrospective discloses the knowledge structure, correction pipeline, and internally reported results; no independent measurement is disclosed.",
+    "case_summary": "Meta separates specialist knowledge files from analytical recipes and converts expert corrections into minimal, reviewable changes tested by blind replay and regression suites before a human-approved merge.",
+    "evidence_level": "A",
+    "evidence_label": "Level A | Direct company engineering source",
+    "source_record": {
+      "title": "An Organizational Second Brain: Building an AI That Learns From Experts",
+      "publisher": "Engineering at Meta",
+      "url": "https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/",
+      "source_type": "Company engineering blog",
+      "directness": "Direct case-level source",
+      "claim_origin": "Company engineering-team disclosure",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Disclosed in Meta Engineering article",
+      "solution": "Structured from the published project process",
+      "architecture": "Files, recipes, and validation pipeline directly disclosed",
+      "fde_actions": "Editorial synthesis; no FDE role disclosed",
+      "result": "Internal outcomes reported by Meta engineers"
+    },
+    "verification_notes": [
+      "This is a specific compliance-domain system, not the separate Meta Second Brain project for a broad knowledge-worker population.",
+      "The days-to-minutes claim has no public sample size or statistical baseline; zero regressions has no published test count.",
+      "The article does not establish company-wide rollout, so the case is marked as a domain-specific internal system."
+    ],
+    "additional_sources": [],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "Deep case | Key delivery chain is substantially documented",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-doctolib-ai-factory-001",
+    "technical_reference": true,
+    "source": "First-party enterprise source",
+    "company": "Doctolib",
+    "industry": "Digital health / software platform",
+    "industry_group": "Healthcare & Life Sciences",
+    "scenario": "Unifying AI products through a Data & AI platform and a golden-path agent template",
+    "fde": "Internal enterprise AI deployment",
+    "fde_relation": "Built by Doctolib platform teams; no FDE role disclosed",
+    "problem": "Doctolib originally had fragmented data, machine-learning, and engineering platforms, while AI product teams built their own evaluations, model access, and agent frameworks. The first AI-native products took several quarters to reach production. Teams spent time assembling infrastructure instead of product logic, and reuse between teams remained low.",
+    "solution": "Over more than a year, Doctolib unified its Data & AI Platform and sequenced investment into shared evaluation, governed model access, and framework standardization. A shared evaluation and observability system involves PMs and domain experts; a GenAI gateway switches among compliant models with provider fallback. A common agent framework and golden-path template pre-integrate memory, evaluation, observability, model access, and guardrails so teams can focus on domain logic.",
+    "human": "Feature teams own production quality and cost, while PMs and domain experts contribute directly to evaluation. The platform team maintains shared gateways, evaluation infrastructure, and standards. Healthcare safety still requires human governance. The author explicitly says product-asset reuse remains limited and a more advanced agent builder is future work.",
+    "result": "The Doctolib platform lead reports hundreds of evaluation experiments per day. Early AI-native products required several quarters to reach production, while one team at an internal hackathon reached a production beta with an agentic product in about 3 weeks. This single beta does not establish an average delivery time, and no patient outcomes, total ROI, or independent audit are reported.",
+    "maturity": "Shared platform in use; golden path demonstrated in a production beta",
+    "maturity_stage": "In production",
+    "url": "https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9",
+    "architecture": [
+      "Merge the Data and ML platforms into Data & AI while coordinating deployment experience with the separate Engineering Platform",
+      "Connect experimentation and production through shared evaluation and observability",
+      "Govern model choice and automatic provider fallback through one GenAI gateway",
+      "Replace per-product framework choices with a common agent foundation",
+      "Pre-integrate memory, observability, evaluation, model access, and guardrails in a golden-path template",
+      "Let feature teams build domain logic and own production quality and cost"
+    ],
+    "components": [
+      "Data & AI Platform",
+      "Shared evaluation platform",
+      "Production observability",
+      "GenAI gateway",
+      "Multi-model provider fallback",
+      "Common agent framework",
+      "Golden-path agent template",
+      "Standard guardrails"
+    ],
+    "fde_actions": [
+      "Identify evaluation, model access, and deployment work repeated by early product teams",
+      "Build shared evaluation and a model gateway before standardizing the agent framework",
+      "Bring PMs and domain experts directly into quality evaluation",
+      "Package memory, evaluation, observability, and guardrails into a runnable template",
+      "Validate startup speed with one production beta while tracking reuse gaps"
+    ],
+    "reusable": [
+      "Sequence platform work by what unblocks AI product delivery",
+      "A unified gateway and evaluation system are foundations for multiple products",
+      "A golden path should start from runnable wiring rather than documentation alone",
+      "Do not generalize one beta's delivery speed to the whole product portfolio"
+    ],
+    "evidence": "The Doctolib ML Platform lead published a retrospective in the company's Medium publication, describing platform components, evaluation volume, and one beta deployment. Figures are first-party claims.",
+    "case_summary": "Doctolib consolidated repeated product work—evaluation, model access, agent framework, and guardrails—into a shared platform and golden-path template, while publicly acknowledging limited cross-team asset reuse.",
+    "evidence_level": "A",
+    "evidence_label": "Level A | Direct company platform retrospective",
+    "source_record": {
+      "title": "From one AI product to an AI factory",
+      "publisher": "Doctolib official Medium publication",
+      "url": "https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9",
+      "source_type": "Company platform-lead retrospective",
+      "directness": "Direct case-level source",
+      "claim_origin": "Doctolib ML Platform lead disclosure",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Disclosed by the platform lead",
+      "solution": "Structured from the published platform evolution",
+      "architecture": "Disclosed platform layers and template components",
+      "fde_actions": "Editorial synthesis; no FDE role disclosed",
+      "result": "Company-reported evaluation volume and one beta timeline"
+    },
+    "verification_notes": [
+      "About 3 weeks refers to one hackathon team's production beta, not an average across all AI products.",
+      "Hundreds per day refers to evaluation experiments, not production products or users.",
+      "The agent builder and stronger product-asset reuse remain future work.",
+      "The article does not disclose the specific framework vendor, patient outcomes, aggregate cost savings, or independent audit."
+    ],
+    "additional_sources": [],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "Deep case | Key delivery chain is substantially documented",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
   }
 ]

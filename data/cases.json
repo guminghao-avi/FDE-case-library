@@ -11052,5 +11052,377 @@
       "source_traceability": 2
     },
     "missing_details": []
+  },
+  {
+    "id": "enterprise-bayer-prince-001",
+    "technical_reference": true,
+    "source": "企业原始材料",
+    "company": "Bayer",
+    "industry": "制药/临床前研发",
+    "industry_group": "医疗与生命科学",
+    "scenario": "PRINCE：临床前研究资料检索与多Agent研究助手",
+    "fde": "伴随式部署",
+    "fde_relation": "拜耳与Thoughtworks联合建设；公开材料未称为FDE",
+    "problem": "拜耳的临床前研究数据分散在多个系统中，既有结构化研究元数据，也有数十年积累的PDF安全性研究报告；历史迁移造成部分元数据缺失或错误。关键词检索难以回答跨研究、跨文档的问题，研究人员需要花时间手工查找和核对原始报告。",
+    "solution": "拜耳与Thoughtworks逐步把PRINCE从结构化数据搜索平台扩展为研究助手。先汇集研究报告和元数据，再用RAG检索PDF证据、用Text-to-SQL查询结构化数据；LangGraph协调意图澄清、规划、研究、证据充分性检查与答案撰写。回答附原始文档引用；撰写监管相关文档前由研究人员复核提示，最终内容仍由人审核。",
+    "human": "研究人员可选择或调整数据来源，并核查回答链接到的报告页码和原文片段；涉及监管文档时，用户先审改写作提示，再负责审阅、验证和定稿。领域专家整理评测题与参考答案，团队根据用户反馈和生产流量持续检查质量。",
+    "result": "拜耳与Thoughtworks合著论文称，PRINCE整合超过18,000项内部研究；在15至20名高频用户的反馈中，75%表示查找信息所花时间显著减少；引入多Agent后，复杂查询的平均响应时间改善30%。系统满足用户需求的平均评分为3.1/5；未披露药物研发周期或财务收益。",
+    "maturity": "内部生产使用/持续迭代",
+    "maturity_stage": "已上线",
+    "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+    "architecture": [
+      "内部研究系统与PDF报告汇入S3；文档提取、切分并附研究及章节元数据",
+      "结构化研究元数据经整理后由Amazon Athena提供查询",
+      "报告片段嵌入OpenSearch，按元数据过滤并结合关键词与向量做混合检索、重排",
+      "Text-to-SQL按相关Schema和示例生成只读SELECT语句，并限制返回条数",
+      "LangGraph协调意图澄清、规划、Researcher、Reflection与Writer，答案引用原文",
+      "PostgreSQL保存工作流检查点，DynamoDB保存应用状态；失败时重试或切换模型",
+      "Langfuse保存追踪及专家评测集，对生产查询每日做无参考答案评测"
+    ],
+    "components": [
+      "React / FastAPI",
+      "LangGraph",
+      "Amazon S3 / Athena / OpenSearch",
+      "RAG混合检索与重排",
+      "Text-to-SQL只读校验",
+      "PostgreSQL / DynamoDB",
+      "Langfuse / RAGAS",
+      "人工复核与来源引用"
+    ],
+    "fde_actions": [
+      "从研究人员跨系统寻找安全性研究证据的流程入手，先建设可搜索的数据入口",
+      "将PDF原文与不完整的历史元数据关联，保留报告作为可核查依据",
+      "按问题类型路由非结构化检索与结构化SQL查询，并约束工具权限",
+      "用领域专家问题集与真实用户反馈评估检索、答案和复杂查询响应",
+      "为多步骤工作流增加检查点、节点重试、模型回退与生产追踪",
+      "让科学家在文档生成前后保留审改、验证和最终责任"
+    ],
+    "reusable": [
+      "历史元数据可能不可靠时，以获批原始文档作为可追溯事实依据",
+      "同时有结构化表和非结构化报告时，分别设计SQL和检索路径再汇总证据",
+      "多Agent工作流需要可恢复状态、明确工具边界和分阶段评测",
+      "高风险研究与监管文档应显示逐句出处并保留专家定稿权"
+    ],
+    "evidence": "Thoughtworks项目参与者在martinfowler.com发布技术复盘；拜耳与Thoughtworks合著论文披露演进、架构与有限用户反馈。两份资料都直接指向PRINCE，但论文并非独立第三方审计。",
+    "case_summary": "PRINCE的参考价值在于把几十年临床前报告与结构化研究数据接进同一可追溯工作流，并将证据引用、只读SQL、人工复核、失败恢复和持续评测做成生产系统的一部分。",
+    "evidence_level": "A",
+    "evidence_label": "A级｜项目参与者案例级技术复盘",
+    "source_record": {
+      "title": "Building Reliable Agentic AI Systems",
+      "publisher": "martinfowler.com / Thoughtworks项目团队",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "source_type": "项目参与者技术复盘",
+      "directness": "案例级直接来源",
+      "claim_origin": "项目参与者与拜耳合著论文披露",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "技术复盘与拜耳合著论文披露",
+      "solution": "两份项目参与者材料披露并结构化整理",
+      "architecture": "公开组件与工作流逐层披露",
+      "fde_actions": "依据公开项目演进与工程措施归纳；未公开FDE岗位安排",
+      "result": "拜耳与Thoughtworks合著论文中的内部评测和用户反馈"
+    },
+    "verification_notes": [
+      "martinfowler.com是刊载网站，文章作者是Thoughtworks的Sarang Sanjay Kulkarni，不是Martin Fowler本人。",
+      "论文由拜耳和Thoughtworks项目人员合著；同行评审不等于结果经过独立审计。",
+      "75%来自15至20名高频用户的反馈；30%是复杂查询平均响应时间改善，论文未公开完整基线和测试样本。",
+      "论文同时报告系统满足用户需求的评分仅3.1/5；不能据此推断药物研发周期缩短或监管决策自动化。",
+      "文中按领域拆分Researcher子Agent及自动修复元数据属于演进计划，未写作已上线功能。"
+    ],
+    "additional_sources": [
+      {
+        "title": "拜耳与Thoughtworks合著论文｜PRINCE的演进、实现与用户反馈",
+        "url": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1636809/full"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-nubank-support-agents-001",
+    "technical_reference": true,
+    "source": "企业原始材料",
+    "company": "Nubank",
+    "industry": "数字银行/金融服务",
+    "industry_group": "金融与保险",
+    "scenario": "五类生产客服Agent：评测驱动的迭代与A/B上线",
+    "fde": "企业内部AI改造",
+    "fde_relation": "Nubank内部团队建设；未披露FDE岗位",
+    "problem": "Nubank的客服需要处理卡片配送、债务管理、信用额度、卡片管理和产品解释等不同问题。传统知识库型机器人难以调用实时业务数据、执行受控操作或处理复杂分支；若只看离线答题分数，也无法证明真实客户满意度和自助解决率会改善。",
+    "solution": "团队把客服SOP拆成可版本化的指令、例行流程、工具说明和工作记忆，并按场景配置Agent。以卡片配送为例，Agent读取物流与客户资料、按地址类型排查、必要时发起补卡或带上下文转人工。团队先用人工标注、LLM评审器和离线模拟定位失败，再用GEPA优化评测提示，最终以小流量A/B逐步发布并跟踪交易NPS和自助服务率。",
+    "human": "人工客服承接低置信度、客户不满或自动流程无法解决的场景，交接时保留上下文。领域专家标注评测集并校准LLM评审器；受监管的授信和债务相关决策仍受既有规则、人工监督与申诉机制约束。对话数据经最小化、去标识化和受控访问。",
+    "result": "论文报告5个生产客服Agent。卡片配送Agent相对先前版本，AI交易NPS提高37个百分点、自助服务率提高29个百分点；其NPS仍比专家人工客服低10个百分点。债务管理Agent虽有改善，NPS仍低于专家人工客服23.6个百分点；产品解释Agent的自助服务率短暂下降1.5个百分点。论文未公开完整财务回报或独立审计。",
+    "maturity": "五个场景生产部署/持续A/B",
+    "maturity_stage": "已上线",
+    "url": "https://arxiv.org/html/2606.08867",
+    "architecture": [
+      "把人类客服SOP改写为可组合、语义版本化的指令、例行流程、工具描述与工作记忆",
+      "卡片配送Agent通过客户资料、配送状态与补卡工具执行受控步骤",
+      "离线案例和人工标注构建场景评测集，LLM评审器与人工判断做一致性校准",
+      "用GEPA在DSPy中优化评审提示词，并比较不同模型上的评测稳定性",
+      "新版本先在1%流量发布，再按离线失败率和线上表现扩大A/B流量",
+      "线上同时测交易NPS、自助服务率、任务完成率，并在低置信度时转人工",
+      "客服数据最小化与去标识化，日志及评测集按角色、审计与时限授权"
+    ],
+    "components": [
+      "模块化上下文工程",
+      "领域SOP/例行流程",
+      "客户资料与配送工具",
+      "LLM-as-a-Judge",
+      "GEPA / DSPy",
+      "离线模拟与人工标注",
+      "线上A/B和交易NPS",
+      "转人工与隐私治理"
+    ],
+    "fde_actions": [
+      "先选高频且可观测的卡片配送问题，明确老版本机器人与人工服务基线",
+      "将客服SOP拆成可维护的步骤、工具权限和触发条件",
+      "用专家标注校准自动评测，而非直接信任模型自评",
+      "根据失败案例逐项增加物流工具、补卡能力、挫败识别和简洁性约束",
+      "从1%流量开始做真实客户A/B，并同时衡量满意度和自助解决率",
+      "为隐私、争议处理和人工接管建立生产边界"
+    ],
+    "reusable": [
+      "离线评测应与线上业务指标建立可检验关联",
+      "满意度与自助率可能互相牵制，不能只优化一个指标",
+      "先在单一高频场景验证再扩展为多场景共用框架",
+      "生产Agent的工具权限、人工交接和数据保护与提示词同等重要"
+    ],
+    "evidence": "Nubank员工署名的KDD 2026论文直接披露五个生产Agent、技术流程和A/B结果；同行评审不等于独立审计公司业务指标。",
+    "case_summary": "Nubank把客服Agent做成评测驱动的生产工程：SOP与工具模块化、人工标注校准评审器、离线模拟筛选版本、1%流量起步A/B，最终在五类客服场景复用。",
+    "evidence_level": "A",
+    "evidence_label": "A级｜企业团队论文直接来源",
+    "source_record": {
+      "title": "Building Customer Support AI Agents at 100M-User Scale: An Evaluation-Driven Framework",
+      "publisher": "Nubank团队 / KDD 2026论文",
+      "url": "https://arxiv.org/html/2606.08867",
+      "source_type": "企业员工署名技术论文",
+      "directness": "案例级直接来源",
+      "claim_origin": "企业项目团队披露",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "论文背景与客服场景披露",
+      "solution": "依据论文所述Agent、评测和上线流程整理",
+      "architecture": "论文逐层披露",
+      "fde_actions": "依据公开工程过程归纳；未披露FDE岗位",
+      "result": "企业团队论文中的线上A/B结果"
+    },
+    "verification_notes": [
+      "100M+是Nubank客户规模，不是这些Agent的实际用户数。",
+      "37和29都是百分点，不是相对百分比；对照组是先前Agent版本。",
+      "五个Agent的交易NPS均改善，但产品解释场景自助服务率短暂下降；不得写作所有指标全面提升。",
+      "论文未给出完整ROI，线上结果和隐私控制均属于企业团队自述。"
+    ],
+    "additional_sources": [
+      {
+        "title": "arXiv论文摘要、作者与KDD 2026收录信息",
+        "url": "https://arxiv.org/abs/2606.08867"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-meta-expert-second-brain-001",
+    "technical_reference": true,
+    "source": "企业原始材料",
+    "company": "Meta",
+    "industry": "互联网/企业合规",
+    "industry_group": "科技与软件",
+    "scenario": "面向特定合规领域的专家知识Agent与反馈修正闭环",
+    "fde": "企业内部AI改造",
+    "fde_relation": "Meta工程团队自建；未披露FDE岗位",
+    "problem": "在特定合规领域，专家需要查阅大量组织立场、历史判断与外部材料才能完成评估。关键知识往往散落在文档或专家脑中，简单RAG每次仍要从原始片段重新推断规则，导致评估耗时、解释不一致，也难以把一次人工纠错可靠地保存下来。",
+    "solution": "Meta团队将200多个文件整理为立场、术语、路由和准入规则，使用YAML依赖关系形成可追踪知识图；高密度常用知识进入结构化wiki，稀疏资料按需RAG检索。另以可组合recipe规定分析步骤，与知识事实分离。专家在检查点审核或对模糊问题升级；纠错再经根因归类、最小文件修补、盲测回放、回归测试和专家批准后合并。",
+    "human": "领域专家负责在关键检查点确认、纠正或改写分析，并对真正模糊的判断作决定；自动修改只形成待审差异和证据链，由专家审核后才能进入知识库。独立评审Agent与确定性结构校验用于发现冲突，但不能取代专家最终责任。",
+    "result": "Meta工程文章称，3个开发冲刺、约6周后，单次评估由数天缩至数分钟；改为分阶段recipe后，每轮消耗的token约减少80%；团队报告改进周期中没有回归。文章未给出评估样本量、完整时间基线、回归测试数量或独立审计。",
+    "maturity": "特定领域内部系统/持续迭代",
+    "maturity_stage": "试点",
+    "url": "https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/",
+    "architecture": [
+      "离线整理内部与外部资料，形成200多个立场、术语、路由和准入文件",
+      "每个文件用YAML声明适用场景、depends_on与referenced_by，便于依赖追踪",
+      "常用高密度知识进入结构化wiki，低频参考资料通过语义或词法RAG检索",
+      "顶层recipe选择下游分析步骤，按阶段加载必要知识和指令",
+      "关键检查点向专家展示中间分析，证据不充分或存在歧义时升级",
+      "从专家纠错中区分知识缺口、流程缺陷与真正歧义，生成最小补丁",
+      "独立评审、结构lint、盲测回放和回归测试后提交人工审核PR"
+    ],
+    "components": [
+      "结构化知识wiki",
+      "YAML双向依赖图",
+      "RAG检索",
+      "可组合recipe工作流",
+      "专家检查点与升级",
+      "自动纠错编译管线",
+      "确定性lint",
+      "盲测回放与回归测试"
+    ],
+    "fde_actions": [
+      "选择一个判断标准密集、专家负荷高的合规领域",
+      "先从既有文档与专家判断中提炼可审查的组织立场，而非直接全量检索",
+      "把知识事实和分析程序拆开，建立路由与依赖关系",
+      "将专家介入点和歧义升级条件写入流程",
+      "把每次纠错诊断成知识、流程或歧义问题，再做最小修改",
+      "要求独立检查、原场景回放、回归测试和专家批准后上线"
+    ],
+    "reusable": [
+      "专家知识应编码为可版本化、可审计的事实与程序，而非只依赖向量索引",
+      "对高风险判断，纠错流程比自动生成答案更值得工程化",
+      "让专家纠错变成带回归用例的版本化变更",
+      "内部效率提升数字需说明样本和基线缺口"
+    ],
+    "evidence": "Meta Engineering项目团队的第一方技术复盘，公开知识结构、纠错管线与团队自报成效；未披露独立测量。",
+    "case_summary": "Meta把合规专家的知识和分析步骤分别编码为文件与recipe，之后用专家纠错、自动最小补丁、盲测回放、回归测试和人工PR审核形成可追溯的改进闭环。",
+    "evidence_level": "A",
+    "evidence_label": "A级｜企业工程博客直接来源",
+    "source_record": {
+      "title": "An Organizational Second Brain: Building an AI That Learns From Experts",
+      "publisher": "Engineering at Meta",
+      "url": "https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/",
+      "source_type": "企业工程博客",
+      "directness": "案例级直接来源",
+      "claim_origin": "企业工程团队披露",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Meta工程文章披露",
+      "solution": "依据公开项目过程结构化整理",
+      "architecture": "文章直接披露文件、recipe及验证管线",
+      "fde_actions": "编辑归纳；未披露FDE岗位",
+      "result": "Meta工程团队自报的内部改进结果"
+    },
+    "verification_notes": [
+      "这是Meta特定合规领域的系统，不应与另一个面向知识工作者的Second Brain项目混同。",
+      "数天到数分钟没有公开样本量和统计口径；零回归也没有公开测试总量。",
+      "文中没有证明组织级普遍上线，故记为特定领域内部系统而非全公司规模化部署。"
+    ],
+    "additional_sources": [],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-doctolib-ai-factory-001",
+    "technical_reference": true,
+    "source": "企业原始材料",
+    "company": "Doctolib",
+    "industry": "数字医疗/软件平台",
+    "industry_group": "医疗与生命科学",
+    "scenario": "从分散AI产品到共享Data & AI平台及Agent黄金路径",
+    "fde": "企业内部AI改造",
+    "fde_relation": "Doctolib内部平台团队建设；未披露FDE岗位",
+    "problem": "Doctolib早期的数据、机器学习和工程平台彼此分散，AI产品团队各自建设评测、模型接入和Agent框架。前几个AI原生产品到生产环境需数个季度，业务团队在组装基础设施上耗时，产品能力跨团队复用低。",
+    "solution": "Doctolib用一年多整合Data & AI平台，并按先评测、后模型治理、再框架标准化的顺序改造。共享评测与可观测平台让产品经理和领域专家参与实验；统一GenAI网关接入合规模型并支持故障回退；共同Agent框架和黄金路径模板预置记忆、评测、观测、模型访问及护栏，产品团队在此基础上开发具体业务逻辑。",
+    "human": "产品团队对质量、成本及生产运行负责，领域专家和产品经理直接参与评测；平台团队维护共享网关、评测和标准框架。医疗场景的安全与质量仍需人工治理。文章也承认团队资产复用仍低，未来的交互式Agent Builder尚未完成。",
+    "result": "Doctolib平台负责人称，团队现在每天运行数百次评测实验；早期AI原生产品从构想到生产用数个季度，而一次内部黑客松中的团队约3周将一个Agent产品以beta形式运行在生产环境。该例不能代表所有产品的平均交付时间，也未披露患者疗效、整体ROI或独立审计。",
+    "maturity": "共享平台已用于产品团队；黄金路径已验证beta",
+    "maturity_stage": "已上线",
+    "url": "https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9",
+    "architecture": [
+      "Data与ML平台合并为Data & AI平台，并与独立的Engineering平台协调部署体验",
+      "共享评测及可观测层连接实验与生产，产品经理和领域专家可参与",
+      "GenAI网关集中管理合规模型选择、切换与供应商故障自动回退",
+      "共同Agent框架替代早期产品各自选型，降低重复维护",
+      "黄金路径模板集成记忆、观测、评测、模型访问和标准护栏",
+      "产品团队基于模板开发业务逻辑并负责线上质量和成本"
+    ],
+    "components": [
+      "Data & AI Platform",
+      "共享评测平台",
+      "生产可观测性",
+      "GenAI网关",
+      "多模型故障回退",
+      "共同Agent框架",
+      "黄金路径Agent模板",
+      "标准护栏"
+    ],
+    "fde_actions": [
+      "盘点早期产品重复建设的评测、接入和部署工作",
+      "先建立共享评测与模型网关，再统一Agent框架",
+      "让产品经理及领域专家直接参与质量评估",
+      "把记忆、评测、观测、护栏预装进可复用模板",
+      "用一个团队的生产beta验证起步速度，同时跟踪后续复用缺口"
+    ],
+    "reusable": [
+      "平台建设应按最能解锁产品交付的依赖顺序推进",
+      "统一网关和评测是多产品AI化的基础能力",
+      "黄金路径要提供可运行的起点，而不是只给文档规范",
+      "单个beta上线速度不能外推为全部产品的平均收益"
+    ],
+    "evidence": "Doctolib ML Platform负责人在企业官方Medium频道发布项目复盘，披露平台能力、实验量与一次beta案例；数字属企业自述。",
+    "case_summary": "Doctolib将各产品重复搭建的评测、模型接入、Agent框架和护栏沉淀为共享平台与黄金路径模板，公开了平台采用量、一次约三周beta实践以及尚未解决的复用问题。",
+    "evidence_level": "A",
+    "evidence_label": "A级｜企业负责人项目复盘",
+    "source_record": {
+      "title": "From one AI product to an AI factory",
+      "publisher": "Doctolib官方Medium频道",
+      "url": "https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9",
+      "source_type": "企业负责人项目复盘",
+      "directness": "案例级直接来源",
+      "claim_origin": "Doctolib ML Platform负责人披露",
+      "independently_verified": false,
+      "accessed_at": "2026-09-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "平台负责人披露",
+      "solution": "依据公开平台演进整理",
+      "architecture": "公开的平台层及模板组件",
+      "fde_actions": "依据演进过程归纳；未披露FDE岗位",
+      "result": "企业负责人报告的内部实验量及一次beta周期"
+    },
+    "verification_notes": [
+      "约3周是一个黑客松团队进入生产beta的个例，不是所有AI产品交付周期。",
+      "数百次是每天的评测实验次数，不是生产产品数或用户数。",
+      "Agent Builder及更高产品资产复用仍属后续计划，不能标记为已完成。",
+      "文章没有公开具体框架厂商、患者结局、成本节约总额或独立审计。"
+    ],
+    "additional_sources": [],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
   }
 ]

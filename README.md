@@ -8,11 +8,13 @@
 
 ![企业 AI 落地案例库中文首页](docs/images/home-zh.png)
 
-带有 `⚙ 技术方案` 小标识的案例，是从深度案例中进一步筛出的实施参考模板：技术组件和工作流有案例级公开材料支持，不只是编辑推演。当前共有 **14 条**。
+*截图摄于 2026-09-19，显示当时的 123 条案例；当前数量以页面和下方统计为准。*
 
-当前收录 **123 条**案例。首页首先按案例详细程度分为：
+带有 `⚙ 技术方案` 小标识的案例，是从深度案例中进一步筛出的实施参考模板：技术组件和工作流有案例级公开材料支持，不只是编辑推演。当前共有 **18 条**。
 
-- 深度案例：31 条
+当前收录 **127 条**案例。首页首先按案例详细程度分为：
+
+- 深度案例：35 条
 - 标准案例：77 条
 - 概览案例：15 条
 
@@ -21,8 +23,10 @@
 - [Datawhale《FDE案例100》官方 PDF](https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf)：24 条，案例主链接可直接跳到对应 PDF 页
 - Palantir 客户部署案例：45 条
 - OpenAI 客户部署案例：34 条
-- 企业年报、投资者材料、工程博客与内部项目复盘：12 条
+- 企业年报、投资者材料、工程博客与内部项目复盘：16 条
 - IBM、Microsoft、AWS、Google Cloud 逐案例材料：8 条
+
+近期补充的深度案例包括 [拜耳 PRINCE](https://martinfowler.com/articles/reliable-llm-bayer.html)、[Nubank 客服 Agent](https://arxiv.org/html/2606.08867)、[Meta 专家知识系统](https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/) 和 [Doctolib AI 平台](https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9)。它们都披露了实施过程，但效果数字主要来自项目参与者；案例卡片逐条记录对照基线、上线范围和未公开信息。
 
 ## 最重要的阅读边界
 
@@ -41,7 +45,7 @@
 - 中文入口：`index.html`
 - English entry: `index.en.html`
 
-两个页面都覆盖全部123条案例，并可在顶部一键切换语言。英文数据与中文数据保持相同案例 ID、顺序、证据等级和详细度评分；重点深度案例经过人工术语精修，其余内容使用机器辅助翻译并保留原始来源供复核。
+两个页面都覆盖全部127条案例，并可在顶部一键切换语言。英文数据与中文数据保持相同案例 ID、顺序、证据等级和详细度评分；重点深度案例经过人工术语精修，其余内容使用机器辅助翻译并保留原始来源供复核。
 
 直接打开页面即可浏览。也可以启动一个本地静态服务器：
 
@@ -61,7 +65,7 @@ python3 -m http.server 8000
 ├── data/
 │   ├── cases.json                   # 案例数据唯一事实源
 │   ├── cases.js                     # 由 cases.json 自动生成，供页面直接加载
-│   ├── cases.en.json                # 123条案例的英文镜像数据
+│   ├── cases.en.json                # 127条案例的英文镜像数据
 │   ├── cases.en.js                  # 英文页面浏览器数据
 │   └── case.schema.json             # 数据结构约束
 ├── scripts/
@@ -144,13 +148,15 @@ An open, source-traceable library of enterprise AI deployments. Instead of colle
 
 ![Enterprise AI Case Library — English home page](docs/images/home-en.png)
 
-Cases marked `⚙ Technical reference` are a stricter subset of deep cases. Their technical components and implementation steps are supported by case-level public material rather than being filled in through editorial inference. The library currently contains **14 technical references**.
+*Screenshot taken on 2026-09-19, when the library had 123 cases; use the live page and the counts below for current totals.*
+
+Cases marked `⚙ Technical reference` are a stricter subset of deep cases. Their technical components and implementation steps are supported by case-level public material rather than being filled in through editorial inference. The library currently contains **18 technical references**.
 
 ## Coverage
 
-The repository contains **123 cases**, grouped by disclosed level of detail:
+The repository contains **127 cases**, grouped by disclosed level of detail:
 
-- Deep cases: 31
+- Deep cases: 35
 - Standard cases: 77
 - Overview cases: 15
 
@@ -159,8 +165,10 @@ Source coverage:
 - [Official Datawhale *FDE Case 100* PDF](https://assets.datawhale.cn/Datawhale%20FDE%E6%A1%88%E4%BE%8B100.pdf): 24 cases, with primary links opening the corresponding PDF page
 - Palantir customer deployments: 45
 - OpenAI customer deployments: 34
-- First-party annual reports, investor materials, engineering blogs, and internal project retrospectives: 12
+- First-party annual reports, investor materials, engineering blogs, and internal project retrospectives: 16
 - IBM, Microsoft, AWS, and Google Cloud case-level materials: 8
+
+Recent deep additions include [Bayer PRINCE](https://martinfowler.com/articles/reliable-llm-bayer.html), [Nubank's support agents](https://arxiv.org/html/2606.08867), [Meta's expert-knowledge system](https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/), and [Doctolib's AI platform](https://medium.com/doctolib/from-one-ai-product-to-an-ai-factory-e6337ffa75d9). Each documents implementation, but outcome figures are largely participant-reported. Individual case sheets record comparison baselines, rollout scope, and missing evidence.
 
 ## Evidence boundary
 
@@ -183,7 +191,7 @@ Detail level and evidence level are separate dimensions: a source can be authori
 
 Both interfaces include search, source and industry filters, detail-level segmentation, evidence labels, technical-reference badges, and a full case sheet covering the problem, solution, architecture, components, human controls, FDE actions, outcomes, and verification notes.
 
-All 123 English records preserve the same case IDs, ordering, evidence levels, and detail scores as the Chinese source. Translation is machine-assisted; flagship deep cases receive additional human terminology review. The linked primary source remains authoritative when wording or interpretation is uncertain.
+All 127 English records preserve the same case IDs, ordering, evidence levels, and detail scores as the Chinese source. Translation is machine-assisted; flagship deep cases receive additional human terminology review. The linked primary source remains authoritative when wording or interpretation is uncertain.
 
 ## Run locally
 
