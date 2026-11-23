@@ -4517,89 +4517,87 @@
     "source": "OpenAI",
     "company": "Indeed",
     "industry": "招聘/平台",
-    "scenario": "招聘匹配与求职体验",
+    "scenario": "为 Invite to Apply 职位邀请生成个性化匹配理由",
     "fde": "企业部署案例",
-    "problem": "大规模职位与求职者匹配需要更强语义理解和个性化。",
-    "solution": "OpenAI模型进入匹配与用户体验工作流。",
-    "human": "招聘方和求职者做最终选择。",
-    "result": "OpenAI 2025企业AI报告代表案例之一。",
+    "problem": "Indeed 的匹配系统已经能挑出职位并给出简短说明。产品团队想让收到邀请的求职者看懂自己的哪段经历匹配岗位，同时控制每天大批量生成个性化消息的成本。",
+    "solution": "保留既有职位匹配系统，在邀请环节用生成模型解释推荐理由。团队先测试提示样例，再用标注结果和扩充数据微调较小模型，通过线上对照实验比较新版和传统邀请的表现。",
+    "human": "标注人员按内容规范评判生成的解释，工程团队在上线前后持续评测。求职者决定是否申请，招聘方负责后续筛选。",
+    "result": "数月分阶段实验中，相对传统邀请，开始申请增加 20%，后续成功指标提升 13%。项目方没有拆出单独的录用增幅。另一次较小模型对比显示 token 消耗降低 60%，衡量的是模型用量。",
     "maturity": "生产级",
-    "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/",
+    "url": "https://openai.com/index/indeed/",
     "architecture": [
-      "业务数据/文档/系统输入",
-      "数据清洗与业务语义整理",
-      "AI/规则完成理解、匹配或生成",
-      "确定性校验或业务规则检查",
-      "人工处理低置信度/高风险事项",
-      "结果写回原业务流程并持续沉淀反馈"
+      "用既有系统匹配职位",
+      "用少量输入输出示例测试解释文案",
+      "用 GPT-4 扩充数据",
+      "按内容规范标注输出并建立评测参照",
+      "微调较小模型并部署到专用实例",
+      "对照传统邀请追踪开始申请及后续结果"
     ],
     "components": [
-      "企业数据/文档",
-      "LLM/语义理解",
-      "业务规则",
-      "Human-in-the-loop",
-      "原有业务系统"
+      "职位匹配系统",
+      "Chat Completions API",
+      "GPT-4 数据扩充",
+      "人工标注集",
+      "微调模型专用实例"
     ],
     "fde_actions": [
-      "跟一线人员走完整工作流，确认真实瓶颈而不是只接需求文档",
-      "盘点可用数据、权限、系统接口和隐性业务规则",
-      "把任务拆成 AI、规则/传统软件、人三类责任边界",
-      "先做窄场景 PoC，用真实样本验证准确率与业务价值",
-      "嵌入原有系统，设计异常升级、反馈和后续迭代机制"
+      "比较带示例的提示方案",
+      "制定文案规范并标注样本",
+      "比较小模型的质量和用量",
+      "配置专用实例扩容",
+      "按阶段做线上对照并监测上线效果"
     ],
     "reusable": [
-      "先选高频、高成本、可验证的窄流程",
-      "能用确定性工具验证的步骤，不让模型自评",
-      "高风险动作保留人工责任",
-      "把每次人工修正变成后续可检索的上下文/规则"
+      "分别验证推荐解释的转化效果和模型成本。",
+      "保留原邀请作为对照，单列申请与录用指标。"
     ],
-    "evidence": "公开资料确认业务流程；技术组件为基于公开描述的架构抽象",
-    "case_summary": "这个案例的关键不是单点使用AI，而是把“招聘匹配与求职体验”重构成可执行、可验证、有人类责任边界的生产工作流。",
+    "evidence": "OpenAI 专题案例引用 Indeed 团队并交代对照组。",
+    "case_summary": "Indeed 在原有职位匹配之后增加一层个性化解释，分别评估求职者是否开始申请、后续成功指标以及较小模型的用量。",
     "industry_group": "企业运营与其他",
     "maturity_stage": "已上线",
     "fde_relation": "企业部署案例",
-    "evidence_level": "B",
-    "evidence_label": "B级｜官方汇总来源",
+    "evidence_level": "A",
+    "evidence_label": "A级｜案例级直接来源",
     "source_record": {
-      "title": "Indeed：招聘匹配与求职体验",
+      "title": "Indeed uses OpenAI to deliver contextual job matching to millions of job seekers",
       "publisher": "OpenAI",
-      "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/",
-      "source_type": "厂商官方客户材料",
-      "directness": "汇总页或多案例报告",
-      "claim_origin": "厂商或客户公开披露",
+      "url": "https://openai.com/index/indeed/",
+      "source_type": "厂商客户案例",
+      "directness": "案例级直接来源",
+      "claim_origin": "OpenAI 与 Indeed 团队披露",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-11-23"
     },
     "analysis_boundary": {
-      "business_problem": "基于公开材料概括",
-      "solution": "基于公开材料概括",
-      "architecture": "公开信息与编辑推演混合",
-      "fde_actions": "FDE视角编辑推演",
-      "result": "厂商或客户披露"
+      "business_problem": "据项目团队披露整理",
+      "solution": "按已披露实现整理",
+      "architecture": "案例原文披露的组件与步骤",
+      "fde_actions": "据团队实际部署动作归纳，未确认 FDE 职称",
+      "result": "项目参与方披露"
     },
     "verification_notes": [
-      "公开资料确认业务流程；技术组件为基于公开描述的架构抽象",
-      "当前链接为官方汇总入口，尚需补充可直接定位该案例的深链接或页码。"
+      "20% 和 13% 是实验相对提升，基线绝对值未披露。",
+      "13% 为下游指标，不能直接写成录用人数增加 13%。"
     ],
-    "additional_sources": [],
-    "detail_score": 4,
-    "detail_level": "overview",
-    "detail_label": "概览案例｜作为线索使用",
+    "additional_sources": [
+      {
+        "title": "The state of enterprise AI 2025",
+        "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
     "detail_dimensions": {
-      "business_context": 0,
-      "solution_workflow": 0,
+      "business_context": 2,
+      "solution_workflow": 2,
       "technical_workflow": 2,
-      "human_governance": 0,
-      "measured_outcome": 1,
-      "source_traceability": 1
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
     },
-    "missing_details": [
-      "业务背景",
-      "改造流程",
-      "人机与治理",
-      "量化结果",
-      "来源可定位性"
-    ]
+    "missing_details": [],
+    "technical_reference": true
   },
   {
     "id": "openai-011",
@@ -11412,6 +11410,97 @@
       "文章没有公开具体框架厂商、患者结局、成本节约总额或独立审计。"
     ],
     "additional_sources": [],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "深度案例｜关键链路较完整",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": []
+  },
+  {
+    "id": "enterprise-stripe-minions-001",
+    "company": "Stripe",
+    "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2",
+    "evidence_level": "A",
+    "technical_reference": true,
+    "scenario": "Minions 异步完成代码变更并交给工程师评审",
+    "problem": "值班工程师常在讨论中碰到多项小修改。完成其中任何一项，都要掌握大型代码库的局部规则，准备开发环境，并走完测试和评审流程。",
+    "solution": "工程师在 Slack 讨论里发起任务，Minions 读取相关上下文，在预热的隔离开发机上修改代码。团队用代码规定哪些步骤必须执行，模型负责实现修改和处理失败，最后由工程师检查并发起同事评审。",
+    "human": "发起人检查改动，可要求继续修改或手动接手。满意后发起合并请求并请另一名工程师评审，保留人工合并前审查。",
+    "result": "Stripe 于 2026 年 2 月 19 日披露，每周合并超过 1,300 个由 Minions 完成全部代码并经人工评审的合并请求。此数衡量交付量，原文未给出总工时节省或缺陷率。",
+    "architecture": [
+      "从 Slack 讨论发起任务",
+      "读取线程及相关链接",
+      "在预热的隔离开发机载入代码和目录规则",
+      "按任务选择 Toolshed 工具",
+      "按蓝图修改代码、运行静态检查并推送至 CI",
+      "最多两轮 CI 后交工程师评审或继续处理"
+    ],
+    "components": [
+      "Slack",
+      "devbox",
+      "Toolshed (MCP)",
+      "blueprints",
+      "CI"
+    ],
+    "fde_actions": [
+      "接入已有工程讨论入口",
+      "复用工程师的隔离开发环境",
+      "按代码目录加载规则",
+      "把固定检查编入工作流",
+      "限制 CI 重试并交回人工评审"
+    ],
+    "reusable": [
+      "将必跑检查编成固定步骤，给模型留出实现空间。",
+      "记录人工评审和接手成本，再评价净收益。"
+    ],
+    "evidence": "Stripe 工程团队两篇复盘披露实现与合并量。",
+    "case_summary": "Stripe 把 Slack 中的工程任务交给隔离环境中的编码助手运行，保留固定检查、CI 次数上限和同事评审，并按已合并请求统计产出。",
+    "evidence_label": "A级｜案例级直接来源",
+    "source_record": {
+      "title": "Minions: Stripe’s one-shot, end-to-end coding agents—Part 2",
+      "publisher": "Stripe",
+      "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2",
+      "source_type": "企业工程复盘",
+      "directness": "案例级直接来源",
+      "claim_origin": "Stripe 工程团队自述",
+      "independently_verified": false,
+      "accessed_at": "2026-11-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "据项目团队披露整理",
+      "solution": "按已披露实现整理",
+      "architecture": "案例原文披露的组件与步骤",
+      "fde_actions": "据团队实际部署动作归纳，未确认 FDE 职称",
+      "result": "项目参与方披露"
+    },
+    "verification_notes": [
+      "每周合并量对应 2026 年 2 月的披露时点。",
+      "缺少所有尝试的总量，无法由此计算一次成功率。"
+    ],
+    "additional_sources": [
+      {
+        "title": "Minions: Stripe’s one-shot, end-to-end coding agents",
+        "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents"
+      },
+      {
+        "title": "Stripe on X · 2026-02-19",
+        "url": "https://x.com/stripe/status/2024574740417970462"
+      }
+    ],
+    "source": "企业原始材料",
+    "industry": "金融科技/研发工具",
+    "industry_group": "金融与保险",
+    "fde": "企业内部AI改造",
+    "fde_relation": "Stripe 内部工程团队实施",
+    "maturity": "已用于内部工程流程",
+    "maturity_stage": "已上线",
     "detail_score": 12,
     "detail_level": "deep",
     "detail_label": "深度案例｜关键链路较完整",

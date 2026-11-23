@@ -1,25 +1,30 @@
 # 当前证据审计
 
-审计日期：2026-09-23
+审计记录最近更新于 2026-11-23
 
 ## 当前状态
 
-- 案例总数：127
+- 案例总数：128
 - Datawhale：24
 - Palantir：45
 - OpenAI：34
-- 企业原始材料：16
+- 企业原始材料：17
 - IBM / Microsoft / AWS / Google Cloud：8
-- 深度案例：35
+- 深度案例：37
 - 标准案例：77
-- 概览案例：15
-- A级案例级直接来源：104
-- B级官方汇总来源：23
+- 概览案例：14
+- A级案例级直接来源：106
+- B级官方汇总来源：22
 - C/D级：0
 - 已记录独立核验：0
-- 技术方案参考：18
+- 技术方案参考：20
 
 A级表示案例可直接定位，不代表数字经过独立审计。
+
+## 2026-11-23 本次修订
+
+- 新增 Stripe Minions。Stripe 于 2 月 19 日披露每周合并超过 1,300 个由助手编写、经工程师评审的 PR。记录了隔离开发机、固定检查和最多两轮 CI。数量属于当时的工程团队自报。[工程复盘](https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2) · [官方 X 帖](https://x.com/stripe/status/2024574740417970462)
+- 修订 Indeed（openai-010）。原条目仅列为企业报告代表案例，未记录实验数字。现改用 Invite to Apply 专题，补入相对传统邀请的申请开始量提升 20%、下游成功指标提升 13%，以及独立一项模型对比中 token 用量下降 60%。证据 B → A，详细度 4 → 12。上述结果均由项目参与方披露。[案例原文](https://openai.com/index/indeed/)
 
 ## 已完成
 
@@ -46,11 +51,11 @@ A级表示案例可直接定位，不代表数字经过独立审计。
 
 ### 2. OpenAI 企业报告复用
 
-5条案例仍共同指向《The State of Enterprise AI 2025》汇总页。应补充案例级客户故事或报告章节位置。
+4条案例仍共同指向《The State of Enterprise AI 2025》汇总页。应补充案例级客户故事或报告章节位置。
 
 ### 3. 独立证据缺失
 
-当前127条均未记录独立核验材料。后续可优先寻找：
+当前128条均未记录独立核验材料。后续可优先寻找：
 
 - 客户财报与监管文件；
 - 客户自己的技术博客或新闻稿；
@@ -66,5 +71,5 @@ A级表示案例可直接定位，不代表数字经过独立审计。
 1. GE Aerospace：区分公司产量增长与Palantir系统贡献。
 2. PG&E：避免把整体野火影响面积下降直接归因于单一平台。
 3. Airbus：核对33%生产加速与17亿美元节省的具体时期和口径。
-4. OpenAI汇总页中的Moderna、Intercom、Lowe's、Indeed与Oscar Health。
+4. OpenAI汇总页中的Moderna、Intercom、Lowe's与Oscar Health。
 5. Palantir首页中的United Airlines、Fujitsu、Walgreens、Lowe's、AT&T、Parexel等案例深链接。

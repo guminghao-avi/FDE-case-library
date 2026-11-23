@@ -4517,89 +4517,87 @@
     "source": "OpenAI",
     "company": "Indeed",
     "industry": "Recruitment/platform",
-    "scenario": "Recruit matching and job-seeking experience",
+    "scenario": "Personalized match explanations in Invite to Apply",
     "fde": "Enterprise deployment",
-    "problem": "The matching of large-scale jobs with job-seekers requires greater semantic understanding and individualization.",
-    "solution": "OpenAI models enter workflow matching and user experience.",
-    "human": "The final choice is made by the recruiter and the job seeker.",
-    "result": "OpenAI 2025 Enterprise AI report represents one of the cases.",
+    "problem": "Indeed already selected jobs and offered brief reasons. The team wanted invitations to connect a role to the recipient’s experience while keeping the cost of generating explanations at scale manageable.",
+    "solution": "The existing matching system selects the job. A language model explains the match in the invitation. Engineers tested example prompts, augmented training data, fine-tuned a smaller model and compared the personalized invitation with the traditional version.",
+    "human": "Annotators judge generated explanations against content guidelines. Engineers evaluate changes before and after rollout. Job seekers decide whether to apply and employers make hiring decisions.",
+    "result": "Across a phased experiment lasting several months, the team reported 20% more application starts and a 13% lift in downstream success versus traditional invitations. Hires alone were not broken out. A separate smaller-model comparison used 60% fewer tokens.",
     "maturity": "In production",
-    "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/",
+    "url": "https://openai.com/index/indeed/",
     "architecture": [
-      "Business Data/Documents/System Inputs",
-      "Data cleansing and business semantics",
-      "AI/rules are understood, matched or generated",
-      "Final check or business rule check",
-      "Manual handling of low confidence/high-risk matters",
-      "Turns out to write back the original business process and continue to settle the feedback."
+      "Match roles with the existing system",
+      "Test example-guided explanations",
+      "Augment data with GPT-4",
+      "Label outputs against guidelines and build evaluation references",
+      "Fine-tune a smaller model and deploy to dedicated instances",
+      "Compare application starts and downstream outcomes with traditional invitations"
     ],
     "components": [
-      "Enterprise data/documents",
-      "LLM/Semantic Understanding",
-      "Operational rules",
-      "Human-in-the-loop",
-      "Original operational system"
+      "Job matching system",
+      "Chat Completions API",
+      "GPT-4 data augmentation",
+      "Human-labeled examples",
+      "Dedicated inference instances"
     ],
     "fde_actions": [
-      "Take a full workflow with the first line of staff and confirm the real bottlenecks, not just the required documents.",
-      "Inventory of available data, permissions, system interfaces and hidden operating rules",
-      "Dismantling tasks into AI, rules/traditional software, three types of human responsibility",
-      "We'll start with a narrow scene, PoC, and we'll use real samples to verify accuracy and business value.",
-      "Embedded to the original system and designed for abnormal upgrades, feedback and follow-up iterative mechanisms"
+      "Iterate on example prompts",
+      "Define guidelines and label outputs",
+      "Compare quality and token use on a smaller model",
+      "Scale on dedicated instances",
+      "Run staged online comparisons and monitor rollout"
     ],
     "reusable": [
-      "HF, high-cost, verifiable narrow-flow selection",
-      "Steps that can be validated with a certainty tool to prevent model self-assessment",
-      "Retain manual responsibility for high-risk actions",
-      "For each manual amendment to follow-up searchable context/rules"
+      "Evaluate conversion and model cost separately.",
+      "Keep a control invitation and distinguish application starts from hires."
     ],
-    "evidence": "Public information confirming business processes; technical components are abstract architecture based on public description",
-    "case_summary": "The key to this case is not the single-point use of AI, but the “job matching and job-seeking experience” to be re-constituted as an enforceable, verifiable production stream with boundaries of human responsibility.",
+    "evidence": "OpenAI's case study quotes Indeed and describes the comparison.",
+    "case_summary": "Indeed added explanations after job matching and measured application starts, downstream outcomes and the token usage of a smaller model.",
     "industry_group": "Business operations and other",
     "maturity_stage": "In production",
     "fde_relation": "Enterprise deployment",
-    "evidence_level": "B",
-    "evidence_label": "Level B | Official aggregate source",
+    "evidence_level": "A",
+    "evidence_label": "Level A | Direct case source",
     "source_record": {
-      "title": "Indeed: Recruitment Matches and Job Search Experiences",
+      "title": "Indeed uses OpenAI to deliver contextual job matching to millions of job seekers",
       "publisher": "OpenAI",
-      "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/",
-      "source_type": "Vendors ' official customer information",
-      "directness": "Summary page or multiple case reports",
-      "claim_origin": "Public disclosure by manufacturer or customer",
+      "url": "https://openai.com/index/indeed/",
+      "source_type": "Vendor customer case study",
+      "directness": "Direct case source",
+      "claim_origin": "OpenAI and Indeed",
       "independently_verified": false,
-      "accessed_at": "2026-09-19"
+      "accessed_at": "2026-11-23"
     },
     "analysis_boundary": {
-      "business_problem": "Summary based on public material",
-      "solution": "Summary based on public material",
-      "architecture": "Public information mixed with editing",
-      "fde_actions": "FDE perspective editor extension",
-      "result": "Vendor or customer disclosure"
+      "business_problem": "Summarized from the project team",
+      "solution": "Summarized from published implementation",
+      "architecture": "Components and steps documented in the case study",
+      "fde_actions": "Editorial grouping of reported deployment work. FDE title unconfirmed.",
+      "result": "Reported by project participants"
     },
     "verification_notes": [
-      "Public information confirming business processes; technical components are abstract architecture based on public description",
-      "The current link is the official aggregation entrance, and a deep link or page number that directly locates the case has yet to be added."
+      "Both lifts are relative to the control. Absolute baselines were not given.",
+      "The downstream metric does not establish a 13% rise in hires alone."
     ],
-    "additional_sources": [],
-    "detail_score": 4,
-    "detail_level": "overview",
-    "detail_label": "Overview case | Use as a research lead",
+    "additional_sources": [
+      {
+        "title": "The state of enterprise AI 2025",
+        "url": "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report/"
+      }
+    ],
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_label": "Deep case | Key delivery chain is substantially documented",
     "detail_dimensions": {
-      "business_context": 0,
-      "solution_workflow": 0,
+      "business_context": 2,
+      "solution_workflow": 2,
       "technical_workflow": 2,
-      "human_governance": 0,
-      "measured_outcome": 1,
-      "source_traceability": 1
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
     },
-    "missing_details": [
-      "Business context",
-      "Transformation workflow",
-      "Human roles & governance",
-      "Measured outcomes",
-      "Source traceability"
-    ]
+    "missing_details": [],
+    "technical_reference": true
   },
   {
     "id": "openai-011",
@@ -11424,5 +11422,96 @@
       "source_traceability": 2
     },
     "missing_details": []
+  },
+  {
+    "id": "enterprise-stripe-minions-001",
+    "company": "Stripe",
+    "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2",
+    "evidence_level": "A",
+    "technical_reference": true,
+    "scenario": "Asynchronous code changes and engineer review with Minions",
+    "problem": "Small changes raised during on-call shifts still require repository-specific knowledge, a working development environment, testing and review.",
+    "solution": "Engineers start a task in a Slack thread. Minions use its context in an isolated, prewarmed development environment. A coded workflow runs mandatory checks and delegates implementation and fixes to the model before engineer review.",
+    "human": "The initiating engineer checks the change, requests revisions or takes over, then opens the pull request for another engineer to review.",
+    "result": "On February 19, 2026, Stripe reported over 1,300 merged pull requests per week with all code written by Minions and reviewed by humans. Engineering hours saved and defect rates were not quantified.",
+    "architecture": [
+      "Start from a Slack thread",
+      "Collect thread and link context",
+      "Load repository and directory rules in a prewarmed devbox",
+      "Select task-relevant Toolshed tools",
+      "Implement changes, lint and push to CI using a blueprint",
+      "Stop after at most two CI runs and hand the change to an engineer"
+    ],
+    "components": [
+      "Slack",
+      "devbox",
+      "Toolshed (MCP)",
+      "blueprints",
+      "CI"
+    ],
+    "fde_actions": [
+      "Use the existing engineering discussion channel",
+      "Reuse isolated developer environments",
+      "Scope instructions by directory",
+      "Encode mandatory checks in the workflow",
+      "Cap CI retries and retain engineer review"
+    ],
+    "reusable": [
+      "Encode mandatory checks and leave implementation choices to the model.",
+      "Measure human review and takeover time when evaluating net savings."
+    ],
+    "evidence": "Two engineering posts from Stripe describe implementation and merged volume.",
+    "case_summary": "Stripe moves engineering tasks from Slack into isolated coding sessions, caps CI retries, retains peer review and counts merged pull requests.",
+    "evidence_label": "Level A | Direct case source",
+    "source_record": {
+      "title": "Minions: Stripe’s one-shot, end-to-end coding agents—Part 2",
+      "publisher": "Stripe",
+      "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2",
+      "source_type": "Engineering retrospective",
+      "directness": "Direct case source",
+      "claim_origin": "Stripe engineering team",
+      "independently_verified": false,
+      "accessed_at": "2026-11-23"
+    },
+    "analysis_boundary": {
+      "business_problem": "Summarized from the project team",
+      "solution": "Summarized from published implementation",
+      "architecture": "Components and steps documented in the case study",
+      "fde_actions": "Editorial grouping of reported deployment work. FDE title unconfirmed.",
+      "result": "Reported by project participants"
+    },
+    "verification_notes": [
+      "Weekly merged volume is a February 2026 snapshot.",
+      "Total attempts are unavailable, so a one-shot success rate cannot be calculated."
+    ],
+    "additional_sources": [
+      {
+        "title": "Minions: Stripe’s one-shot, end-to-end coding agents",
+        "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents"
+      },
+      {
+        "title": "Stripe on X · 2026-02-19",
+        "url": "https://x.com/stripe/status/2024574740417970462"
+      }
+    ],
+    "source": "First-party enterprise source",
+    "industry": "Fintech / developer tooling",
+    "industry_group": "Financial Services & Insurance",
+    "fde": "Internal enterprise AI deployment",
+    "fde_relation": "Built by Stripe engineering",
+    "maturity": "Used in internal engineering workflows",
+    "maturity_stage": "In production",
+    "detail_score": 12,
+    "detail_level": "deep",
+    "detail_dimensions": {
+      "business_context": 2,
+      "solution_workflow": 2,
+      "technical_workflow": 2,
+      "human_governance": 2,
+      "measured_outcome": 2,
+      "source_traceability": 2
+    },
+    "missing_details": [],
+    "detail_label": "Deep case | Key delivery chain is substantially documented"
   }
 ]
